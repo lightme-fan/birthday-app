@@ -1,11 +1,13 @@
 {
-  "name": "birthday",
+  "name": "new-api",
   "version": "1.0.0",
   "description": "Hey team! So the final project here will be a birthday list.",
   "main": "script.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
-    "date-fns": "^2.16.1"
+    "date-fns": "^2.16.1",
+    "express": "^4.17.1",
+    "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {},
   "scripts": {
