@@ -5,6 +5,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>TEST</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<style>
+			.popup {
+				background: hsla(0, 0%, 30%, 0.5);
+				position: fixed;
+				height: 505px;
+				width: 50%;
+				transition: all 0.25s;
+				top: 50px;
+				left: 25%;
+				display: grid;
+				justify-content: center;
+				align-items: center;
+				pointer-events: none;
+				--opacity: 0;
+				opacity: var(--opacity);
+			}
+			.popup.open {
+				--opacity: 1;
+				pointer-events: all;
+			}
+
+		</style>
 	</head>
 	<body class="bg-secondary">
 		<div class="container mx-auto border bg-light text-dark" width="1114px">
