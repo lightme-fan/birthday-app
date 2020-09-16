@@ -1,171 +1,194 @@
-// import { format } from "./date";
-// console.log(format);
-
 const container = document.querySelector('.container')
 // Fetch people
 async function fetchPeople() {
   const people = await fetch('./people.json');
-  const data = await people.json();
-  return data;
-}
+  let dataPerson = await people.json();
 
-// Display the list of people
-async function displayPeople() {
-  // Grabbing the feched people
-  const listOfPeople = await fetchPeople();
-
-  // Mapping the list of people
-  const html = listOfPeople.map(person => {
-
-    const date = new Date(person.birthday);
-    const getDate = date.getDate();
-    const getMonth = date.getMonth();
-    const getFullYear = date.getFullYear();
-    const birthday = `${getDate}th - ${getMonth} - ${getFullYear}`;
-
-    const dateNow = new Date();
-    const birthdate = new Date(person.birthday);
-    const day = (dateNow.getDate() - birthdate.getDate()) *dateNow.getMonth() - birthdate.getMonth();
-    // const month = dateNow.getMonth() - birthdate.getMonth();  
-
-    // const fulldays = day * month;);
-
-    return `
-      <div class="row border-bottom m-4 person" data-id="${person.id}" value= "${person.id}">
-        <div class="col-sm">
-          <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
-        </div>
-        <div class="col-sm">
-          <p class="h5 name">${person.lastName} ${person.firstName}</p>
-          <p>Turn to this age on<br> <b class="birthday">${birthday}</b></p>
-        </div>
-        <div class="col-sm">
-          <b>${day}</b> days
-        </div>
-        <div class="col-sm">
-          <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-            <img class="edit icon" width="15px" src="../icons/edit-icon.png" alt="Edit">
-          </button>    
-        </div>
-        <div class="col-sm">
-          <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-            <img class="delete icon" width="15px" src="../icons/trash_icon.png" alt="Delete">
-          </button>
-        </div>
-    </div>
-  `});
-  container.insertAdjacentHTML('beforeend', html.join(''));
-  container.dispatchEvent(new CustomEvent('updatedBirthday'))
-}
-
-// Destroy form popup
-async function destroyPopup(formPopup) {
-	formPopup.remove();
-	formPopup = null;
-}
-
-// Handling buttons 
-const handleClickButtons = async (e) => {
-  // Handling Edit button
-  if (e.target.closest('button.edit')) {
-    const closestEl = e.target.closest('.person');
-    const id = closestEl.dataset.id;
-    editButton(id);
+  // Get age of a person
+  const getAge = (date1, date2) => {
+    date2 = date2 || new Date();
+    const diff = date2.getTime() - date1.getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
   }
 
-  // Handling Delete button
-  if (e.target.closest('button.delete')) {
-    const closestEl = e.target.closest('.person');
-    const button = closestEl.querySelector('button.delete')
-    const id = button.value;
-    deleteButton(id);
+  // Get birthdate
+  // const actualBirthdate = () => {
+  //   const date = new Date();
+  //   const getDay = date.getDay();
+  //   const getMonth = date.getMonth();
+  //   // const getYear = date.getFullYear();
+  //   return `${getDay}th - ${getMonth}`;
+  // }
+
+  // Destroy form popup
+  function destroyPopup(formPopup) {
+    formPopup.remove();
+    formPopup = null;
   }
-}
 
-// Edit person
-const editButton = async (id) => {
-  // Grabbing the list of people
-  const people = await fetchPeople();
-  // Find person by id
-  const persons = people.find(person => person.id === id);
+  // Template
+  const template = (arr) => {
+    // Mapping the list of people
+    return arr.map(person => {
+      const birthdate = getAge(new Date(person.birthday));
+    
+      // Get date of birthday
+      // const today = new Date();
+      const date = new Date(person.birthday);
+      const birthday = `${date.getDate()}th of ${date.getMonth().toString()}`;
+      console.log(birthday);
+      // const birthdayParty = today - date;
+      // console.log(birthdayParty.toLocaleDateString());
 
-  // New promisse
-  return new Promise(async function (resolve) {
-    // Creating form popup
-    const formPopup = document.createElement('form');
-    formPopup.classList.add('popup');
-  
-    // Popup HTML
-    const popupHtml = `
-    <div>
-      <p class="modal-title h3 text-white" id="exampleModalLabel">Edit <i>${persons.lastName}</i><p>
-      <fieldset class="form-group d-flex flex-column">
-        <label class="text-white h5" for="lastname">Last name</label>
-        <input type="text" name="lastname" id="lastname" value="${persons.lastName}">
-      </fieldset>
-      <fieldset class="form-group d-flex flex-column">
-        <label class="text-white h5" for="firstname">First name</label>
-        <input type="text" name="firstname" id="firstname" value="${persons.firstName}">
-      </fieldset>
-      <fieldset class="form-group d-flex flex-column">
-        <label class="text-white h5" for="jobTitle">Birthday</label>
-        <input type="text" name="jobTitle" id="jobTitle" value="${persons.birthday}">
-      </fieldset>
-      <fieldset class="form-group d-flex flex-column">
-        <label class="text-white h5" for="jobArea">Job area</label>
-        <input type="text" name="jobArea" id="jobArea" value="${persons}">
-      </fieldset>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary submit" value="${persons.id}">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${persons.id}">Close</button>
-      </div>      
-    </div>	
-    `;
-    formPopup.insertAdjacentHTML('afterbegin', popupHtml);
-    document.body.appendChild(formPopup);
-    formPopup.classList.add('open');
+      return `
+        <div class="row border-bottom m-4 person" data-id="${person.id}" value= "${person.id}">
+          <div class="col-sm">
+            <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
+          </div>
+          <div class="col-sm">
+            <p class="h5 name">${person.lastName} ${person.firstName}</p>
+            <p>Turn to <b>${birthdate}</b> years old on <b class="birthday"></b></p>
+          </div>
+          <div class="col-sm">
+            <b>${person.birthday}</b> days
+          </div>
+          <div class="col-sm">
+            <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+              <img class="edit icon" width="15px" src="../icons/edit-icon.png" alt="Edit">
+            </button>    
+          </div>
+          <div class="col-sm">
+            <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+              <img class="delete icon" width="15px" src="../icons/trash_icon.png" alt="Delete">
+            </button>
+          </div>
+      </div>
+    `});
+  }
 
-    // Submitting the values from the input form
-    formPopup.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const form = e.target;
-      people.lastName = form.lastname.value;
-      people.firstName = form.firstname.value; 
-      console.log(formPopup);
+  // Append to body
+  const displayArr = () => {
+    const runTemplate = template(dataPerson);
+    container.innerHTML = runTemplate;
+  }
 
-      destroyPopup(formPopup);
-      displayPeople();
+  // Display people
+  const displayListOfPeople = () => {
+    const generatePeople = template(dataPerson);
+    container.insertAdjacentHTML('beforeend', generatePeople);
+    container.dispatchEvent(new CustomEvent('updatedBirthday'))
+  }
 
+  // Update local storage
+  const updatedLocalStorage = () => {
+    localStorage.setItem('data', JSON.stringify(dataPerson));
+  }
+
+  // Local storage
+  const initialLocalStorage = () => {
+    const storedPersons = JSON.parse(localStorage.getItem('dataPerson'));
+    if (storedPersons) {
+      dataPerson = storedPersons;
+      
+      // Call the display array
+      displayArr();
       container.dispatchEvent(new CustomEvent('updatedBirthday'));
-    }, { once: true });
+    }
+  }
 
-    // Close popup
-    window.addEventListener('click', (e) => {
-      if (e.target.closest('button[data-dismiss="modal"]')) {
-        destroyPopup(formPopup);
-      container.dispatchEvent(new CustomEvent('updatedBirthday'));
-
+  // Handling buttons 
+  const handleClickButtons = (e) => {
+      // Handling Edit button
+      if (e.target.closest('button.edit')) {
+        const closestEl = e.target.closest('.person');
+        const id = closestEl.dataset.id;
+        editPopup(id);
       }
-    }, { once: true });
 
-  });
+      // Handling Delete button
+      if (e.target.closest('button.delete')) {
+        const closestEl = e.target.closest('.person');
+        const id = closestEl.dataset.id;
+        deletePopup(id);
+      }
+  }
 
-}
+  // Edit
+  const editPopup = (id) => {
+    // Find person by id
+    const people = dataPerson.find(person => person.id === id);
+    return new Promise(async function (resolve) {
+      // Creating form popup
+      const formPopup = document.createElement('form');
+      formPopup.classList.add('popup');
 
-// Delete persons
-const deleteButton = async (id) => {
-  const persons = await fetchPeople();
-  const findPerson = persons.find(person => person.id === id);
+      // Popup HTML
+      const popupHtml = `
+      <div>
+        <p class="modal-title h3 text-white" id="exampleModalLabel">Edit <i>${people.lastName}</i><p>
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="lastname">Last name</label>
+          <input type="text" name="lastname" id="lastname" value="${people.lastName}">
+        </fieldset>
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="firstname">First name</label>
+          <input type="text" name="firstname" id="firstname" value="${people.firstName}">
+        </fieldset>
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="birthday">Birthday</label>
+          <input type="text" name="birthday" id="birthday" value="${people.birthday}">
+        </fieldset>
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="age">Age</label>
+          <input type="text" name="jobArea" id="jobArea" value="${people}">
+        </fieldset>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary submit" value="${people.id}">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
+        </div>      
+      </div>	
+      `;
+      formPopup.insertAdjacentHTML('afterbegin', popupHtml);
+      document.body.appendChild(formPopup);
+      formPopup.classList.add('open');
 
-  return new Promise(async function (resolve) { 
+      // Submitting the values from the input form
+      formPopup.addEventListener('submit', (e) => {
+        e.preventDefault();
+          
+        people.lastName = formPopup.lastname.value;
+        people.firstName = formPopup.firstname.value;
+        people.birthday = formPopup.birthday.value;
+
+        // Call the display array
+        displayArr();
+        // Destroy the popup form
+        destroyPopup(formPopup);
+        container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      }, { once: true });
+
+      // Close popup
+      window.addEventListener('click', (e) => {
+        if (e.target.closest('button[data-dismiss="modal"]')) {
+          destroyPopup(formPopup);
+          container.dispatchEvent(new CustomEvent('updatedBirthday'));
+        }
+      })
+    });
+  }
+
+  // Delete
+  const deletePopup = (id) => {
+      // Delete element
     const deleteForm = document.createElement('div');
     deleteForm.classList.add('popup');
-    deleteForm.style.height = '100px';
+    deleteForm.style.height = '200px';
+    deleteForm.style.width = '400px';
 
     // Delete html
     deleteForm.innerHTML = `
     <div tabindex="-1" role="dialog">
-      <p class="h4 text-white">Are sure ${findPerson.lastName} ${findPerson.firstName}?</p>
+      <p class="h4 text-white">Are sure you want to delete thi person?</p>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary ok">OK</button>
         <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
@@ -177,46 +200,45 @@ const deleteButton = async (id) => {
     deleteForm.classList.add('open');
 
     // Handle clik
-    window.addEventListener('click', (e) => {
+    const confirmBtn = (e) => {
 
       // Confirm deletion
-      if (e.target.closest('.ok')) {
-        persons = persons.filter(person => person.id !== id);
+      if (e.target.matches('button.ok')) {
+        dataPerson = dataPerson.filter(person => person.id !== id);
+
+        // Call the display arr
+        displayArr();
+
+        // Destroy the popup form
         destroyPopup(deleteForm);
+        container.dispatchEvent(new CustomEvent('updatedBirthday'));
       }
 
       // Cancel delete
-      if (e.target.closest('.cancel')) {
+      if (e.target.matches('button.cancel')) {
         destroyPopup(deleteForm);
       }
 
       container.dispatchEvent(new CustomEvent('updatedBirthday'));
-    })
-  }, { once: true });
-  
+    };
+
+    // Event listener for delete button 
+    window.addEventListener('click', confirmBtn)
+  }
+
+  // Running the template
+  displayArr();
+
+  // Event listner for localStorage
+  container.addEventListener('updatedBirthday', updatedLocalStorage);
+  // Initialising local storage
+  initialLocalStorage();
+
+  // Display people
+  displayListOfPeople();
+
+  // Even listener
+  window.addEventListener('click', handleClickButtons);
 }
 
-// Local storage
-const initialLocalStorage = async () => {
-  const fetchedPeople = await fetchPeople();
-  JSON.parse(localStorage.getItem('fetchedPeople'));
-  container.dispatchEvent(new CustomEvent('updatedBirthday'))
-}
-
-// Update local storage
-const updatedLocalStorage = async () => {
-  const fetchedPeople = await fetchPeople(); 
-  localStorage.setItem('fetchedPeople', JSON.stringify(fetchedPeople));
-}
-
-// Updating local storage 
-container.addEventListener('updatedBirthday', updatedLocalStorage);
-
-// Click event listener
-window.addEventListener('click', handleClickButtons);
-
-// Display list of people
-displayPeople();
-
-// Initial Local Storage 
-initialLocalStorage();
+fetchPeople();
