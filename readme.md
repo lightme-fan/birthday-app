@@ -1,42 +1,25 @@
-# Term 3 JS Project : Birthday App
+Hello 
 
-Hey team! So the final project here will be a birthday list.
+This is my week project;
 
-We have a list of persons. The app will show us whose person is the closest to have their birthday.
+- Firstly, I could not import the **date-fns** in my script page.
 
-You have a file in the project called person.json. It contains a list of persons, and we want to add all those persons to our birthday list app.
+- I set all my work in one big function.
 
-The first time you launch the app, it should fetch all the data from the people.json local file. You can use fetch for that, it also works with local files.
+1. I declare an empty array 
+2. I fetch the list of people, the push it as the value of the empty array.
+3. I set the new array of object to local storage.
+4. I create a template to calculate the age of those people in new array of oject. 
+5. I display the new array of object from local storage by mapping it. I also call the created age template to get the age of everybody.
+6. I declare a destroy popup function.
+7. After that the edit function
+8. Delete function
+9. Add function
 
-Once they are loaded in the app, you can save them on localstorage, and you don't need to work with the json file anymore.
+The most challenging in this project is to work with the date.
 
-The app will show the list of people, sorted by the ones who will have their birthday the soonest.
+I tried to calculate the number of days from untill the birthday. I got numbers but it is the birthday this year. Some of the birthday have gone, so some are negative numbers.
 
-![assets/Screenshot_2020-09-12_at_16.57.18.png](assets/Screenshot_2020-09-12_at_16.57.18.png)
+Thanks for this challenge. I found this difficult but it is fan.
 
-The screenshot is just an example of a possible layout. Feel free to create a custom layout with boostrap if you want to.
-
-The users will be able to add a new element on the list (only on the app list localstorage, not on the json). Here are the fields :
-
--   first name
--   last name
--   birthday (datepicker)
--   an url for their avatar image
--   an id for handling the operations on the objects. (no need to add that on the form)
-
-The users should be able to edit an element on the list. When you click the edit button, a modal should appear with a form inside, to edit any attribute.
-
-The users should be able to delete an element. There will be a modal that will ask if you're sure to delete the element.
-
-Every action should be persisted into the local storage.
-
-Here is the package you should use for handling date computations. Add it as a dependency of your project
-
-[https://date-fns.org/v1.29.0/docs/differenceInYears](https://date-fns.org/v1.29.0/docs/differenceInYears)
-
-Again, try to make a plan, by dividing big tasks into smaller ones.
-You have the whole week to work on it. You can collaborate with other students, but copy/pasting code is forbidden.
-Once you're finished with the functionality, try to make your app more appealing with css and other tricks.
-Be creative 🎨
-
-Good Luck
+👍 🙂 🙂  👍 

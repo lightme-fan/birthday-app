@@ -2,60 +2,76 @@ const container = document.querySelector('.container');
 const addButton = document.querySelector('.addPerson');
 console.log(addButton);
 
+let data = [];
 // Fetch people
 async function fetchPeople() {
-  const people = await fetch('./people.json');
-  let dataPerson = await people.json();
+
+  const res = await fetch('./people.json');
+  const dataPerson = await res.json();
+  data = dataPerson;
+
+  // Update local storage
+  const updatedLocalStorage = () => {
+    localStorage.setItem('data', JSON.stringify(data));
+  }
+
+  // Local storage
+  const initialLocalStorage = () => {
+    const storedPersons = JSON.parse(localStorage.getItem('data'));
+
+    if (storedPersons) {
+      data = storedPersons;
+      displayData(data);
+      // container.dispatchEvent(new CustomEvent('updatedBirthday'));
+    }
+  }
 
   // Get age of a person
   const getAge = (date1, date2) => {
+    // This is a condition like if statement
     date2 = date2 || new Date();
+    //Calculation
     const diff = date2.getTime() - date1.getTime();
     return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
   }
-
-  // Destroy form popup
-  function destroyPopup(formPopup) {
-    formPopup.remove();
-    formPopup = null;
-  }
-
-  // Template
-  const template = (arr) => {
-    // Mapping the list of people
-    return arr.map(person => {
-     
+ 
+  // Displaying the data form the local storage
+  const displayData = () => {
+    // Mapping the data,   
+    const persons = data.map(person => { 
       // Birthdate, Date now, 
       const date1 = new Date(person.birthday);
       const date2 = new Date();
       const oneDay = 1000 * 60 * 60 * 24;
+
       // get current year 
       const yearNow = date2.getFullYear();
-
+      
       // Age
       const birthdate = getAge(new Date(person.birthday));
-      // const month = `${date1.getMonth() + 1}`
       const longMonth = date1.toLocaleString('en-us', { month: 'long' });
-
-      const actualBirthday = `${date1.getDay() + 1}th of ${longMonth}`;
-      // Birthday
-      const convertedBirthdate = `${date1.getDay() + 1}-${date1.getMonth() + 1}-${yearNow}`;
+      const getDay = date1.getDay() + 1;
       
+      const actualBirthday = `${getDay} - ${longMonth}`;
+      
+      // Birthday
+      const convertedBirthdate = `${getDay}/${longMonth}/${yearNow}`;
+
       // Get distance days between today and the birthday
       const newDate = new Date(convertedBirthdate).getTime();
-      const diffDays = Math.round(Math.abs((date2 - newDate)/(oneDay)));
-
+      const diffDays = Math.floor((newDate - date2) / oneDay);
+      
       return `
         <div class="row border-bottom m-4 person" data-id="${person.id}" value= "${person.id}">
           <div class="col-sm">
             <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
           </div>
           <div class="col-sm">
-            <p class="h5 name">${person.lastName} ${person.firstName}</p>
-            <p>Turn to <b>${birthdate}</b> years old on <b class="birthday">${actualBirthday}</b></p>
+            <p class="h5 name text-primary"><i class="last-name">${person.lastName}</i> <i class="first-name">${person.firstName}</i></p>
+            <p>Turn to <b class="age text-primary">${birthdate}</b> years old on <b class="birthday text-primary">${actualBirthday}</b></p>
           </div>
           <div class="col-sm">
-            <b>${diffDays}</b> days
+            <b class="day text-primary">${diffDays}</b> days
           </div>
           <div class="col-sm">
             <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
@@ -69,21 +85,15 @@ async function fetchPeople() {
           </div>
       </div>
     `});
+
+    container.innerHTML = persons.join('');
+    
   }
-
-  // Append to body
-  const displayArr = () => {
-    const sortedPeople = dataPerson.sort((a, b) => a.birthday - b.birthday);
-    const runTemplate = template(sortedPeople);
-    container.innerHTML = runTemplate;
-
-    // console.log(template(dataPerson).sort((a, b) => a.birthday - b.birthday));
-  }
-
-  // Display people
-  const displayListOfPeople = () => {
-    const generatePeople = template(dataPerson);
-    container.insertAdjacentHTML('beforeend', generatePeople);
+  
+  // Destroy form popup
+  function destroyPopup(formPopup) {
+    formPopup.remove();
+    formPopup = null;
   }
 
   // Handling buttons 
@@ -102,11 +112,16 @@ async function fetchPeople() {
         deletePopup(id);
       }
   }
-
+    
   // Edit
   const editPopup = (id) => {
+    const listPerso = document.querySelector('.person');
+    const birthday = listPerso.querySelector('.birthday');
+    const age = listPerso.querySelector('.age');
+    const differenceDay = listPerso.querySelector('.day');
+
     // Find person by id
-    const people = dataPerson.find(person => person.id === id);
+    const people = data.find(person => person.id === id);
     return new Promise(async function (resolve) {
       // Creating form popup
       const formPopup = document.createElement('form');
@@ -128,7 +143,17 @@ async function fetchPeople() {
 
         <fieldset class="form-group d-flex flex-column">
           <label class="text-white h5" for="birthday">Birthday</label>
-          <input type="text" name="birthday" id="birthday" value="${people.birthday}">
+          <input type="text" name="birthday" id="birthday" value="${birthday.textContent}">
+        </fieldset>
+
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="age">Age</label>
+          <input type="text" name="age" id="age" value="${age.textContent}">
+        </fieldset>
+
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="day">Day</label>
+          <input type="text" name="day" id="day" value="${differenceDay.textContent}">
         </fieldset>
 
         <div class="modal-footer">
@@ -144,14 +169,16 @@ async function fetchPeople() {
       // Submitting the values from the input form
       formPopup.addEventListener('submit', (e) => {
         e.preventDefault();
-          
+
+        // Chanring the textContent of a person by value of form popup
         people.lastName = formPopup.lastname.value;
         people.firstName = formPopup.firstname.value;
-        people.birthday = formPopup.birthday.value;
+        people.birthday = formPopup.birthday.value,
+        id = id
+        age.textContent = formPopup.age.value,
+        differenceDay.textContent = formPopup.day.value
 
-        // Call the display array
-        // displayArr();
-        // Destroy the popup form
+        displayData(data);
         destroyPopup(formPopup);
         container.dispatchEvent(new CustomEvent('updatedBirthday'));
       }, { once: true });
@@ -190,16 +217,11 @@ async function fetchPeople() {
 
     // Handle clik
     const confirmBtn = (e) => {
-
       // Confirm deletion
       if (e.target.matches('button.ok')) {
-        dataPerson = dataPerson.filter(person => person.id !== id);
-
-
-        displayArr(dataPerson);
-
-        // Destroy the popup form
+        data = data.filter(person => person.id !== id);
         destroyPopup(deleteForm);
+        displayData(data);
         container.dispatchEvent(new CustomEvent('updatedBirthday'));
       }
 
@@ -215,111 +237,88 @@ async function fetchPeople() {
     window.addEventListener('click', confirmBtn)
   }
 
-  // // Add a new person
-  // const handleAddBtn = () => {
-  //   // Creating form popup
-  //   const addPopup = document.createElement('form');
-  //   addPopup.classList.add('popup');
+  // Add a new person
+  const handleAddBtn = () => {
+    // Creating form popup
+    const addPopup = document.createElement('form');
+    addPopup.classList.add('popup');
 
-  //   // Popup HTML
-  //   const popupHtml = `
-  //   <div>
-  //     <p class="modal-title h3 text-white" id="exampleModalLabel">Add a new person's birthday</i><p>
-  //     <fieldset class="form-group d-flex flex-column">
-  //       <label class="text-white h5" for="lastname">Last name</label>
-  //       <input type="text" name="lastname" id="lastname" value="adjkdjal">
-  //     </fieldset>
+    // Popup HTML
+    const popupHtml = `
+    <div>
+      <p class="modal-title h3 text-white" id="exampleModalLabel">Add a new person's birthday</i><p>
+      <fieldset class="form-group d-flex flex-column">
+        <label class="text-white h5" for="lastname">Last name</label>
+        <input type="text" name="lastname" id="lastname" require>
+      </fieldset>
 
-  //     <fieldset class="form-group d-flex flex-column">
-  //       <label class="text-white h5" for="firstname">First name</label>
-  //       <input type="text" name="firstname" id="firstname" value="fjalkfaj">
-  //     </fieldset>
+      <fieldset class="form-group d-flex flex-column">
+        <label class="text-white h5" for="firstname">First name</label>
+        <input type="text" name="firstname" id="firstname" require>
+      </fieldset>
 
-  //     <fieldset class="form-group d-flex flex-column">
-  //       <label class="text-white h5" for="birthday">Birthday</label>
-  //       <input type="text" name="birthday" id="birthday" value="ghlkfgslfk">
-  //     </fieldset>
+      <fieldset class="form-group d-flex flex-column">
+        <label class="text-white h5" for="birthday">Birthday</label>
+        <input type="date" name="birthday" id="birthday" require>
+      </fieldset>
 
       
-  //     <fieldset class="form-group d-flex flex-column">
-  //       <label class="text-white h5" for="picture">Image URL</label>
-  //       <input type="url" name="picture" id="picture" value="https://bit.ly/32DOwd6">
-  //     </fieldset>
+      <fieldset class="form-group d-flex flex-column">
+        <label class="text-white h5" for="picture">Image URL</label>
+        <input type="url" name="picture" id="picture"require>
+      </fieldset>
       
-  //     <div class="modal-footer">
-  //       <button type="submit" class="btn btn-primary submit">Submit</button>
-  //       <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
-  //     </div>      
-  //   </div>	
-  //   `;
-  //   addPopup.insertAdjacentHTML('afterbegin', popupHtml);
-  //   document.body.appendChild(addPopup);
-  //   addPopup.classList.add('open');
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary submit">Submit</button>
+        <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+      </div>      
+    </div>	
+    `;
+    addPopup.insertAdjacentHTML('afterbegin', popupHtml);
+    document.body.appendChild(addPopup);
+    addPopup.classList.add('open');
 
-  //   // Submit form
-  //   addPopup.addEventListener('submit', (e) => {
-  //     e.preventDefault();
-  //     const addForm = e.currentTarget;
+    // Submit form
+    addPopup.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const addForm = e.currentTarget;
       
-  //     // Declare a new object
-  //     const newPerson = {
-  //       birthday: addForm.birthday.value,
-  //       id: Date.now(),
-  //       lastName: addForm.lastname.value,
-  //       firstname: addForm.firstname.value,
-  //       picture: addForm.picture
-  //     }
+      // Declare a new object
+      const newPerson = {
+        birthday: addForm.birthday.value,
+        id: Date.now(),
+        lastName: addForm.lastname.value,
+        firstName: addForm.firstname.value,
+        picture: addForm.picture
+      }
       
-  //     // Push the new object
-  //     dataPerson.push(newPerson);
-      
-  //     container.dispatchEvent(new CustomEvent('updatedBirthday'));
-  //     addPopup.reset();
-  //     destroyPopup(addPopup); 
-  //     // console.log(displayArr(newItem));
-  //   })
+      // Push the new object
+      data.push(newPerson);
 
-  //   // Close button
-  //   window.addEventListener('click', (e) => {
-  //     if (e.target.closest('.cancel')) {
-  //       destroyPopup(addPopup);
-  //     }
-  //   })
-  // }
-
-  // Update local storage
-  const updatedLocalStorage = () => {
-    localStorage.setItem('data', JSON.stringify(dataPerson));
-  }
-
-  // Local storage
-  const initialLocalStorage = () => {
-    const storedPersons = JSON.parse(localStorage.getItem('dataPerson'));
-    if (storedPersons) {
-      dataPerson = storedPersons;
+      displayData(data);
       container.dispatchEvent(new CustomEvent('updatedBirthday'));
-    }
+      addPopup.reset();
+      destroyPopup(addPopup); 
+      // console.log(displayArr(newItem));
+    })
+
+    // Close button
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('.cancel')) {
+        destroyPopup(addPopup);
+      }
+    })
   }
-  
-  // Add button
-  // addButton.addEventListener('click', handleAddBtn);
 
-  // Running the template
-  // container.addEventListener('updatedBirthday', displayArr);
-
-  displayArr();
+  window.addEventListener('click', handleClickButtons);
   // Event listner for localStorage
   container.addEventListener('updatedBirthday', updatedLocalStorage);
   // Initialising local storage
   initialLocalStorage();
+  addButton.addEventListener('click', handleAddBtn);
 
-  // Display people
-  container.addEventListener('updatedBirthday',   displayListOfPeople);
-
-  // displayListOfPeople();
-
-  // Even listener
-  window.addEventListener('click', handleClickButtons);
+  displayData();
 }
+fetchPeople()
 
-fetchPeople();
+  
