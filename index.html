@@ -1,42 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>TEST</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-		<style>
-			.popup {
-				background: hsla(0, 0%, 30%, 0.5);
-				position: fixed;
-				height: 505px;
-				width: 50%;
-				transition: all 0.25s;
-				top: 50px;
-				left: 25%;
-				display: grid;
-				justify-content: center;
-				align-items: center;
-				pointer-events: none;
-				--opacity: 0;
-				opacity: var(--opacity);
-			}
-			.popup.open {
-				--opacity: 1;
-				pointer-events: all;
-			}
 
-		</style>
-	</head>
-	<body class="bg-secondary">
-		<article class="mx-auto">
-			<div class="d-flex justify-content-around bg-info text-white">
-				<p class="h1">Birthday app</p>
-				<button type="button" class="addPerson rounded h-25 align-self-center">Add a new person</button>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>TEST</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+		.popup {
+			background: hsla(0, 0%, 30%, 0.5);
+			position: fixed;
+			height: 505px;
+			width: 50%;
+			transition: all 0.25s;
+			top: 50px;
+			left: 25%;
+			display: grid;
+			justify-content: center;
+			align-items: center;
+			pointer-events: none;
+			--opacity: 0;
+			opacity: var(--opacity);
+		}
+
+		.popup.open {
+			--opacity: 1;
+			pointer-events: all;
+		}
+	</style>
+</head>
+
+<body class="bg-secondary">
+	<article class="mx-auto">
+		<div class="d-flex justify-content-around bg-info text-white">
+			<p class="h1">Birthday app</p>
+			<button type="button" class="addPerson rounded h-25 align-self-center">Add a new person</button>
+		</div>
+		<div class="d-flex justify-content-around bg-info text-white">
+			<img width="50px" src="./icons/search.png" alt="Search button">
+
+			<div>
+				<select name="pets" id="pet-select">
+					<option value="January"><small><i>January</i></small></option>
+					<option value="dog"><small><i>February</i></small></option>
+					<option value="cat"><small><i>March</i></small></option>
+					<option value="hamster"><small><i>April</i></small></option>
+					<option value="parrot"><small><i>May</i></small></option>
+					<option value="spider"><small><i>June</i></small></option>
+					<option value="goldfish"><small><i>Jullay</i></small></option>
+				</select>
+
 			</div>
-			<div class="container border bg-light text-dark" width="1114px">
-			</div>
-		</article>
-		<script src="script.js" type="module"></script>
-	</body>
+		</div>
+		<div class="container border bg-light text-dark" width="1114px">
+		</div>
+	</article>
+	<script src="script.js" type="module"></script>
+</body>
+
 </html>

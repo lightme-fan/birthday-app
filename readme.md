@@ -18,7 +18,7 @@ This is my week project;
 
 The most challenging in this project is to work with the date.
 
-I tried to calculate the number of days from untill the birthday. I got numbers but it is the birthday this year. Some of the birthday have gone, so some are negative numbers.
+I tried to calculate the number of days from now untill the birthday. I got numbers but it is the birthday this year. Some of the birthdays have gone, so some are negative numbers.
 
 Thanks for this challenge. I found this difficult but it is fan.
 

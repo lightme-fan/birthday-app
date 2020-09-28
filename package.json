@@ -5,10 +5,10 @@
   "main": "script.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "date": "https://date-fns.org/v1.29.0/docs/differenceInYears",
     "date-fns": "^2.16.1",
     "express": "^4.17.1",
-    "regenerator-runtime": "^0.13.7",
-    "date": "https://date-fns.org/v1.29.0/docs/differenceInYears"
+    "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {},
   "scripts": {
