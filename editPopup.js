@@ -14,6 +14,7 @@ import { displayData } from "./displayData.js";
 export const editPopup = (id) => {
     const listPerso = document.querySelector('.person');
     const birthday = listPerso.querySelector('.birthday');
+    console.log(birthday);
     const age = listPerso.querySelector('.age');
     const differenceDay = listPerso.querySelector('.day');
   

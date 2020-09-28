@@ -24,12 +24,23 @@ import { handleClickButtons } from "./handleclick.js";
 // Import handleAdd button
 import { handleAddBtn } from "./addBtn.js";
 
+// Import searchByName variable
+import { searchByName } from "./usefulvariables.js";
+
+// Import searchByName Function
+import { searchByNameFunction } from "./searchByName.js";
+
+
 window.addEventListener('click', handleClickButtons);
 // Event listner for localStorage
 container.addEventListener('updatedBirthday', updatedLocalStorage);
 // Initialising local storage
 initialLocalStorage();
+
+// event listner for handle Add button
 addButton.addEventListener('click', handleAddBtn);
+
+searchByName.addEventListener('click', searchByNameFunction);
 
 displayData();
 
