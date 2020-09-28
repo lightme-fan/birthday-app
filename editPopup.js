@@ -32,22 +32,17 @@ export const editPopup = (id) => {
             <label class="text-white h5" for="lastname">Last name</label>
             <input type="text" name="lastname" id="lastname" value="${people.lastName}">
           </fieldset>
+          
           <fieldset class="form-group d-flex flex-column">
             <label class="text-white h5" for="firstname">First name</label>
             <input type="text" name="firstname" id="firstname" value="${people.firstName}">
           </fieldset>
+
           <fieldset class="form-group d-flex flex-column">
             <label class="text-white h5" for="birthday">Birthday</label>
-            <input type="text" name="birthday" id="birthday" value="${birthday.textContent}">
+            <input type="text" name="birthday" id="birthday" value="${people.birthday}">
           </fieldset>
-          <fieldset class="form-group d-flex flex-column">
-            <label class="text-white h5" for="age">Age</label>
-            <input type="text" name="age" id="age" value="${age.textContent}">
-          </fieldset>
-          <fieldset class="form-group d-flex flex-column">
-            <label class="text-white h5" for="day">Day</label>
-            <input type="text" name="day" id="day" value="${differenceDay.textContent}">
-          </fieldset>
+    
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary submit" value="${people.id}">Save changes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
@@ -66,11 +61,8 @@ export const editPopup = (id) => {
         people.lastName = formPopup.lastname.value;
         people.firstName = formPopup.firstname.value;
         people.birthday = formPopup.birthday.value,
-          id = id
-        age.textContent = formPopup.age.value,
-          differenceDay.textContent = formPopup.day.value
-  
-        displayData(data);
+        
+        displayData();
         destroyPopup(formPopup);
         container.dispatchEvent(new CustomEvent('updatedBirthday'));
       }, { once: true });
