@@ -13,29 +13,25 @@ import { searchBtn } from "./usefulvariables.js";
 
 export const searchByNameFunction = () => {
     const html = `
-        <div class="md-form mt-0">
-            <input class="form-control search" type="text" placeholder="Search a person by name" aria-label="Search">
-        </div>
+        
     `
     searchBtn.innerHTML = html;
     const inputSearch = document.querySelector('.search');
 
     const filterByName = (e, filterName, filterStyle) => {
-        // if (filterName) {
-        //   console.log(data);
-        //   console.log(filterName);
-        //     data.filter(name => {
-        //       let lowerCaseName = name.title.toLowerCase();
-        //       console.log(lowerCaseName);
-        //       let lowerCaseFilterName = filterTitle.toLowerCase();
-        //       if (lowerCaseName.includes(lowerCaseFilterName)) {
-        //           return true;
-        //       } else {
-        //           return false;
-        //       }
-        //     })
-        // }
-        console.log(e);
+        let sortedData = data.sort((a, b) => b.birthday - a.birthday);
+        if (filterName) {
+            sortedData = data.filter(person => {
+                let lowerCaseName = person.lastName.toLowerCase();
+                let lowerCaseFilterName = filterName.toLowerCase();        
+                if (lowerCaseName.includes(lowerCaseFilterName)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+        }
+
     }
     inputSearch.addEventListener('input', filterByName)
 }

@@ -36,14 +36,14 @@ import { searchByNameFunction } from "./searchByName.js";
 window.addEventListener('click', handleClickButtons);
 // Event listner for localStorage
 container.addEventListener('updatedBirthday', updatedLocalStorage);
+container.addEventListener('updatedBirthday', displayData);
+
 // Initialising local storage
 initialLocalStorage();
 
 // event listner for handle Add button
 addButton.addEventListener('click', handleAddBtn);
 
-searchByName.addEventListener('click', searchByNameFunction);
-
+// searchByName.addEventListener('click', searchByNameFunction);
 displayData();
-
-fetchPeople()
+fetchPeople();

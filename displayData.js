@@ -2,17 +2,64 @@
 import { data } from "./localStorage.js";
 
 // import Variables
-import { container } from "./usefulvariables.js";
+import { container, searchByName,searchByMonth, resetBtn } from "./usefulvariables.js";
 
 // Importing the calculation of age
 import { getAge } from "./getAge.js";
 
+// Filter function
+const filterList = (e) => {
+  displayData(e, searchByName.value, searchByMonth.value);
+}
+
+// Reset filter
+const resetFilters = (e) => {
+  const reseting = e.target;
+  container.dispatchEvent(new CustomEvent('updatedBirthday'))
+}
+
+// Event listener for the filters
+searchByName.addEventListener('keyup', filterList);
+searchByMonth.addEventListener('change', filterList);
+resetBtn.addEventListener('click', resetFilters);
+
 // Displaying the data form the local storage
-export const displayData = () => {
+export const displayData = (event, filterName, filterMonth) => {
+  let sortedPeople = data.sort((a,b) => a.birthday - b.birthday);
+  
+  // Filter by name
+  if (filterName) {
+    sortedPeople = data.filter(person => {
+      let lowerCaseName = person.lastName.toLowerCase();
+      let lowerCaseFilterName = filterName.toLowerCase();
+      if (lowerCaseName.includes(lowerCaseFilterName)) {
+          return true;
+      } else {
+          return false;
+      }
+    })
+  }
+
+  // Filter by Month
+  else if (filterMonth) {
+    sortedPeople = data.filter(person => {
+      let date = new Date(person.birthday);
+      let month = date.toLocaleString('en-us', { month: 'long' });
+      let lowerCaseMonth = month.toLowerCase();
+      let lowerCaseFilterMonth = filterMonth.toLowerCase();
+      if (lowerCaseMonth.includes(lowerCaseFilterMonth)) {
+        return true;
+      } else {
+          return false;
+      }
+    })
+  }
+
   // Mapping the data,   
-  const persons = data.map(person => {
+  const persons = sortedPeople.map(person => {
     // Age
     const birthdate = getAge(new Date(person.birthday));
+
 
     // Birthdate, Date now, 
     const date1 = new Date(person.birthday);
@@ -60,4 +107,5 @@ export const displayData = () => {
     `});
 
   container.innerHTML = persons.join('');
+  // container.dispatchEvent(new CustomEvent('updatedBirthday'))
 }  
