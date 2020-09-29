@@ -1,6 +1,5 @@
 // import Variables
-import { container } from "./usefulvariables.js";
-import { addButton } from "./usefulvariables.js";
+import { container, addButton } from "./usefulvariables.js";
 
 // Importing the empty array
 import { data } from "./localStorage.js";
@@ -9,8 +8,7 @@ import { data } from "./localStorage.js";
 import { fetchPeople } from "./fetchData.js";
 
 // Importing local storage
-import { updatedLocalStorage } from "./localStorage.js";
-import { initialLocalStorage } from "./localStorage.js";
+import { updatedLocalStorage, initialLocalStorage } from "./localStorage.js";
 
 // Import display data function
 import { displayData } from "./displayData.js";
