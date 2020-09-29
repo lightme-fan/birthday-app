@@ -24,8 +24,8 @@ export const displayData = () => {
 
     const longMonth = date1.toLocaleString('en-us', { month: 'long' });
     const getDay = date1.getDay() + 1;
-
-    const actualBirthday = `${getDay} - ${longMonth}`;
+    
+    const actualBirthday = `${getDay}th - ${longMonth}`;
 
     // Birthday
     const convertedBirthdate = `${getDay}/${longMonth}/${yearNow}`;

@@ -62,8 +62,9 @@ export const editPopup = (id) => {
         people.lastName = formPopup.lastname.value;
         people.firstName = formPopup.firstname.value;
         people.birthday = formPopup.birthday.value,
-        
-        displayData();
+        birthday.textContent = people.birthday;
+
+        displayData(data);
         destroyPopup(formPopup);
         container.dispatchEvent(new CustomEvent('updatedBirthday'));
       }, { once: true });

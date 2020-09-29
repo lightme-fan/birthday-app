@@ -15,6 +15,8 @@ import { initialLocalStorage } from "./localStorage.js";
 // Import display data function
 import { displayData } from "./displayData.js";
 
+import { deletePopup } from "./localStorage.js";
+
 // Import destroy popup
 import { destroyPopup } from "./destroyPopup.js";
 

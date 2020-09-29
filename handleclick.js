@@ -2,7 +2,7 @@
 import { editPopup } from "./editPopup.js";
 
 // Import handleClick function
-import { deletePopup } from "./deletePopup.js";
+import { deletePopup } from "./localStorage.js";
 
 // Handling buttons 
 export const handleClickButtons = (e) => {
