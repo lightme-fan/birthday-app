@@ -21,19 +21,21 @@ export const searchByNameFunction = () => {
     const inputSearch = document.querySelector('.search');
 
     const filterByName = (e, filterName, filterStyle) => {
-        if (filterName) {
-          console.log(data);
-            data.filter(name => {
-              let lowerCaseName = name.title.toLowerCase();
-              console.log(lowerCaseName);
-              let lowerCaseFilterName = filterTitle.toLowerCase();
-              if (lowerCaseName.includes(lowerCaseFilterName)) {
-                  return true;
-              } else {
-                  return false;
-              }
-            })
-        }
+        // if (filterName) {
+        //   console.log(data);
+        //   console.log(filterName);
+        //     data.filter(name => {
+        //       let lowerCaseName = name.title.toLowerCase();
+        //       console.log(lowerCaseName);
+        //       let lowerCaseFilterName = filterTitle.toLowerCase();
+        //       if (lowerCaseName.includes(lowerCaseFilterName)) {
+        //           return true;
+        //       } else {
+        //           return false;
+        //       }
+        //     })
+        // }
+        console.log(e);
     }
     inputSearch.addEventListener('input', filterByName)
 }

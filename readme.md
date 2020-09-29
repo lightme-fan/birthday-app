@@ -16,9 +16,18 @@ This is my week project;
 8. Delete function
 9. Add function
 
-The most challenging in this project is to work with the date.
+**I separated all my functions into different files.**
 
-I tried to calculate the number of days from now untill the birthday. I got numbers but it is the birthday this year. Some of the birthdays have gone, so some are negative numbers.
+### The most challenging in this project are: 
+ - to work with the date.
+ - Sorting those people by the soonest birthday.
+
+*I tried to calculate the number of days from now untill the birthday. I got numbers but it is the birthday this year. Some of the birthdays have gone, so some are negative numbers.*
+
+## What I still need to improve is:
+* to search a person by lastName or firstName or month of birthday. I still want a short explanation because I don't fully understand it.
+
+*I spent a lot of time to refactor my code because after I have refactored it I have many bugs.*
 
 Thanks for this challenge. I found this difficult but it is fan.
 
