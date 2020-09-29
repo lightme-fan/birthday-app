@@ -8,6 +8,15 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<style>
+		.heading {
+			text-align: center;
+			padding-bottom: 1rem;
+		}
+
+		/* .formSearch {
+			margin-left: 1rem;
+		} */
+
 		.popup {
 			background: hsla(0, 0%, 30%, 0.5);
 			position: fixed;
@@ -28,16 +37,21 @@
 			--opacity: 1;
 			pointer-events: all;
 		}
+
+		.person {
+			background-color: #fffffe;
+		}
 	</style>
 </head>
 
 <body class="bg-secondary">
 	<article class="mx-auto">
-		<div class="d-flex justify-content-around bg-info text-white">
+		<div class="heading text-white">
 			<p class="h1">Birthday app</p>
 			<button type="button" class="addPerson rounded h-25 align-self-center">Add a new person</button>
 		</div>
-		<div class="d-flex justify-content-around bg-info text-white">
+
+		<div class="d-flex justify-content-around text-white formSearch">
 			<div class="md-form mt-0">
             	<input class="form-control search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
         	</div>
@@ -58,7 +72,8 @@
 			</select>
 			<button type="button" class="btn btn-light resetBtn">Reset</button>
 		</div>
-		<div class="container border bg-light text-dark" width="1114px">
+
+		<div class="container" width="1114px">
 		</div>
 	</article>
 	<script src="script.js" type="module"></script>

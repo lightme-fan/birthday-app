@@ -64,41 +64,64 @@ export const displayData = (event, filterName, filterMonth) => {
     // Birthdate, Date now, 
     const date1 = new Date(person.birthday);
     const date2 = new Date();
+    
     const oneDay = 1000 * 60 * 60 * 24;
 
+    const birthdayMonth = date1.getMonth() + 1;
     // get current year 
     const yearNow = date2.getFullYear();
 
     const longMonth = date1.toLocaleString('en-us', { month: 'long' });
     const getDay = date1.getDay() + 1;
+    let birthdays;
+    if (getDay === 1) {
+      birthdays = `${getDay}st`;
+    } else if (getDay === 2) {
+      birthdays = `${getDay}nd`;
+    } else if (getDay === 3) {
+      birthdays = `${getDay}rd`;
+    } else {
+      birthdays = `${getDay}th`;
+    }
+      
+    const actualBirthday = `${birthdays} of ${longMonth}`;
     
-    const actualBirthday = `${getDay}th - ${longMonth}`;
+    let year;
+    if (date2.getMonth() > birthdayMonth) {
+      year = yearNow + 1;
+    }
+    else if (date2.getMonth() === birthdayMonth && date2.getDate() > getDay) {
+      year = yearNow;
+    } 
+    else {
+      year = yearNow;
+    }
 
-    // Birthday
-    const convertedBirthdate = `${getDay}/${longMonth}/${yearNow}`;
+    const convertedBirthdate = `${getDay}/${birthdayMonth}/${year}`;
 
     // Get distance days between today and the birthday
-    const newDate = new Date(convertedBirthdate).getTime();
+    const newDate = new Date(convertedBirthdate);
+    
     const diffDays = Math.floor((newDate - date2) / oneDay);
-
     return `
-        <div class="row border-bottom m-4 person" data-id="${person.id}" value= "${person.id}">
-          <div class="col-sm">
+        <div class="d-flex flex-row justify-content-between border m-4 person" data-id="${person.id}" value= "${person.id}">
+          <div>
             <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
           </div>
-          <div class="col-sm">
-            <p class="h5 name text-primary"><i class="last-name">${person.lastName}</i> <i class="first-name">${person.firstName}</i></p>
+        
+          <div>
+            <p class="h5 name">${person.lastName} ${person.firstName}</p>
             <p>Turn to <b class="age text-primary">${birthdate}</b> years old on <b class="birthday text-primary">${actualBirthday}</b></p>
           </div>
-          <div class="col-sm">
+        
+          <div>
             <b class="day text-primary">${diffDays}</b> days
           </div>
-          <div class="col-sm">
+        
+          <div>
             <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
               <img class="edit icon" width="15px" src="../icons/edit-icon.png" alt="Edit">
-            </button>    
-          </div>
-          <div class="col-sm">
+            </button>
             <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
               <img class="delete icon" width="15px" src="../icons/trash_icon.png" alt="Delete">
             </button>
