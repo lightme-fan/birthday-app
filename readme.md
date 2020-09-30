@@ -16,6 +16,8 @@ This is my week project;
 8. Delete function
 9. Add function
 
+#### NB: I tried to calculate the days from today untill the next birthday, but I only got the days from today to the birthday this year. So I have got some negative number of days.
+
 **I separated all my functions into different files.**
 
 ### The most challenging in this project are: 
@@ -27,7 +29,7 @@ This is my week project;
 ## What I still need to improve is:
 * to search a person by lastName or firstName or month of birthday. I still want a short explanation because I don't fully understand it.
 
-*I spent a lot of time to refactor my code because after I have refactored it I have many bugs.*
+*I spent a lot of time to refactor my code because after I have refactored it I have many bugs which I have to figure out.*
 
 Thanks for this challenge. I found this difficult but it is fan.
 
