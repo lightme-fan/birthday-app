@@ -25,10 +25,12 @@ export const handleAddBtn = () => {
           <label class="text-white h5" for="lastname">Last name</label>
           <input type="text" name="lastname" id="lastname" require>
         </fieldset>
+
         <fieldset class="form-group d-flex flex-column">
           <label class="text-white h5" for="firstname">First name</label>
           <input type="text" name="firstname" id="firstname" require>
         </fieldset>
+
         <fieldset class="form-group d-flex flex-column">
           <label class="text-white h5" for="birthday">Birthday</label>
           <input type="date" name="birthday" id="birthday" require>
@@ -53,23 +55,23 @@ export const handleAddBtn = () => {
     addPopup.addEventListener('submit', (e) => {
       e.preventDefault();
       const addForm = e.currentTarget;
+      console.log(addForm.picture.value);
   
       // Declare a new object
       const newPerson = {
         birthday: addForm.birthday.value,
-        id: Date.now(),
+        id: data.id,
         lastName: addForm.lastname.value,
         firstName: addForm.firstname.value,
-        picture: addForm.picture
+        picture: addForm.picture.value
       }
   
       // Push the new object
       data.push(newPerson);
-  
-      displayData(data);
-      container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      displayData();
       addPopup.reset();
       destroyPopup(addPopup);
+      container.dispatchEvent(new CustomEvent('updatedBirthday'));
       // console.log(displayArr(newItem));
     })
   

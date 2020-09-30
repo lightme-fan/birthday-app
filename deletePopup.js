@@ -1,23 +1,9 @@
-export let data = [];
+import { data } from "./localStorage.js";
 
 // import container
 import { container } from "./usefulvariables.js";
 
 import { fetchPeople } from "./fetchData.js";
-
-// Update local storage
-export const updatedLocalStorage = () => {
-  localStorage.setItem('data', JSON.stringify(data));
-}
-
-// Local storage
-export const initialLocalStorage = () => {
-  const storedPersons = JSON.parse(localStorage.getItem('data'));
-  if (storedPersons) {
-    data = storedPersons;
-  }
-  container.dispatchEvent(new CustomEvent('updatedBirthday'));
-}
 
 // Import destroy popup
 import { destroyPopup } from "./destroyPopup.js";
@@ -36,7 +22,7 @@ export const deletePopup = (id) => {
   // Delete html
   deleteForm.innerHTML = `
       <div tabindex="-1" role="dialog">
-        <p class="h4 text-white">Are sure you want to delete thi person?</p>
+        <p class="h4 text-white">Are sure you want to delete this person?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
           <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
@@ -52,7 +38,7 @@ export const deletePopup = (id) => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
       data = data.filter(person => person.id !== id);
-      displayData();
+      displayData(data);
       destroyPopup(deleteForm);
       container.dispatchEvent(new CustomEvent('updatedBirthday'));
     }

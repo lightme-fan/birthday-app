@@ -110,8 +110,8 @@ export const displayData = (event, filterName, filterMonth) => {
           </div>
         
           <div>
-            <p class="h5 name">${person.lastName} ${person.firstName}</p>
-            <p>Turn to <b class="age text-primary">${birthdate}</b> years old on <b class="birthday text-primary">${actualBirthday}</b></p>
+            <p class="name"><b>${person.lastName} ${person.firstName}</b><br>
+            turns to <b class="age text-primary">${birthdate}</b> years old on <b class="birthday text-primary">${actualBirthday}</b></p>
           </div>
         
           <div>
