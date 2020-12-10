@@ -22,7 +22,9 @@ export const editPopup = (id, e) => {
   
     // Find person by id
     const people = data.find(person => person.id === id);
+    console.log(id);
     const birthday = new Date(people.birthday).toLocaleDateString()
+    console.log(birthday);
     
     return new Promise(async function (resolve) {
       // Creating form popup
@@ -62,7 +64,6 @@ export const editPopup = (id, e) => {
         listPerso.classList.add('disabled')
         addButton.classList.add('disabled')
         searchForm.classList.add('disabled')
-
       }
       // Submitting the values from the input form
       formPopup.addEventListener('submit', (e) => {

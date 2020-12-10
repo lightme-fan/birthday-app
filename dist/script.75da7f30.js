@@ -18607,7 +18607,9 @@ const editPopup = (id, e) => {
 
   const people = _localStorage.data.find(person => person.id === id);
 
+  console.log(id);
   const birthday = new Date(people.birthday).toLocaleDateString();
+  console.log(birthday);
   return new Promise(async function (resolve) {
     // Creating form popup
     const formPopup = document.createElement('form');
@@ -18694,11 +18696,14 @@ var _usefulvariables = require("./usefulvariables.js");
 const handleClickButtons = e => {
   const listPerso = document.querySelector('.person');
   const searchForm = document.querySelector('.formSearch');
-  console.log(searchForm); // Handling Edit button
+  const container = document.querySelector('.container');
+  document.body.classList.add('disable');
+  container.classList.add('disable'); // Handling Edit button
 
   if (e.target.closest('button.edit')) {
     const closestEl = e.target.closest('.person');
     const id = closestEl.dataset.id;
+    console.log(id);
     (0, _editPopup.editPopup)(id);
   } // Handling Delete button
 
@@ -18916,7 +18921,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58238" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51434" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
