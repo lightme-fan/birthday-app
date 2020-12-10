@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/lightme-fan/birthday-app#readme",
   "browserslist": [
-		"last 1 chrome versions"
-	]
+    "last 1 chrome versions"
+  ]
 }

@@ -16,32 +16,42 @@
 			padding-bottom: 1rem;
 		}
 
+		.root {
+			position: relative;
+		}
+
 		.popup {
-			background: rgba(0, 0, 0, 0.8);
-			position: fixed;
-			height: 505px;
-			width: 50%;
+			background: #ffffff;
 			transition: all 0.25s;
-			top: 50px;
-			left: 25%;
-			display: grid;
-			justify-content: center;
-			align-items: center;
+			max-width: 900px;
+			margin: auto;
+			padding: 2rem;
 			pointer-events: none;
+			-webkit-box-shadow: 1px 0px 5px 1px #000000; 
+			box-shadow: 1px 0px 5px 1px #000000;
 		}
 
 		.popup.open {
 			pointer-events: all;
+			z-index: 1;
+			position: fixed;
+			top: 5px;
+		}
+
+		body.popup.open {
+			overflow: hidden;
 		}
 
 		.person {
 			background-color: #fffffe;
 		}
+
+		
 	</style>
 </head>
 
 <body>
-	<article class="mx-auto container">
+	<article class="mx-auto container" style="width: 925px">
 		<div class="mb-5">
 			<p class="h1 mb-5">Birthday app</p>
 			<button type="button" class="addPerson rounded h-25 align-self-center btn btn-danger">Add a new person</button>
@@ -69,7 +79,7 @@
 			<button type="button" class="btn btn-light resetBtn">Reset</button>
 		</div>
 
-		<div class="root">
+		<div class="root m-auto">
 		</div>
 	</article>
 	<script src="script.js"></script>

@@ -1,7 +1,7 @@
 import { data } from "./localStorage.js";
 
-// import container
-import { container } from "./usefulvariables.js";
+// import root
+import { root } from "./usefulvariables.js";
 
 import { fetchPeople } from "./fetchData.js";
 
@@ -17,12 +17,13 @@ export const deletePopup = (id) => {
   const deleteForm = document.createElement('div');
   deleteForm.classList.add('popup');
   deleteForm.style.height = '200px';
-  deleteForm.style.width = '400px';
+  deleteForm.style.width = '50%';
+
+  // <p class="h4 text-secondary">Are sure you want to delete this person?</p>
 
   // Delete html
   deleteForm.innerHTML = `
       <div tabindex="-1" role="dialog">
-        <p class="h4 text-white">Are sure you want to delete this person?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
           <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
@@ -30,7 +31,7 @@ export const deletePopup = (id) => {
       </div>
       `;
 
-  document.body.appendChild(deleteForm);
+  document.body.innerHTML = deleteForm;
   deleteForm.classList.add('open');
 
   // Handle clik
@@ -40,7 +41,7 @@ export const deletePopup = (id) => {
       data = data.filter(person => person.id !== id);
       displayData(data);
       destroyPopup(deleteForm);
-      container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      root.dispatchEvent(new CustomEvent('updatedBirthday'));
     }
 
     // Cancel delete
@@ -48,7 +49,7 @@ export const deletePopup = (id) => {
       destroyPopup(deleteForm);
     }
 
-    container.dispatchEvent(new CustomEvent('updatedBirthday'));
+    root.dispatchEvent(new CustomEvent('updatedBirthday'));
   };
 
   // Event listener for delete button 

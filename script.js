@@ -43,5 +43,6 @@ initialLocalStorage();
 addButton.addEventListener('click', handleAddBtn);
 
 // searchByName.addEventListener('click', searchByNameFunction);
+
 displayData();
 fetchPeople();

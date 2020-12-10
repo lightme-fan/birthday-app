@@ -1,5 +1,5 @@
 // import Variables
-import { container } from "./usefulvariables.js";
+import { root } from "./usefulvariables.js";
 import { addButton } from "./usefulvariables.js";
 
 // Importing the empty array
@@ -20,25 +20,25 @@ export const handleAddBtn = () => {
     // Popup HTML
     const popupHtml = `
       <div>
-        <p class="modal-title h3 text-white" id="exampleModalLabel">Add a new person's birthday</i><p>
+        <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="text-white h5" for="lastname">Last name</label>
-          <input type="text" name="lastname" id="lastname" require>
+          <label class="h5" for="lastname">Last name</label>
+          <input type="text" name="lastname" id="lastname" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="text-white h5" for="firstname">First name</label>
-          <input type="text" name="firstname" id="firstname" require>
+          <label class="h5" for="firstname">First name</label>
+          <input type="text" name="firstname" id="firstname" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="text-white h5" for="birthday">Birthday</label>
-          <input type="date" name="birthday" id="birthday" require>
+          <label class="h5" for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="text-white h5" for="picture">Image URL</label>
-          <input type="url" name="picture" id="picture"require>
+          <label class="h5" for="picture">Image URL</label>
+          <input type="url" name="picture" id="picture"required>
         </fieldset>
         
         <div class="modal-footer">
@@ -48,7 +48,7 @@ export const handleAddBtn = () => {
       </div>	
       `;
     addPopup.insertAdjacentHTML('afterbegin', popupHtml);
-    document.body.appendChild(addPopup);
+    document.body.appendChild(addPopup)
     addPopup.classList.add('open');
   
     // Submit form
@@ -71,7 +71,7 @@ export const handleAddBtn = () => {
       displayData();
       addPopup.reset();
       destroyPopup(addPopup);
-      container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      root.dispatchEvent(new CustomEvent('updatedBirthday'));
       // console.log(displayArr(newItem));
     })
   

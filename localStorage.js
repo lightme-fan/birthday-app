@@ -1,5 +1,5 @@
 export let data = []
-// import container
+
 import { root } from "./usefulvariables.js";
 
 import { fetchPeople } from "./fetchData.js";
@@ -12,7 +12,7 @@ export const initialLocalStorage = async () => {
   if (storedPersons) {
     data = storedPersons;
   } else {
-    data = await fetchPeople()
+    data = await fetchPeople();
   }
   
   // displayData(data)
@@ -59,7 +59,7 @@ export const deletePopup = (id) => {
       data = data.filter(person => person.id !== id);
       displayData();
       destroyPopup(deleteForm);
-      container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      root.dispatchEvent(new CustomEvent('updatedBirthday'));
     }
 
     // Cancel delete
@@ -67,7 +67,7 @@ export const deletePopup = (id) => {
       destroyPopup(deleteForm);
     }
 
-    container.dispatchEvent(new CustomEvent('updatedBirthday'));
+    root.dispatchEvent(new CustomEvent('updatedBirthday'));
   };
 
   // Event listener for delete button 
