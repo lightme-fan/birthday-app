@@ -1,5 +1,5 @@
 // import Variables
-import { root, addButton } from "./usefulvariables.js";
+import { container, addButton } from "./usefulvariables.js";
 
 // Importing the empty array
 import { data } from "./localStorage.js";
@@ -33,8 +33,8 @@ import { searchByNameFunction } from "./searchByName.js";
 
 window.addEventListener('click', handleClickButtons);
 // Event listner for localStorage
-root.addEventListener('updatedBirthday', updatedLocalStorage);
-root.addEventListener('updatedBirthday', displayData);
+container.addEventListener('updatedBirthday', updatedLocalStorage);
+container.addEventListener('updatedBirthday', displayData);
 
 // Initialising local storage
 initialLocalStorage();

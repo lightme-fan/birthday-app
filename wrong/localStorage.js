@@ -1,34 +1,35 @@
-export let data = []
+import peopleData from './peopleData.json'
+
 // import container
-import { root } from "./usefulvariables.js";
+import { container } from "./usefulvariables.js";
 
 import { fetchPeople } from "./fetchData.js";
-import { displayData } from './displayData.js'
 
+export let data = [];
 
+// Update local storage
+export const updatedLocalStorage = () => {
+  localStorage.setItem('data', JSON.stringify(data));
+}
+
+// console.log(fetchPeople());
 // Local storage
 export const initialLocalStorage = async () => {
+  console.log(await fetchPeople());
   const storedPersons = JSON.parse(localStorage.getItem('data'));
   if (storedPersons) {
     data = storedPersons;
   } else {
     data = await fetchPeople()
   }
-  
-  // displayData(data)
-  // console.log(await fetchPeople());
-  root.dispatchEvent(new CustomEvent('updatedBirthday'));
+  container.dispatchEvent(new CustomEvent('updatedBirthday'));
 }
 
-// Update local storage
-export const updatedLocalStorage = () => {
-  localStorage.setItem('data', JSON.stringify(data));
-}
 // Import destroy popup
 import { destroyPopup } from "./destroyPopup.js";
 
 // Import display data function
-// import { displayData } from "./displayData.js";
+import { displayData } from "./displayData.js";
 
 // Delete
 export const deletePopup = (id) => {

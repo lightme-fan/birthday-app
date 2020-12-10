@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/lightme-fan/birthday-app/issues"
   },
-  "homepage": "https://github.com/lightme-fan/birthday-app#readme"
+  "homepage": "https://github.com/lightme-fan/birthday-app#readme",
+  "browserslist": [
+		"last 1 chrome versions"
+	]
 }

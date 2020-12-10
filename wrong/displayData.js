@@ -2,7 +2,7 @@
 import { data } from "./localStorage.js";
 
 // import Variables
-import { root, searchByName,searchByMonth, resetBtn } from "./usefulvariables.js";
+import { container, searchByName,searchByMonth, resetBtn } from "./usefulvariables.js";
 
 // Importing the calculation of age
 import { getAge } from "./getAge.js";
@@ -15,7 +15,7 @@ const filterList = (e) => {
 // Reset filter
 const resetFilters = (e) => {
   const reseting = e.target;
-  root.dispatchEvent(new CustomEvent('updatedBirthday'))
+  container.dispatchEvent(new CustomEvent('updatedBirthday'))
 }
 
 // Event listener for the filters
@@ -32,7 +32,7 @@ export const displayData = (event, filterName, filterMonth) => {
     sortedPeople = data.filter(person => {
       let lowerCaseName = person.lastName.toLowerCase();
       let lowerCaseFilterName = filterName.toLowerCase();
-      if (lowerCaseName.includes(lowerCaseFilterName.toLowerCase())) {
+      if (lowerCaseName.includes(lowerCaseFilterName)) {
           return true;
       } else {
           return false;
@@ -47,7 +47,7 @@ export const displayData = (event, filterName, filterMonth) => {
       let month = date.toLocaleString('en-us', { month: 'long' });
       let lowerCaseMonth = month.toLowerCase();
       let lowerCaseFilterMonth = filterMonth.toLowerCase();
-      if (lowerCaseMonth.includes(lowerCaseFilterMonth.toLowerCase())) {
+      if (lowerCaseMonth.includes(lowerCaseFilterMonth)) {
         return true;
       } else {
           return false;
@@ -104,7 +104,7 @@ export const displayData = (event, filterName, filterMonth) => {
     
     const diffDays = Math.floor((newDate - date2) / oneDay);
     return `
-        <div class="d-flex justify-content-between bg-white mt-4 p-5 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+        <div class="d-flex flex-row justify-content-between border m-4 person" data-id="${person.id}" value= "${person.id}">
           <div>
             <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
           </div>
@@ -129,6 +129,6 @@ export const displayData = (event, filterName, filterMonth) => {
       </div>
     `});
 
-  root.innerHTML = persons.join('');
+  container.innerHTML = persons.join('');
   // container.dispatchEvent(new CustomEvent('updatedBirthday'))
 }  

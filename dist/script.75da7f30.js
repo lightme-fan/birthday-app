@@ -123,18 +123,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resetBtn = exports.searchByMonth = exports.searchBtn = exports.searchByName = exports.addButton = exports.container = void 0;
-var container = document.querySelector('.container');
-exports.container = container;
-var addButton = document.querySelector('.addPerson');
+exports.resetBtn = exports.searchByMonth = exports.searchBtn = exports.searchByName = exports.addButton = exports.root = void 0;
+const root = document.querySelector('.root');
+exports.root = root;
+const addButton = document.querySelector('.addPerson');
 exports.addButton = addButton;
-var searchByName = document.querySelector('.search-by-name');
+const searchByName = document.querySelector('.search-by-name');
 exports.searchByName = searchByName;
-var searchBtn = document.querySelector('.search-btn');
+const searchBtn = document.querySelector('.search-btn');
 exports.searchBtn = searchBtn;
-var searchByMonth = document.querySelector('#months');
+const searchByMonth = document.querySelector('#months');
 exports.searchByMonth = searchByMonth;
-var resetBtn = document.querySelector('.resetBtn');
+const resetBtn = document.querySelector('.resetBtn');
 exports.resetBtn = resetBtn;
 },{}],"fetchData.js":[function(require,module,exports) {
 "use strict";
@@ -146,57 +146,14 @@ exports.fetchPeople = fetchPeople;
 
 var _localStorage = require("./localStorage.js");
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+const API_URL = 'https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/93debb7463fbaaec29622221b8f9e719bd5b119f/birthdayPeople.json'; // Fetch people
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-// Fetch people
-function fetchPeople() {
-  return _fetchPeople.apply(this, arguments);
+async function fetchPeople() {
+  const res = await fetch(API_URL);
+  const dataPerson = await res.json();
+  return dataPerson;
 }
-
-function _fetchPeople() {
-  _fetchPeople = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var res, dataPerson;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch('./people.json');
-
-          case 2:
-            res = _context.sent;
-            _context.next = 5;
-            return res.json();
-
-          case 5:
-            dataPerson = _context.sent;
-            return _context.abrupt("return", dataPerson);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _fetchPeople.apply(this, arguments);
-}
-},{"./localStorage.js":"localStorage.js"}],"destroyPopup.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.destroyPopup = destroyPopup;
-
-// Destroy form popup
-function destroyPopup(formPopup) {
-  formPopup.remove();
-  formPopup = null;
-}
-},{}],"getAge.js":[function(require,module,exports) {
+},{"./localStorage.js":"localStorage.js"}],"getAge.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -205,11 +162,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.getAge = void 0;
 
 // Get age of a person
-var getAge = function getAge(date1, date2) {
+const getAge = (date1, date2) => {
   // This is a condition like if statement
   date2 = date2 || new Date(); //Calculation
 
-  var diff = date2.getTime() - date1.getTime();
+  const diff = date2.getTime() - date1.getTime();
   return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
 };
 
@@ -232,15 +189,15 @@ var _getAge = require("./getAge.js");
 // import Variables
 // Importing the calculation of age
 // Filter function
-var filterList = function filterList(e) {
+const filterList = e => {
   displayData(e, _usefulvariables.searchByName.value, _usefulvariables.searchByMonth.value);
 }; // Reset filter
 
 
-var resetFilters = function resetFilters(e) {
-  var reseting = e.target;
+const resetFilters = e => {
+  const reseting = e.target;
 
-  _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
+  _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
 }; // Event listener for the filters
 
 
@@ -251,18 +208,16 @@ _usefulvariables.searchByMonth.addEventListener('change', filterList);
 _usefulvariables.resetBtn.addEventListener('click', resetFilters); // Displaying the data form the local storage
 
 
-var displayData = function displayData(event, filterName, filterMonth) {
-  var sortedPeople = _localStorage.data.sort(function (a, b) {
-    return a.birthday - b.birthday;
-  }); // Filter by name
+const displayData = (event, filterName, filterMonth) => {
+  let sortedPeople = _localStorage.data.sort((a, b) => a.birthday - b.birthday); // Filter by name
 
 
   if (filterName) {
-    sortedPeople = _localStorage.data.filter(function (person) {
-      var lowerCaseName = person.lastName.toLowerCase();
-      var lowerCaseFilterName = filterName.toLowerCase();
+    sortedPeople = _localStorage.data.filter(person => {
+      let lowerCaseName = person.lastName.toLowerCase();
+      let lowerCaseFilterName = filterName.toLowerCase();
 
-      if (lowerCaseName.includes(lowerCaseFilterName)) {
+      if (lowerCaseName.includes(lowerCaseFilterName.toLowerCase())) {
         return true;
       } else {
         return false;
@@ -270,15 +225,15 @@ var displayData = function displayData(event, filterName, filterMonth) {
     });
   } // Filter by Month
   else if (filterMonth) {
-      sortedPeople = _localStorage.data.filter(function (person) {
-        var date = new Date(person.birthday);
-        var month = date.toLocaleString('en-us', {
+      sortedPeople = _localStorage.data.filter(person => {
+        let date = new Date(person.birthday);
+        let month = date.toLocaleString('en-us', {
           month: 'long'
         });
-        var lowerCaseMonth = month.toLowerCase();
-        var lowerCaseFilterMonth = filterMonth.toLowerCase();
+        let lowerCaseMonth = month.toLowerCase();
+        let lowerCaseFilterMonth = filterMonth.toLowerCase();
 
-        if (lowerCaseMonth.includes(lowerCaseFilterMonth)) {
+        if (lowerCaseMonth.includes(lowerCaseFilterMonth.toLowerCase())) {
           return true;
         } else {
           return false;
@@ -287,34 +242,34 @@ var displayData = function displayData(event, filterName, filterMonth) {
     } // Mapping the data,   
 
 
-  var persons = sortedPeople.map(function (person) {
+  const persons = sortedPeople.map(person => {
     // Age
-    var birthdate = (0, _getAge.getAge)(new Date(person.birthday)); // Birthdate, Date now, 
+    const birthdate = (0, _getAge.getAge)(new Date(person.birthday)); // Birthdate, Date now, 
 
-    var date1 = new Date(person.birthday);
-    var date2 = new Date();
-    var oneDay = 1000 * 60 * 60 * 24;
-    var birthdayMonth = date1.getMonth() + 1; // get current year 
+    const date1 = new Date(person.birthday);
+    const date2 = new Date();
+    const oneDay = 1000 * 60 * 60 * 24;
+    const birthdayMonth = date1.getMonth() + 1; // get current year 
 
-    var yearNow = date2.getFullYear();
-    var longMonth = date1.toLocaleString('en-us', {
+    const yearNow = date2.getFullYear();
+    const longMonth = date1.toLocaleString('en-us', {
       month: 'long'
     });
-    var getDay = date1.getDay() + 1;
-    var birthdays;
+    const getDay = date1.getDay() + 1;
+    let birthdays;
 
     if (getDay === 1) {
-      birthdays = "".concat(getDay, "st");
+      birthdays = `${getDay}st`;
     } else if (getDay === 2) {
-      birthdays = "".concat(getDay, "nd");
+      birthdays = `${getDay}nd`;
     } else if (getDay === 3) {
-      birthdays = "".concat(getDay, "rd");
+      birthdays = `${getDay}rd`;
     } else {
-      birthdays = "".concat(getDay, "th");
+      birthdays = `${getDay}th`;
     }
 
-    var actualBirthday = "".concat(birthdays, " of ").concat(longMonth);
-    var year;
+    const actualBirthday = `${birthdays} of ${longMonth}`;
+    let year;
 
     if (date2.getMonth() > birthdayMonth) {
       year = yearNow + 1;
@@ -324,79 +279,127 @@ var displayData = function displayData(event, filterName, filterMonth) {
       year = yearNow;
     }
 
-    var convertedBirthdate = "".concat(getDay, "/").concat(birthdayMonth, "/").concat(year); // Get distance days between today and the birthday
+    const convertedBirthdate = `${getDay}/${birthdayMonth}/${year}`; // Get distance days between today and the birthday
 
-    var newDate = new Date(convertedBirthdate);
-    var diffDays = Math.floor((newDate - date2) / oneDay);
-    return "\n        <div class=\"d-flex flex-row justify-content-between border m-4 person\" data-id=\"".concat(person.id, "\" value= \"").concat(person.id, "\">\n          <div>\n            <img class=\"rounded-circle profile\" width=\"70px\" src=\"").concat(person.picture, "\" alt=\"Person's profile\">\n          </div>\n        \n          <div>\n            <p class=\"name\"><b>").concat(person.lastName, " ").concat(person.firstName, "</b><br>\n            turns to <b class=\"age text-primary\">").concat(birthdate, "</b> years old on <b class=\"birthday text-primary\">").concat(actualBirthday, "</b></p>\n          </div>\n        \n          <div>\n            <b class=\"day text-primary\">").concat(diffDays, "</b> days\n          </div>\n        \n          <div>\n            <button type=\"button\" class=\"btn edit\" data-toggle=\"modal\" data-target=\"#exampleModal\" value=\"").concat(person.id, "\">\n              <img class=\"edit icon\" width=\"15px\" src=\"../icons/edit-icon.png\" alt=\"Edit\">\n            </button>\n            <button type=\"button\" class=\"btn delete\" data-toggle=\"modal\" data-target=\"#exampleModal\" value=\"").concat(person.id, "\">\n              <img class=\"delete icon\" width=\"15px\" src=\"../icons/trash_icon.png\" alt=\"Delete\">\n            </button>\n          </div>\n      </div>\n    ");
+    const newDate = new Date(convertedBirthdate);
+    const diffDays = Math.floor((newDate - date2) / oneDay);
+    return `
+        <div class="d-flex justify-content-between bg-white mt-4 p-5 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+          <div>
+            <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
+          </div>
+        
+          <div>
+            <p class="name"><b>${person.lastName} ${person.firstName}</b><br>
+            turns to <b class="age text-primary">${birthdate}</b> years old on <b class="birthday text-primary">${actualBirthday}</b></p>
+          </div>
+        
+          <div>
+            <b class="day text-primary">${diffDays}</b> days
+          </div>
+        
+          <div>
+            <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+              <img class="edit icon" width="15px" src="../icons/edit-icon.png" alt="Edit">
+            </button>
+            <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+              <img class="delete icon" width="15px" src="../icons/trash_icon.png" alt="Delete">
+            </button>
+          </div>
+      </div>
+    `;
   });
-  _usefulvariables.container.innerHTML = persons.join(''); // container.dispatchEvent(new CustomEvent('updatedBirthday'))
+  _usefulvariables.root.innerHTML = persons.join(''); // container.dispatchEvent(new CustomEvent('updatedBirthday'))
 };
 
 exports.displayData = displayData;
-},{"./localStorage.js":"localStorage.js","./usefulvariables.js":"usefulvariables.js","./getAge.js":"getAge.js"}],"localStorage.js":[function(require,module,exports) {
+},{"./localStorage.js":"localStorage.js","./usefulvariables.js":"usefulvariables.js","./getAge.js":"getAge.js"}],"destroyPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deletePopup = exports.initialLocalStorage = exports.updatedLocalStorage = exports.data = void 0;
+exports.destroyPopup = destroyPopup;
+
+// Destroy form popup
+function destroyPopup(formPopup) {
+  formPopup.remove();
+  formPopup = null;
+}
+},{}],"localStorage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deletePopup = exports.updatedLocalStorage = exports.initialLocalStorage = exports.data = void 0;
 
 var _usefulvariables = require("./usefulvariables.js");
 
 var _fetchData = require("./fetchData.js");
 
-var _destroyPopup = require("./destroyPopup.js");
-
 var _displayData = require("./displayData.js");
 
-var data = []; // import container
+var _destroyPopup = require("./destroyPopup.js");
+
+let data = []; // import container
 
 exports.data = data;
 
-// Update local storage
-var updatedLocalStorage = function updatedLocalStorage() {
-  localStorage.setItem('data', JSON.stringify(data));
-}; // Local storage
-
-
-exports.updatedLocalStorage = updatedLocalStorage;
-
-var initialLocalStorage = function initialLocalStorage() {
-  var storedPersons = JSON.parse(localStorage.getItem('data'));
+// Local storage
+const initialLocalStorage = async () => {
+  const storedPersons = JSON.parse(localStorage.getItem('data'));
 
   if (storedPersons) {
     exports.data = data = storedPersons;
-  }
+  } else {
+    exports.data = data = await (0, _fetchData.fetchPeople)();
+  } // displayData(data)
+  // console.log(await fetchPeople());
 
-  _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
-}; // Import destroy popup
+
+  _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
+}; // Update local storage
 
 
 exports.initialLocalStorage = initialLocalStorage;
 
+const updatedLocalStorage = () => {
+  localStorage.setItem('data', JSON.stringify(data));
+}; // Import destroy popup
+
+
+exports.updatedLocalStorage = updatedLocalStorage;
+
+// Import display data function
+// import { displayData } from "./displayData.js";
 // Delete
-var deletePopup = function deletePopup(id) {
+const deletePopup = id => {
   // Delete element
-  var deleteForm = document.createElement('div');
+  const deleteForm = document.createElement('div');
   deleteForm.classList.add('popup');
   deleteForm.style.height = '200px';
   deleteForm.style.width = '400px'; // Delete html
 
-  deleteForm.innerHTML = "\n      <div tabindex=\"-1\" role=\"dialog\">\n        <p class=\"h4 text-white\">Are sure you want to delete thi person?</p>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-primary ok\">OK</button>\n          <button type=\"button\" class=\"btn btn-secondary cancel\" data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n      ";
+  deleteForm.innerHTML = `
+      <div tabindex="-1" role="dialog">
+        <p class="h4 text-white">Are sure you want to delete thi person?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary ok">OK</button>
+          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      `;
   document.body.appendChild(deleteForm);
   deleteForm.classList.add('open'); // Handle clik
 
-  var confirmBtn = function confirmBtn(e) {
+  const confirmBtn = e => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      exports.data = data = data.filter(function (person) {
-        return person.id !== id;
-      });
+      exports.data = data = data.filter(person => person.id !== id);
       (0, _displayData.displayData)();
       (0, _destroyPopup.destroyPopup)(deleteForm);
-
-      _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      container.dispatchEvent(new CustomEvent('updatedBirthday'));
     } // Cancel delete
 
 
@@ -404,7 +407,7 @@ var deletePopup = function deletePopup(id) {
       (0, _destroyPopup.destroyPopup)(deleteForm);
     }
 
-    _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
+    container.dispatchEvent(new CustomEvent('updatedBirthday'));
   }; // Event listener for delete button 
 
 
@@ -412,7 +415,7 @@ var deletePopup = function deletePopup(id) {
 };
 
 exports.deletePopup = deletePopup;
-},{"./usefulvariables.js":"usefulvariables.js","./fetchData.js":"fetchData.js","./destroyPopup.js":"destroyPopup.js","./displayData.js":"displayData.js"}],"editPopup.js":[function(require,module,exports) {
+},{"./usefulvariables.js":"usefulvariables.js","./fetchData.js":"fetchData.js","./displayData.js":"displayData.js","./destroyPopup.js":"destroyPopup.js"}],"editPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -428,72 +431,75 @@ var _destroyPopup = require("./destroyPopup.js");
 
 var _displayData = require("./displayData.js");
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+// Importing the empty array
+// import Variables
+// Import destroy popup
+// Import display data function
 // Edit
-var editPopup = function editPopup(id) {
-  var listPerso = document.querySelector('.person');
-  var birthday = listPerso.querySelector('.birthday');
+const editPopup = id => {
+  const listPerso = document.querySelector('.person');
+  const birthday = listPerso.querySelector('.birthday');
   console.log(birthday);
-  var age = listPerso.querySelector('.age');
-  var differenceDay = listPerso.querySelector('.day'); // Find person by id
+  const age = listPerso.querySelector('.age');
+  const differenceDay = listPerso.querySelector('.day'); // Find person by id
 
-  var people = _localStorage.data.find(function (person) {
-    return person.id === id;
+  const people = _localStorage.data.find(person => person.id === id);
+
+  return new Promise(async function (resolve) {
+    // Creating form popup
+    const formPopup = document.createElement('form');
+    formPopup.classList.add('popup'); // Popup HTML
+
+    const popupHtml = `
+        <div>
+          <p class="modal-title h3 text-white" id="exampleModalLabel">Edit <i>${people.lastName}</i><p>
+          <fieldset class="form-group d-flex flex-column">
+            <label class="text-white h5" for="lastname">Last name</label>
+            <input type="text" name="lastname" id="lastname" value="${people.lastName}">
+          </fieldset>
+          
+          <fieldset class="form-group d-flex flex-column">
+            <label class="text-white h5" for="firstname">First name</label>
+            <input type="text" name="firstname" id="firstname" value="${people.firstName}">
+          </fieldset>
+
+          <fieldset class="form-group d-flex flex-column">
+            <label class="text-white h5" for="birthday">Birthday</label>
+            <input type="text" name="birthday" id="birthday" value="${people.birthday}">
+          </fieldset>
+    
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary submit" value="${people.id}">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
+          </div>      
+        </div>	
+        `;
+    formPopup.insertAdjacentHTML('afterbegin', popupHtml);
+    document.body.appendChild(formPopup);
+    formPopup.classList.add('open'); // Submitting the values from the input form
+
+    formPopup.addEventListener('submit', e => {
+      e.preventDefault(); // Chanring the textContent of a person by value of form popup
+
+      people.lastName = formPopup.lastname.value;
+      people.firstName = formPopup.firstname.value;
+      people.birthday = formPopup.birthday.value, birthday.textContent = people.birthday;
+      (0, _displayData.displayData)(_localStorage.data);
+      (0, _destroyPopup.destroyPopup)(formPopup);
+
+      _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
+    }, {
+      once: true
+    }); // Close popup
+
+    window.addEventListener('click', e => {
+      if (e.target.closest('button[data-dismiss="modal"]')) {
+        (0, _destroyPopup.destroyPopup)(formPopup);
+
+        _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
+      }
+    });
   });
-
-  return new Promise( /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve) {
-      var formPopup, popupHtml;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              // Creating form popup
-              formPopup = document.createElement('form');
-              formPopup.classList.add('popup'); // Popup HTML
-
-              popupHtml = "\n        <div>\n          <p class=\"modal-title h3 text-white\" id=\"exampleModalLabel\">Edit <i>".concat(people.lastName, "</i><p>\n          <fieldset class=\"form-group d-flex flex-column\">\n            <label class=\"text-white h5\" for=\"lastname\">Last name</label>\n            <input type=\"text\" name=\"lastname\" id=\"lastname\" value=\"").concat(people.lastName, "\">\n          </fieldset>\n          \n          <fieldset class=\"form-group d-flex flex-column\">\n            <label class=\"text-white h5\" for=\"firstname\">First name</label>\n            <input type=\"text\" name=\"firstname\" id=\"firstname\" value=\"").concat(people.firstName, "\">\n          </fieldset>\n\n          <fieldset class=\"form-group d-flex flex-column\">\n            <label class=\"text-white h5\" for=\"birthday\">Birthday</label>\n            <input type=\"text\" name=\"birthday\" id=\"birthday\" value=\"").concat(people.birthday, "\">\n          </fieldset>\n    \n          <div class=\"modal-footer\">\n            <button type=\"submit\" class=\"btn btn-primary submit\" value=\"").concat(people.id, "\">Save changes</button>\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" value=\"").concat(people.id, "\">Close</button>\n          </div>      \n        </div>\t\n        ");
-              formPopup.insertAdjacentHTML('afterbegin', popupHtml);
-              document.body.appendChild(formPopup);
-              formPopup.classList.add('open'); // Submitting the values from the input form
-
-              formPopup.addEventListener('submit', function (e) {
-                e.preventDefault(); // Chanring the textContent of a person by value of form popup
-
-                people.lastName = formPopup.lastname.value;
-                people.firstName = formPopup.firstname.value;
-                people.birthday = formPopup.birthday.value, birthday.textContent = people.birthday;
-                (0, _displayData.displayData)(_localStorage.data);
-                (0, _destroyPopup.destroyPopup)(formPopup);
-
-                _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
-              }, {
-                once: true
-              }); // Close popup
-
-              window.addEventListener('click', function (e) {
-                if (e.target.closest('button[data-dismiss="modal"]')) {
-                  (0, _destroyPopup.destroyPopup)(formPopup);
-
-                  _usefulvariables.container.dispatchEvent(new CustomEvent('updatedBirthday'));
-                }
-              });
-
-            case 8:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }());
 };
 
 exports.editPopup = editPopup;
@@ -512,20 +518,19 @@ var _localStorage = require("./localStorage.js");
 // Import handleClick function
 // Import handleClick function
 // Handling buttons 
-var handleClickButtons = function handleClickButtons(e) {
+const handleClickButtons = e => {
   // Handling Edit button
   if (e.target.closest('button.edit')) {
-    var closestEl = e.target.closest('.person');
-    var id = closestEl.dataset.id;
+    const closestEl = e.target.closest('.person');
+    const id = closestEl.dataset.id;
     (0, _editPopup.editPopup)(id);
   } // Handling Delete button
 
 
   if (e.target.closest('button.delete')) {
-    var _closestEl = e.target.closest('.person');
-
-    var _id = _closestEl.dataset.id;
-    (0, _localStorage.deletePopup)(_id);
+    const closestEl = e.target.closest('.person');
+    const id = closestEl.dataset.id;
+    (0, _localStorage.deletePopup)(id);
   }
 };
 
@@ -551,22 +556,50 @@ var _destroyPopup = require("./destroyPopup.js");
 // Import display data function
 // Import destroy popup
 // Add a new person
-var handleAddBtn = function handleAddBtn() {
+const handleAddBtn = () => {
   // Creating form popup
-  var addPopup = document.createElement('form');
+  const addPopup = document.createElement('form');
   addPopup.classList.add('popup'); // Popup HTML
 
-  var popupHtml = "\n      <div>\n        <p class=\"modal-title h3 text-white\" id=\"exampleModalLabel\">Add a new person's birthday</i><p>\n        <fieldset class=\"form-group d-flex flex-column\">\n          <label class=\"text-white h5\" for=\"lastname\">Last name</label>\n          <input type=\"text\" name=\"lastname\" id=\"lastname\" require>\n        </fieldset>\n\n        <fieldset class=\"form-group d-flex flex-column\">\n          <label class=\"text-white h5\" for=\"firstname\">First name</label>\n          <input type=\"text\" name=\"firstname\" id=\"firstname\" require>\n        </fieldset>\n\n        <fieldset class=\"form-group d-flex flex-column\">\n          <label class=\"text-white h5\" for=\"birthday\">Birthday</label>\n          <input type=\"date\" name=\"birthday\" id=\"birthday\" require>\n        </fieldset>\n        \n        <fieldset class=\"form-group d-flex flex-column\">\n          <label class=\"text-white h5\" for=\"picture\">Image URL</label>\n          <input type=\"url\" name=\"picture\" id=\"picture\"require>\n        </fieldset>\n        \n        <div class=\"modal-footer\">\n          <button type=\"submit\" class=\"btn btn-primary submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-secondary cancel\" data-dismiss=\"modal\">Close</button>\n        </div>      \n      </div>\t\n      ";
+  const popupHtml = `
+      <div>
+        <p class="modal-title h3 text-white" id="exampleModalLabel">Add a new person's birthday</i><p>
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="lastname">Last name</label>
+          <input type="text" name="lastname" id="lastname" require>
+        </fieldset>
+
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="firstname">First name</label>
+          <input type="text" name="firstname" id="firstname" require>
+        </fieldset>
+
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" require>
+        </fieldset>
+        
+        <fieldset class="form-group d-flex flex-column">
+          <label class="text-white h5" for="picture">Image URL</label>
+          <input type="url" name="picture" id="picture"require>
+        </fieldset>
+        
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary submit">Submit</button>
+          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+        </div>      
+      </div>	
+      `;
   addPopup.insertAdjacentHTML('afterbegin', popupHtml);
   document.body.appendChild(addPopup);
   addPopup.classList.add('open'); // Submit form
 
-  addPopup.addEventListener('submit', function (e) {
+  addPopup.addEventListener('submit', e => {
     e.preventDefault();
-    var addForm = e.currentTarget;
+    const addForm = e.currentTarget;
     console.log(addForm.picture.value); // Declare a new object
 
-    var newPerson = {
+    const newPerson = {
       birthday: addForm.birthday.value,
       id: _localStorage.data.id,
       lastName: addForm.lastname.value,
@@ -584,7 +617,7 @@ var handleAddBtn = function handleAddBtn() {
 
   }); // Close button
 
-  window.addEventListener('click', function (e) {
+  window.addEventListener('click', e => {
     if (e.target.closest('.cancel')) {
       (0, _destroyPopup.destroyPopup)(addPopup);
     }
@@ -608,20 +641,20 @@ var _localStorage = require("./localStorage.js");
 // Import data variable
 // Import local storage
 // Import searchBtn variable
-var searchByNameFunction = function searchByNameFunction() {
-  var html = "\n        \n    ";
+const searchByNameFunction = () => {
+  const html = `
+        
+    `;
   _usefulvariables.searchBtn.innerHTML = html;
-  var inputSearch = document.querySelector('.search');
+  const inputSearch = document.querySelector('.search');
 
-  var filterByName = function filterByName(e, filterName, filterStyle) {
-    var sortedData = _localStorage.data.sort(function (a, b) {
-      return b.birthday - a.birthday;
-    });
+  const filterByName = (e, filterName, filterStyle) => {
+    let sortedData = _localStorage.data.sort((a, b) => b.birthday - a.birthday);
 
     if (filterName) {
-      sortedData = _localStorage.data.filter(function (person) {
-        var lowerCaseName = person.lastName.toLowerCase();
-        var lowerCaseFilterName = filterName.toLowerCase();
+      sortedData = _localStorage.data.filter(person => {
+        let lowerCaseName = person.lastName.toLowerCase();
+        let lowerCaseFilterName = filterName.toLowerCase();
 
         if (lowerCaseName.includes(lowerCaseFilterName)) {
           return true;
@@ -667,9 +700,9 @@ var _searchByName = require("./searchByName.js");
 // Import searchByName Function
 window.addEventListener('click', _handleclick.handleClickButtons); // Event listner for localStorage
 
-_usefulvariables.container.addEventListener('updatedBirthday', _localStorage.updatedLocalStorage);
+_usefulvariables.root.addEventListener('updatedBirthday', _localStorage.updatedLocalStorage);
 
-_usefulvariables.container.addEventListener('updatedBirthday', _displayData.displayData); // Initialising local storage
+_usefulvariables.root.addEventListener('updatedBirthday', _displayData.displayData); // Initialising local storage
 
 
 (0, _localStorage.initialLocalStorage)(); // event listner for handle Add button
@@ -707,7 +740,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58634" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64341" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
