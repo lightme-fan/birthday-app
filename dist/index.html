@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>TEST</title>
+	<title>Birthday App</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<style>body {
 			background: #D8EEFE;
@@ -35,24 +35,31 @@
 			position: fixed;
 			top: 99px;
     		left: 35%;
+			/* max-width: 30%;
+			margin-top: 2rem; */
 		}
 
-		.open ~ body {
-			background-color: transparent;
-		}
-
-		.person {
-			background-color: #fffffe;
-		}
-
-		/* .disable {
-			background-color: rgba(0, 0, 0, 0.2);
+		.disable {
 			overflow-y: hidden;
-		} */</style>
+			pointer-events: none;
+		}
+
+		.disable, .root > div {
+			background: rgba(0, 0, 0, 0.2)
+		}
+
+		.remove-disable {
+			overflow-y: auto;
+			pointer-events: auto;
+		}
+
+		.remove-disable, .root > div {
+			background: #D8EEFE
+		}</style>
 </head>
 
 <body>
-	<article class="mx-auto container" style="width: 925px">
+	<article class="mx-auto container" style="width: 100%">
 		<div class="mb-5">
 			<p class="h1 mb-5">Birthday app</p>
 			<button type="button" class="addPerson rounded h-25 align-self-center btn btn-danger">Add a new person</button>

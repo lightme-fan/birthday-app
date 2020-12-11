@@ -18486,6 +18486,8 @@ exports.destroyPopup = destroyPopup;
 
 // Destroy form popup
 function destroyPopup(formPopup) {
+  formPopup.classList.remove('open');
+  document.body.classList.add('remove-disable');
   formPopup.remove();
   formPopup = null;
 }
@@ -18545,7 +18547,7 @@ const deletePopup = id => {
 
   deleteForm.innerHTML = `
       <div tabindex="-1" role="dialog">
-        <p class="h4 text-white">Are sure you want to delete thi person?</p>
+        <p class="h4">Are sure you want to delete this person?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
           <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
@@ -18553,12 +18555,13 @@ const deletePopup = id => {
       </div>
       `;
   document.body.appendChild(deleteForm);
-  deleteForm.classList.add('open'); // Handle clik
+  deleteForm.classList.add('open');
+  document.body.classList.add('disable'); // Handle clik
 
   const confirmBtn = e => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      exports.data = data = data.filter(person => person.id !== id);
+      exports.data = data = data.filter(person => person.id.toString() !== id);
       (0, _displayData.displayData)();
       (0, _destroyPopup.destroyPopup)(deleteForm);
 
@@ -18605,11 +18608,9 @@ const editPopup = (id, e) => {
   const age = listPerso.querySelector('.age');
   const differenceDay = listPerso.querySelector('.day'); // Find person by id
 
-  const people = _localStorage.data.find(person => person.id === id);
+  const people = _localStorage.data.find(person => person.id.toString() === id);
 
-  console.log(id);
   const birthday = new Date(people.birthday).toLocaleDateString();
-  console.log(birthday);
   return new Promise(async function (resolve) {
     // Creating form popup
     const formPopup = document.createElement('form');
@@ -18630,7 +18631,7 @@ const editPopup = (id, e) => {
 
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="birthday">Birthday</label>
-            <input type="text" class="w-100" name="birthday" id="birthday" value="${birthday}">
+            <input type="text" class="w-100" name="birthday" id="birthday" value="${birthday}" disabled>
           </fieldset>
     
           <div class="modal-footer">
@@ -18641,7 +18642,9 @@ const editPopup = (id, e) => {
         `;
     formPopup.insertAdjacentHTML('afterbegin', popupHtml);
     document.body.appendChild(formPopup);
-    formPopup.classList.add('open');
+    formPopup.classList.add('open'); // root.innerHTML = formPopup
+
+    document.body.classList.add('disable');
 
     if (formPopup.classList.add('open')) {
       listPerso.classList.add('disabled');
@@ -18653,11 +18656,12 @@ const editPopup = (id, e) => {
 
 
     formPopup.addEventListener('submit', e => {
-      e.preventDefault(); // Chanring the textContent of a person by value of form popup
+      e.preventDefault();
+      const newBirthday = new Date(people.birthday).toLocaleDateString(); // Chanring the textContent of a person by value of form popup
 
       people.lastName = formPopup.lastname.value;
       people.firstName = formPopup.firstname.value;
-      people.birthday = formPopup.birthday.value, (0, _displayData.displayData)(_localStorage.data);
+      (0, _displayData.displayData)(_localStorage.data);
       (0, _destroyPopup.destroyPopup)(formPopup);
 
       _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
@@ -18696,14 +18700,11 @@ var _usefulvariables = require("./usefulvariables.js");
 const handleClickButtons = e => {
   const listPerso = document.querySelector('.person');
   const searchForm = document.querySelector('.formSearch');
-  const container = document.querySelector('.container');
-  document.body.classList.add('disable');
-  container.classList.add('disable'); // Handling Edit button
+  const container = document.querySelector('.container'); // Handling Edit button
 
   if (e.target.closest('button.edit')) {
     const closestEl = e.target.closest('.person');
     const id = closestEl.dataset.id;
-    console.log(id);
     (0, _editPopup.editPopup)(id);
   } // Handling Delete button
 
@@ -18773,29 +18774,30 @@ const handleAddBtn = () => {
       `;
   addPopup.insertAdjacentHTML('afterbegin', popupHtml);
   document.body.appendChild(addPopup);
-  addPopup.classList.add('open'); // Submit form
+  addPopup.classList.add('open');
+  document.body.classList.add('disable'); // Submit form
 
   addPopup.addEventListener('submit', e => {
     e.preventDefault();
     const addForm = e.currentTarget;
-    console.log(addForm.picture.value); // Declare a new object
+    console.log(_localStorage.data); // Declare a new object
 
     const newPerson = {
       birthday: addForm.birthday.value,
-      id: _localStorage.data.id,
+      id: Date.now(),
       lastName: addForm.lastname.value,
       firstName: addForm.firstname.value,
       picture: addForm.picture.value
-    }; // Push the new object
+    };
+    console.log(newPerson); // Push the new object
 
-    _localStorage.data.push(newPerson);
+    _localStorage.data.unshift(newPerson);
 
     (0, _displayData.displayData)();
     addPopup.reset();
     (0, _destroyPopup.destroyPopup)(addPopup);
 
-    _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday')); // console.log(displayArr(newItem));
-
+    _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
   }); // Close button
 
   window.addEventListener('click', e => {
@@ -18921,7 +18923,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51434" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61250" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

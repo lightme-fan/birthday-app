@@ -21,10 +21,8 @@ export const editPopup = (id, e) => {
     const differenceDay = listPerso.querySelector('.day');
   
     // Find person by id
-    const people = data.find(person => person.id === id);
-    console.log(id);
+    const people = data.find(person => person.id.toString() === id);
     const birthday = new Date(people.birthday).toLocaleDateString()
-    console.log(birthday);
     
     return new Promise(async function (resolve) {
       // Creating form popup
@@ -47,7 +45,7 @@ export const editPopup = (id, e) => {
 
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="birthday">Birthday</label>
-            <input type="text" class="w-100" name="birthday" id="birthday" value="${birthday}">
+            <input type="text" class="w-100" name="birthday" id="birthday" value="${birthday}" disabled>
           </fieldset>
     
           <div class="modal-footer">
@@ -59,7 +57,9 @@ export const editPopup = (id, e) => {
       formPopup.insertAdjacentHTML('afterbegin', popupHtml);
       document.body.appendChild(formPopup);
       formPopup.classList.add('open');
-      
+      // root.innerHTML = formPopup
+      document.body.classList.add('disable')
+
       if (formPopup.classList.add('open')) {
         listPerso.classList.add('disabled')
         addButton.classList.add('disabled')
@@ -68,12 +68,12 @@ export const editPopup = (id, e) => {
       // Submitting the values from the input form
       formPopup.addEventListener('submit', (e) => {
         e.preventDefault();
-  
+        const newBirthday = new Date(people.birthday).toLocaleDateString()
+        
         // Chanring the textContent of a person by value of form popup
         people.lastName = formPopup.lastname.value;
         people.firstName = formPopup.firstname.value;
-        people.birthday = formPopup.birthday.value,
-
+        
         displayData(data);
         destroyPopup(formPopup);
         root.dispatchEvent(new CustomEvent('updatedBirthday'));

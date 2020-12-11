@@ -50,29 +50,29 @@ export const handleAddBtn = () => {
     addPopup.insertAdjacentHTML('afterbegin', popupHtml);
     document.body.appendChild(addPopup)
     addPopup.classList.add('open');
+    document.body.classList.add('disable')
   
     // Submit form
     addPopup.addEventListener('submit', (e) => {
       e.preventDefault();
       const addForm = e.currentTarget;
-      console.log(addForm.picture.value);
-  
+      console.log(data);
       // Declare a new object
       const newPerson = {
         birthday: addForm.birthday.value,
-        id: data.id,
+        id: Date.now(),
         lastName: addForm.lastname.value,
         firstName: addForm.firstname.value,
         picture: addForm.picture.value
       }
+      console.log(newPerson);
   
       // Push the new object
-      data.push(newPerson);
+      data.unshift(newPerson);
       displayData();
       addPopup.reset();
       destroyPopup(addPopup);
       root.dispatchEvent(new CustomEvent('updatedBirthday'));
-      // console.log(displayArr(newItem));
     })
   
     // Close button

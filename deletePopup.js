@@ -39,6 +39,8 @@ export const deletePopup = (id) => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
       data = data.filter(person => person.id !== id);
+      console.log(data.filter(person => person.id));
+      console.log(id);
       displayData(data);
       destroyPopup(deleteForm);
       root.dispatchEvent(new CustomEvent('updatedBirthday'));

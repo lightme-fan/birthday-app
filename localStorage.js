@@ -41,7 +41,7 @@ export const deletePopup = (id) => {
   // Delete html
   deleteForm.innerHTML = `
       <div tabindex="-1" role="dialog">
-        <p class="h4 text-white">Are sure you want to delete thi person?</p>
+        <p class="h4">Are sure you want to delete this person?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
           <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
@@ -51,12 +51,13 @@ export const deletePopup = (id) => {
 
   document.body.appendChild(deleteForm);
   deleteForm.classList.add('open');
+  document.body.classList.add('disable')
 
   // Handle clik
   const confirmBtn = (e) => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      data = data.filter(person => person.id !== id);
+      data = data.filter(person => person.id.toString() !== id);
       displayData();
       destroyPopup(deleteForm);
       root.dispatchEvent(new CustomEvent('updatedBirthday'));
