@@ -33,6 +33,8 @@ import { destroyPopup } from "./destroyPopup.js";
 // Delete
 export const deletePopup = (id) => {
   // Delete element
+  const person = data.find(perso => perso.id.toString() === id)
+
   const deleteForm = document.createElement('div');
   deleteForm.classList.add('popup');
   deleteForm.style.height = '200px';
@@ -57,7 +59,8 @@ export const deletePopup = (id) => {
   const confirmBtn = (e) => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      data = data.filter(person => person.id.toString() !== id);
+      data = data.filter(perso => perso.id !== person.id);
+
       displayData();
       destroyPopup(deleteForm);
       root.dispatchEvent(new CustomEvent('updatedBirthday'));

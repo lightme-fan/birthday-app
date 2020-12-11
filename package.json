@@ -8,6 +8,7 @@
     "date": "https://date-fns.org/v1.29.0/docs/differenceInYears",
     "date-fns": "^2.16.1",
     "express": "^4.17.1",
+    "paginationjs": "^2.1.5",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {},

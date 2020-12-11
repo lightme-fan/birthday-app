@@ -41,8 +41,13 @@ resetBtn.addEventListener('click', resetFilters);
 
 // Displaying the data form the local storage
 export const displayData = (event, filterName, filterMonth) => {
-  let sortedPeople = data.sort((a,b) => a.birthday - b.birthday);
-
+  let sortedPeople = data.sort((a,b) => {
+    let first = differenceInCalendarDays(a.birthday, new Date())
+    let last = differenceInCalendarDays(b.birthday, new Date())
+    const rank = last - first;
+    return rank
+  })
+  
   // Filter by name
   if (filterName) {
     sortedPeople = data.filter(person => {

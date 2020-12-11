@@ -22,6 +22,7 @@ export const editPopup = (id, e) => {
   
     // Find person by id
     const people = data.find(person => person.id.toString() === id);
+    console.log(people)
     const birthday = new Date(people.birthday).toLocaleDateString()
     
     return new Promise(async function (resolve) {
@@ -41,6 +42,11 @@ export const editPopup = (id, e) => {
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="firstname">First name</label>
             <input type="text" class="w-100"  name="firstname" id="firstname" value="${people.firstName}">
+          </fieldset>
+          
+          <fieldset class="form-group d-flex flex-column">
+            <label class="h5" for="picture">Picture</label>
+            <input type="url" class="w-100" name="picture" id="picture" value="${people.picture}">
           </fieldset>
 
           <fieldset class="form-group d-flex flex-column">
@@ -73,6 +79,7 @@ export const editPopup = (id, e) => {
         // Chanring the textContent of a person by value of form popup
         people.lastName = formPopup.lastname.value;
         people.firstName = formPopup.firstname.value;
+        people.picture = formPopup.picture.value;
         
         displayData(data);
         destroyPopup(formPopup);

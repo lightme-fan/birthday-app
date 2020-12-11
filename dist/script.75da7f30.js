@@ -18391,7 +18391,12 @@ _usefulvariables.resetBtn.addEventListener('click', resetFilters); // Displaying
 
 
 const displayData = (event, filterName, filterMonth) => {
-  let sortedPeople = _localStorage.data.sort((a, b) => a.birthday - b.birthday); // Filter by name
+  let sortedPeople = _localStorage.data.sort((a, b) => {
+    let first = (0, _dateFns.differenceInCalendarDays)(a.birthday, new Date());
+    let last = (0, _dateFns.differenceInCalendarDays)(b.birthday, new Date());
+    const rank = last - first;
+    return rank;
+  }); // Filter by name
 
 
   if (filterName) {
@@ -18540,6 +18545,7 @@ exports.updatedLocalStorage = updatedLocalStorage;
 // Delete
 const deletePopup = id => {
   // Delete element
+  const person = data.find(perso => perso.id.toString() === id);
   const deleteForm = document.createElement('div');
   deleteForm.classList.add('popup');
   deleteForm.style.height = '200px';
@@ -18561,7 +18567,7 @@ const deletePopup = id => {
   const confirmBtn = e => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      exports.data = data = data.filter(person => person.id.toString() !== id);
+      exports.data = data = data.filter(perso => perso.id !== person.id);
       (0, _displayData.displayData)();
       (0, _destroyPopup.destroyPopup)(deleteForm);
 
@@ -18610,6 +18616,7 @@ const editPopup = (id, e) => {
 
   const people = _localStorage.data.find(person => person.id.toString() === id);
 
+  console.log(people);
   const birthday = new Date(people.birthday).toLocaleDateString();
   return new Promise(async function (resolve) {
     // Creating form popup
@@ -18627,6 +18634,11 @@ const editPopup = (id, e) => {
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="firstname">First name</label>
             <input type="text" class="w-100"  name="firstname" id="firstname" value="${people.firstName}">
+          </fieldset>
+          
+          <fieldset class="form-group d-flex flex-column">
+            <label class="h5" for="picture">Picture</label>
+            <input type="url" class="w-100" name="picture" id="picture" value="${people.picture}">
           </fieldset>
 
           <fieldset class="form-group d-flex flex-column">
@@ -18661,6 +18673,7 @@ const editPopup = (id, e) => {
 
       people.lastName = formPopup.lastname.value;
       people.firstName = formPopup.firstname.value;
+      people.picture = formPopup.picture.value;
       (0, _displayData.displayData)(_localStorage.data);
       (0, _destroyPopup.destroyPopup)(formPopup);
 
@@ -18923,7 +18936,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61250" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60516" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
