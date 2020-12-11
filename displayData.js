@@ -17,8 +17,6 @@ import { data } from "./localStorage.js";
 // import Variables
 import { root, searchByName,searchByMonth, resetBtn } from "./usefulvariables.js";
 
-// Date fns
-
 
 // Importing the calculation of age
 import { getAge } from "./getAge.js";
