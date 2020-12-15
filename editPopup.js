@@ -2,7 +2,7 @@
 import { data } from "./localStorage.js";
 
 // import Variables
-import { root, addButton } from "./usefulvariables.js";
+import { root, addButton, formSearch,mainArticle } from "./usefulvariables.js";
 
 // Import destroy popup
 import { destroyPopup } from "./destroyPopup.js";
@@ -32,7 +32,7 @@ export const editPopup = (id, e) => {
   
       // Popup HTML
       const popupHtml = `
-        <div>
+        <div class="wrapper">
           <p class="modal-title h3" id="exampleModalLabel">Edit <i>${people.lastName}</i><p>
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="lastname">Last name</label>
@@ -61,16 +61,9 @@ export const editPopup = (id, e) => {
         </div>	
         `;
       formPopup.insertAdjacentHTML('afterbegin', popupHtml);
-      document.body.appendChild(formPopup);
+      document.body.appendChild(formPopup); 
       formPopup.classList.add('open');
-      // root.innerHTML = formPopup
-      document.body.classList.add('disable')
-
-      if (formPopup.classList.add('open')) {
-        listPerso.classList.add('disabled')
-        addButton.classList.add('disabled')
-        searchForm.classList.add('disabled')
-      }
+      
       // Submitting the values from the input form
       formPopup.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -95,4 +88,3 @@ export const editPopup = (id, e) => {
       })
     });
   }
-  

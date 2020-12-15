@@ -7,91 +7,42 @@
 	<title>Birthday App</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<style>
-		body {
-			background: #D8EEFE;
-		}
-		.heading {
-			text-align: center;
-			padding-bottom: 1rem;
-		}
-
-		.root {
-			position: relative;
-		}
-
-		.popup {
-			background: #ffffff;
-			transition: all 0.25s;
-			max-width: 900px;
-			margin: auto;
-			padding: 2rem;
-			pointer-events: none;
-			-webkit-box-shadow: 1px 0px 5px 1px #000000; 
-			box-shadow: 1px 0px 5px 1px #000000;
-		}
-
-		.popup.open {
-			pointer-events: all;
-			z-index: 1;
-			position: fixed;
-			top: 99px;
-    		left: 35%;
-			/* max-width: 30%;
-			margin-top: 2rem; */
-		}
-
-		.disable {
-			overflow-y: hidden;
-			pointer-events: none;
-		}
-
-		.disable, .root > div {
-			background: rgba(0, 0, 0, 0.2)
-		}
-
-		.remove-disable {
-			overflow-y: auto;
-			pointer-events: auto;
-		}
-
-		.remove-disable, .root > div {
-			background: #D8EEFE
-		}
-	</style>
+	<link rel="stylesheet" href="./style.css"/>
+	
 </head>
 
 <body>
-	<article class="mx-auto container" style="width: 100%">
+	<article class="mx-auto container">
 		<div class="mb-5">
 			<p class="h1 mb-5">Birthday app</p>
-			<button type="button" class="addPerson rounded h-25 align-self-center btn btn-danger">Add a new person</button>
 		</div>
+		<div class="main-article">
+			<button type="button" class="addPerson mb-5 rounded h-25 align-self-center btn btn-danger">Add a new person</button>
+			<div class="d-flex justify-content-between text-white formSearch">
+				<div class="md-form mt-0">
+					<input class="form-control search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
+				</div>
+				
+				<select name="month" id="months">
+					<option value="january"><small><i>January</i></small></option>
+					<option value="february"><small><i>February</i></small></option>
+					<option value="march"><small><i>March</i></small></option>
+					<option value="april"><small><i>April</i></small></option>
+					<option value="may"><small><i>May</i></small></option>
+					<option value="june"><small><i>June</i></small></option>
+					<option value="july"><small><i>July</i></small></option>
+					<option value="august"><small><i>August</i></small></option>
+					<option value="september"><small><i>September</i></small></option>
+					<option value="october"><small><i>October</i></small></option>
+					<option value="november"><small><i>November</i></small></option>
+					<option value="december"><small><i>December</i></small></option>
+				</select>
+				<button type="button" class="btn btn-light resetBtn">Reset</button>
+			</div>
 
-		<div class="d-flex justify-content-between text-white formSearch">
-			<div class="md-form mt-0">
-            	<input class="form-control search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
-        	</div>
-			
-			<select name="month" id="months">
-				<option value="january"><small><i>January</i></small></option>
-				<option value="february"><small><i>February</i></small></option>
-				<option value="march"><small><i>March</i></small></option>
-				<option value="april"><small><i>April</i></small></option>
-				<option value="may"><small><i>May</i></small></option>
-				<option value="june"><small><i>June</i></small></option>
-				<option value="july"><small><i>July</i></small></option>
-				<option value="august"><small><i>August</i></small></option>
-				<option value="september"><small><i>September</i></small></option>
-				<option value="october"><small><i>October</i></small></option>
-				<option value="november"><small><i>November</i></small></option>
-				<option value="december"><small><i>December</i></small></option>
-			</select>
-			<button type="button" class="btn btn-light resetBtn">Reset</button>
-		</div>
-
-		<div class="root m-auto">
-		</div>
+			<div class="root m-auto">
+				
+			</div>
 	</article>
 	<script tyle="module" src="script.js"></script>
 </body>

@@ -33,6 +33,11 @@ export const deletePopup = (id) => {
 
   document.body.innerHTML = deleteForm;
   deleteForm.classList.add('open');
+  // root.innerHTML = deleteForm
+  // root.classList.add('disable')
+  // formSearch.classList.add('disactivate')
+  // addButton.classList.add('disactivate')
+
 
   // Handle clik
   const confirmBtn = (e) => {

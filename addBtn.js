@@ -1,6 +1,5 @@
 // import Variables
-import { root } from "./usefulvariables.js";
-import { addButton } from "./usefulvariables.js";
+import { root, formSearch, addButton } from "./usefulvariables.js";
 
 // Importing the empty array
 import { data } from "./localStorage.js";
@@ -19,7 +18,7 @@ export const handleAddBtn = () => {
   
     // Popup HTML
     const popupHtml = `
-      <div>
+      <div class="wrapper">
         <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="lastname">Last name</label>
@@ -50,13 +49,12 @@ export const handleAddBtn = () => {
     addPopup.insertAdjacentHTML('afterbegin', popupHtml);
     document.body.appendChild(addPopup)
     addPopup.classList.add('open');
-    document.body.classList.add('disable')
-  
+    
     // Submit form
     addPopup.addEventListener('submit', (e) => {
       e.preventDefault();
       const addForm = e.currentTarget;
-      console.log(data);
+      
       // Declare a new object
       const newPerson = {
         birthday: addForm.birthday.value,
@@ -65,8 +63,7 @@ export const handleAddBtn = () => {
         firstName: addForm.firstname.value,
         picture: addForm.picture.value
       }
-      console.log(newPerson);
-  
+      
       // Push the new object
       data.unshift(newPerson);
       displayData();
@@ -79,6 +76,7 @@ export const handleAddBtn = () => {
     window.addEventListener('click', (e) => {
       if (e.target.closest('.cancel')) {
         destroyPopup(addPopup);
+        root.dispatchEvent(new CustomEvent('updatedBirthday'));
       }
     })
   }
