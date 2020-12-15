@@ -1,6 +1,35 @@
-Hello 
+<h1 align="center">Birthday app</h1>
 
-This is my week project;
+<div align="center">
+  <h3>
+    <a href="https://fanilo-birthday-app.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://github.com/lightme-fan/birthday-app">
+      Solution
+    </a>
+  </h3>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+-   [Overview](#overview)
+    -   [Built With](#built-with)
+-   [Features](#features)
+-   [How to use](#how-to-use)
+-   [Contact](#contact)
+-   [Acknowledgements](#acknowledgements)
+
+<!-- OVERVIEW -->
+
+## Overview
+
+![screenshot](./assets/birthday.png)
+
+You can see my demo by clicking this [link](https://fanilo-birthday-app.netlify.app/)
 
 - Firstly, I could not import the **date-fns** in my script page.
 
@@ -29,8 +58,36 @@ This is my week project;
 ## What I still need to improve is:
 * to search a person by lastName or firstName or month of birthday. I still want a short explanation because I don't fully understand it.
 
-*I spent a lot of time to refactor my code because after I have refactored it I have many bugs which I have to figure out.*
+### Built With
 
-Thanks for this challenge. I found this difficult but it is fan.
+-   [Vanilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-👍 🙂 🙂  👍 
+## Features
+
+- I have a component folder. In this folder, I have two folders which are Custom-hooks and Pages as well as App.js file
+- In Custom hooks folder, there are two files, useFunctionalities.js and useFetch.
+- The Pages folder contains 5 files: DisplayQuiz.js, HomePage.js, NextButton.js, Quiz-question.js and TryAgain.js.
+- I also have few svg files.
+- Lastly, I have index.css
+
+## How To Use
+
+<!-- Example: -->
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/lightme-fan/birthday-app
+
+# Install dependencies
+$ npm install date-fns
+
+# Run the app
+$ Reveal in browser
+```
+
+## Contact
+
+-   Website [Bithday App](https://fanilo-birthday-app.netlify.app/)
+-   GitHub [lightme-fan](https://{github.com/lightme-fan})
