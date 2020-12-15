@@ -18,7 +18,8 @@ export const handleAddBtn = () => {
   
     // Popup HTML
     const popupHtml = `
-      <div class="wrapper shadow-sm">
+      <div class="wrapper shadow-sm position-relative">
+        <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
         <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="lastname">Last name</label>
@@ -42,7 +43,7 @@ export const handleAddBtn = () => {
         
         <div>
           <button type="submit" class="btn btn-danger submit">Submit</button>
-          <button type="button" class="btn btn-secondary cancel border border-white" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      
       </div>	
       `;

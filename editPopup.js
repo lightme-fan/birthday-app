@@ -32,8 +32,9 @@ export const editPopup = (id, e) => {
   
       // Popup HTML
       const popupHtml = `
-        <div class="wrapper shadow-sm">
-          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName}<p>
+        <div class="wrapper shadow-sm position-relative">
+          <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="lastname">Last name</label>
             <input type="text" class="w-100 border border-white bg-info text-white p-2" name="lastname" id="lastname" value="${people.lastName}">
@@ -56,7 +57,7 @@ export const editPopup = (id, e) => {
     
           <div>
             <button type="submit" class="btn btn-danger submit" value="${people.id}">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
+            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
           </div>      
         </div>	
         `;

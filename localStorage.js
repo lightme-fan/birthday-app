@@ -37,12 +37,14 @@ export const deletePopup = (id) => {
   
   // Delete html
   const popupHTML = `
-    <div class="wrapper shadow-sm">
+    <div class="wrapper shadow-sm position-relative">
+      <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+
       <div tabindex="-1" role="dialog">
-        <p class="h4">Are sure you want to delete this person?</p>
+        <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
-          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
         </div>
       </div>
     </div>

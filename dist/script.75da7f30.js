@@ -18388,9 +18388,7 @@ const resetFilters = e => {
 
 _usefulvariables.searchByName.addEventListener('keyup', filterList);
 
-_usefulvariables.searchByMonth.addEventListener('change', filterList);
-
-_usefulvariables.resetBtn.addEventListener('click', resetFilters); // Displaying the data form the local storage
+_usefulvariables.searchByMonth.addEventListener('change', filterList); // Displaying the data form the local storage
 
 
 const displayData = (event, filterName, filterMonth) => {
@@ -18450,17 +18448,17 @@ const displayData = (event, filterName, filterMonth) => {
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
     return `
-        <div class="person d-flex justify-content-between bg-white mt-4 p-5 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+        <div class="person d-flex justify-content-between bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
           <div>
-            <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
+            <img class="profile" width="70px" src="${person.picture}" alt="Person's profile">
           </div>
         
-          <div>
+          <div class="aboutPerson">
             <p class="name">
               <b class="fs-1">${person.lastName} ${person.firstName}</b><br>
             Turns to 
-            <b class="age text-danger fs-1">${birthdate}</b> 
-            years old on <b class="birthday fs-1">${nextBirthday.toLocaleDateString()}</b>
+            <b class="age text-danger">${birthdate}</b> 
+            years old on <b class="birthday">${nextBirthday.toLocaleDateString()}</b>
             </p>
           </div>       
           
@@ -18551,12 +18549,14 @@ const deletePopup = id => {
   deleteForm.classList.add('popup'); // Delete html
 
   const popupHTML = `
-    <div class="wrapper shadow-sm">
+    <div class="wrapper shadow-sm position-relative">
+      <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+
       <div tabindex="-1" role="dialog">
-        <p class="h4">Are sure you want to delete this person?</p>
+        <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary ok">OK</button>
-          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
         </div>
       </div>
     </div>
@@ -18627,8 +18627,9 @@ const editPopup = (id, e) => {
     formPopup.classList.add('popup'); // Popup HTML
 
     const popupHtml = `
-        <div class="wrapper shadow-sm">
-          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName}<p>
+        <div class="wrapper shadow-sm position-relative">
+          <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="lastname">Last name</label>
             <input type="text" class="w-100 border border-white bg-info text-white p-2" name="lastname" id="lastname" value="${people.lastName}">
@@ -18651,7 +18652,7 @@ const editPopup = (id, e) => {
     
           <div>
             <button type="submit" class="btn btn-danger submit" value="${people.id}">Save changes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
+            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
           </div>      
         </div>	
         `;
@@ -18749,7 +18750,8 @@ const handleAddBtn = () => {
   addPopup.classList.add('popup'); // Popup HTML
 
   const popupHtml = `
-      <div class="wrapper shadow-sm">
+      <div class="wrapper shadow-sm position-relative">
+        <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
         <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="lastname">Last name</label>
@@ -18773,7 +18775,7 @@ const handleAddBtn = () => {
         
         <div>
           <button type="submit" class="btn btn-danger submit">Submit</button>
-          <button type="button" class="btn btn-secondary cancel border border-white" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      
       </div>	
       `;
@@ -18927,7 +18929,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51484" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52569" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

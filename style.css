@@ -1,5 +1,25 @@
+@font-face {
+    font-family: 'Rubik';
+    src: url('./fonts/Rubik-Bold.woff2') format('woff2'),
+        url('./fonts/Rubik-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('./fonts/Rubik-Regular.woff2') format('woff2'),
+        url('/fonts/Rubik-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 body {
     background: #D8EEFE;
+    font-family: 'Rubik';
 }
 
 .heading {
@@ -36,13 +56,34 @@ body {
 .wrapper {
     background: #ffffff;
     width: 85%;
-    padding: 5rem 10rem;
+    padding: 1rem 10rem;
+    padding-top: 4rem;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 7rem;
+}
+
+.wrapper ~ body {
+    overflow-y: hidden;
 }
 
 .main-article {
     position: relative;
+}
+
+.aboutPerson {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.fs-1 {
+    font-size: 36px;
+    line-height: 43px;
+}
+
+.cancelBtn {
+    top: 0;
+    left: 92%;
+    font-size: 2rem;
 }
 
 .container {
@@ -54,8 +95,9 @@ body {
     .wrapper {
     background: #ffffff;
     padding: 6rem 200px;
-    width: 70%;
+    width: 50%;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 4rem;
+    padding-bottom: 1rem;
 }
 }

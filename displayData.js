@@ -35,7 +35,6 @@ const resetFilters = (e) => {
 // Event listener for the filters
 searchByName.addEventListener('keyup', filterList);
 searchByMonth.addEventListener('change', filterList);
-resetBtn.addEventListener('click', resetFilters);
 
 // Displaying the data form the local storage
 export const displayData = (event, filterName, filterMonth) => {
@@ -96,17 +95,17 @@ export const displayData = (event, filterName, filterMonth) => {
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
     return `
-        <div class="person d-flex justify-content-between bg-white mt-4 p-5 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+        <div class="person d-flex justify-content-between bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
           <div>
-            <img class="rounded-circle profile" width="70px" src="${person.picture}" alt="Person's profile">
+            <img class="profile" width="70px" src="${person.picture}" alt="Person's profile">
           </div>
         
-          <div>
+          <div class="aboutPerson">
             <p class="name">
               <b class="fs-1">${person.lastName} ${person.firstName}</b><br>
             Turns to 
-            <b class="age text-danger fs-1">${birthdate}</b> 
-            years old on <b class="birthday fs-1">${nextBirthday.toLocaleDateString()}</b>
+            <b class="age text-danger">${birthdate}</b> 
+            years old on <b class="birthday">${nextBirthday.toLocaleDateString()}</b>
             </p>
           </div>       
           
