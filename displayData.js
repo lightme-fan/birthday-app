@@ -9,8 +9,8 @@ import {
 	compareAsc
 } from 'date-fns';
 
-import editIcon from './icons/edit-icon.png';
-import trashIcon from './icons/trash_icon.png';
+import editIcon from './icons/edit.svg';
+import trashIcon from './icons/delete.svg';
 
 // Importing the empty array
 import { data } from "./localStorage.js";
@@ -103,16 +103,16 @@ export const displayData = (event, filterName, filterMonth) => {
         
           <div>
             <p class="name">
-              <b>${person.lastName} ${person.firstName}</b><br>
-            turns to 
-            <b class="age text-primary">${birthdate}</b> 
-            years old on <b class="birthday text-primary">${nextBirthday.toLocaleDateString()}</b>
+              <b class="fs-1">${person.lastName} ${person.firstName}</b><br>
+            Turns to 
+            <b class="age text-danger fs-1">${birthdate}</b> 
+            years old on <b class="birthday fs-1">${nextBirthday.toLocaleDateString()}</b>
             </p>
           </div>       
           
           <div>
             <div>
-              <b class="day text-primary">In ${diffDays}</b> days
+              <b class="day">In ${diffDays}</b> days
             </div>
             <div>
               <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">

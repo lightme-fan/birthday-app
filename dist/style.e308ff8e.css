@@ -7,6 +7,10 @@ body {
     padding-bottom: 1rem;
 }
 
+.formSearch {
+    gap: 34px;
+}
+
 .popup {
     background: #ffffff;
     transition: all 0.25s;
@@ -20,7 +24,7 @@ body {
     pointer-events: all;
     width: 100vw;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.8);
     margin: auto;
     position: fixed;
     top: 0;
@@ -31,21 +35,29 @@ body {
 
 .wrapper {
     background: #ffffff;
-    padding: 2rem;
-    width: 30%;
+    width: 85%;
+    padding: 5rem 10rem;
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 .main-article {
     position: relative;
 }
 
-@media(min-width: 600px) {
-    .container {
-        max-width: 60%;
-        margin-top: 2rem;
-    }
+.container {
+    max-width: 779px;
+    margin-top: 2rem;
+}
+
+@media(min-width: 900px) {
+    .wrapper {
+    background: #ffffff;
+    padding: 6rem 200px;
+    width: 70%;
+    margin: auto;
+    margin-top: 2rem;
+}
 }
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */

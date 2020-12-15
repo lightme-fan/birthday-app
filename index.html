@@ -14,16 +14,16 @@
 <body>
 	<article class="mx-auto container">
 		<div class="mb-5">
-			<p class="h1 mb-5">Birthday app</p>
+			<p class="h1 mb-5 fs-1" style="font-size: 64px">Birthday app</p>
 		</div>
 		<div class="main-article">
 			<button type="button" class="addPerson mb-5 rounded h-25 align-self-center btn btn-danger">Add a new person</button>
-			<div class="d-flex justify-content-between text-white formSearch">
-				<div class="md-form mt-0">
-					<input class="form-control search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
+			<div class="d-flex text-white justify-content-between formSearch">
+				<div class="md-form mt-0 w-100">
+					<input class="form-control p-3 rounded search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
 				</div>
 				
-				<select name="month" id="months">
+				<select class="w-100 border border-white rounded" name="month" id="months">
 					<option value="january"><small><i>January</i></small></option>
 					<option value="february"><small><i>February</i></small></option>
 					<option value="march"><small><i>March</i></small></option>
@@ -37,7 +37,7 @@
 					<option value="november"><small><i>November</i></small></option>
 					<option value="december"><small><i>December</i></small></option>
 				</select>
-				<button type="button" class="btn btn-light resetBtn">Reset</button>
+				<button type="button" class="btn w-100 btn-light resetBtn p-2 rounded">Reset</button>
 			</div>
 
 			<div class="root m-auto">

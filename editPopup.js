@@ -32,30 +32,30 @@ export const editPopup = (id, e) => {
   
       // Popup HTML
       const popupHtml = `
-        <div class="wrapper">
-          <p class="modal-title h3" id="exampleModalLabel">Edit <i>${people.lastName}</i><p>
+        <div class="wrapper shadow-sm">
+          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName}<p>
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="lastname">Last name</label>
-            <input type="text" class="w-100" name="lastname" id="lastname" value="${people.lastName}">
+            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="lastname" id="lastname" value="${people.lastName}">
           </fieldset>
           
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="firstname">First name</label>
-            <input type="text" class="w-100"  name="firstname" id="firstname" value="${people.firstName}">
+            <input type="text" class="w-100 border border-white bg-info text-white p-2"  name="firstname" id="firstname" value="${people.firstName}">
           </fieldset>
           
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="picture">Picture</label>
-            <input type="url" class="w-100" name="picture" id="picture" value="${people.picture}">
+            <input type="url" class="w-100 border border-white bg-info text-white p-2" name="picture" id="picture" value="${people.picture}">
           </fieldset>
 
           <fieldset class="form-group d-flex flex-column">
             <label class="h5" for="birthday">Birthday</label>
-            <input type="text" class="w-100" name="birthday" id="birthday" value="${birthday}" disabled>
+            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="birthday" id="birthday" value="${birthday}" disabled>
           </fieldset>
     
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary submit" value="${people.id}">Save changes</button>
+          <div>
+            <button type="submit" class="btn btn-danger submit" value="${people.id}">Save changes</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" value="${people.id}">Close</button>
           </div>      
         </div>	

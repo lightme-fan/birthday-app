@@ -18,31 +18,31 @@ export const handleAddBtn = () => {
   
     // Popup HTML
     const popupHtml = `
-      <div class="wrapper">
+      <div class="wrapper shadow-sm">
         <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="lastname">Last name</label>
-          <input type="text" name="lastname" id="lastname" required>
+          <input type="text" name="lastname" id="lastname" class="w-100 border border-white bg-info text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="firstname">First name</label>
-          <input type="text" name="firstname" id="firstname" required>
+          <input type="text" name="firstname" id="firstname" class="w-100 border border-white bg-info text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="birthday">Birthday</label>
-          <input type="date" name="birthday" id="birthday" required>
+          <input type="date" name="birthday" id="birthday" class="w-100 border border-white bg-info text-white p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
           <label class="h5" for="picture">Image URL</label>
-          <input type="url" name="picture" id="picture"required>
+          <input type="url" name="picture" id="picture" class="w-100 border border-white bg-info text-white p-2" required>
         </fieldset>
         
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary submit">Submit</button>
-          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Close</button>
+        <div>
+          <button type="submit" class="btn btn-danger submit">Submit</button>
+          <button type="button" class="btn btn-secondary cancel border border-white" data-dismiss="modal">Close</button>
         </div>      
       </div>	
       `;
