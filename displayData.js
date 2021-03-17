@@ -41,10 +41,12 @@ export const displayData = (event, filterName, filterMonth) => {
   let sortedPeople = data.sort((a,b) => {
     let first = differenceInCalendarDays(a.birthday, new Date())
     let last = differenceInCalendarDays(b.birthday, new Date())
-    const rank = last - first;
+    const rank = last - last;
+    console.log(data);
     return rank
   })
   
+
   // Filter by name
   if (filterName) {
     sortedPeople = data.filter(person => {
@@ -95,23 +97,23 @@ export const displayData = (event, filterName, filterMonth) => {
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
     return `
-        <div class="person d-flex justify-content-between bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+        <div class="person bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
           <div>
-            <img class="profile" width="70px" src="${person.picture}" alt="Person's profile">
+            <img class="profile" width="92px" src="${person.picture}" alt="Person's profile">
           </div>
         
           <div class="aboutPerson">
-            <p class="name">
-              <b class="fs-1">${person.lastName} ${person.firstName}</b><br>
-            Turns to 
-            <b class="age text-danger">${birthdate}</b> 
-            years old on <b class="birthday">${nextBirthday.toLocaleDateString()}</b>
-            </p>
+            <div class="name">
+              <b class="fs-3">${person.lastName} ${person.firstName}</b>
+              Turns to 
+              <b class="age text-danger">${birthdate}</b> 
+              years old on ${nextBirthday.toLocaleDateString()}
+            </div>
           </div>       
           
-          <div>
+          <div style="justify-self: end; font-size: 22px;">
             <div>
-              <b class="day">In ${diffDays}</b> days
+              In ${diffDays} days
             </div>
             <div>
               <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">

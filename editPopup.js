@@ -32,33 +32,35 @@ export const editPopup = (id, e) => {
   
       // Popup HTML
       const popupHtml = `
-        <div class="wrapper shadow-sm position-relative">
-          <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="lastname">Last name</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="lastname" id="lastname" value="${people.lastName}">
-          </fieldset>
-          
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="firstname">First name</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2"  name="firstname" id="firstname" value="${people.firstName}">
-          </fieldset>
-          
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="picture">Picture</label>
-            <input type="url" class="w-100 border border-white bg-info text-white p-2" name="picture" id="picture" value="${people.picture}">
-          </fieldset>
+        <div class="edit-container">
+          <div class="edit-wrapper shadow-sm position-relative">
+            <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+            <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="lastname">Last name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people.lastName}">
+            </fieldset>
+            
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="firstname">First name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people.firstName}">
+            </fieldset>
+            
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="picture">Picture</label>
+              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people.picture}">
+            </fieldset>
 
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="birthday">Birthday</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="birthday" id="birthday" value="${birthday}" disabled>
-          </fieldset>
-    
-          <div>
-            <button type="submit" class="btn btn-danger submit" value="${people.id}">Save changes</button>
-            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
-          </div>      
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="birthday">Birthday</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value="${birthday}" disabled>
+            </fieldset>
+      
+            <div>
+              <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people.id}">Save changes</button>
+              <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
+            </div>      
+          </div>
         </div>	
         `;
       formPopup.insertAdjacentHTML('afterbegin', popupHtml);

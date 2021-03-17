@@ -14,29 +14,34 @@
 <body>
 	<article class="mx-auto container">
 		<div class="mb-5">
-			<p class="h1 mb-5 fs-1" style="font-size: 64px">Birthday app</p>
+			<p class="h1 mb-5 fs-1">Birthday app</p>
 		</div>
 		<div class="main-article">
-			<div class="d-flex text-white justify-content-between formSearch">
-				<div class="md-form mt-0 w-100">
-					<input class="form-control p-3 rounded search-by-name" type="text" placeholder="Search a person by name" aria-label="Search">
+			<div class="text-white formSearch">
+				<div class="md-form mt-0 w-100" style="font-size: 18px">
+					<label class="text-dark mb-0">Filter by name</label>
+					<input style="height: 50px" class="form-control pt-3 pb-3 pl-3 rounded search-by-name" type="text" placeholder="Type a name" aria-label="Search">
 				</div>
 				
-				<select class="w-100 border border-white rounded" name="month" id="months">
-					<option value="january"><small><i>January</i></small></option>
-					<option value="february"><small><i>February</i></small></option>
-					<option value="march"><small><i>March</i></small></option>
-					<option value="april"><small><i>April</i></small></option>
-					<option value="may"><small><i>May</i></small></option>
-					<option value="june"><small><i>June</i></small></option>
-					<option value="july"><small><i>July</i></small></option>
-					<option value="august"><small><i>August</i></small></option>
-					<option value="september"><small><i>September</i></small></option>
-					<option value="october"><small><i>October</i></small></option>
-					<option value="november"><small><i>November</i></small></option>
-					<option value="december"><small><i>December</i></small></option>
-				</select>
-				<button type="button" class="addPerson w-100 rounded p-2 align-self-center btn btn-danger">Add a new person</button>
+				<div>
+					<label class="text-dark mb-0" style="font-size: 18px">Filter by month</label>
+					<select class="w-100 border border-white rounded pt-2 pl-3 pb-2" style="height: 50px" name="month" id="months">
+						<option><small><i>Select a month</i></small></option>
+						<option value="january"><small><i>January</i></small></option>
+						<option value="february"><small><i>February</i></small></option>
+						<option value="march"><small><i>March</i></small></option>
+						<option value="april"><small><i>April</i></small></option>
+						<option value="may"><small><i>May</i></small></option>
+						<option value="june"><small><i>June</i></small></option>
+						<option value="july"><small><i>July</i></small></option>
+						<option value="august"><small><i>August</i></small></option>
+						<option value="september"><small><i>September</i></small></option>
+						<option value="october"><small><i>October</i></small></option>
+						<option value="november"><small><i>November</i></small></option>
+						<option value="december"><small><i>December</i></small></option>
+					</select>
+				</div>
+				<button type="button" class="addPerson w-100 rounded p-2 align-self-center btn btn-danger" style="height: 50px">Add a new person</button>				
 			</div>
 
 			<div class="root m-auto">

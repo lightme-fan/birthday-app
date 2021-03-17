@@ -22,12 +22,25 @@ body {
     font-family: 'Rubik';
 }
 
+/* 
+    display: grid;
+    grid-template-columns: 18% 1fr 27%;
+    align-items: center;
+    gap: 5%;
+*/
+
 .heading {
     text-align: center;
     padding-bottom: 1rem;
 }
 
+.form-group {
+    margin-bottom: 9px;
+}
+
 .formSearch {
+    display: flex;
+    flex-direction: column;
     gap: 34px;
 }
 
@@ -42,48 +55,136 @@ body {
 
 .popup.open {
     pointer-events: all;
-    width: 100vw;
-    height: 100%;
     background: rgba(255, 255, 255, 0.8);
     margin: auto;
     position: fixed;
-    top: 0;
+    top: -123px;
     left: 0;
     right: 0;
     bottom: 0; 
 }
 
-.wrapper {
-    background: #ffffff;
-    width: 85%;
-    padding: 1rem 10rem;
-    padding-top: 4rem;
+.popup.open > .add-container,
+.popup.open > .delete-container {
+    transform: translateY(35%);
+    -webkit-transform: translateY(25%);
+    -moz-transform: translateY(35%);
+    -ms-transform: translateY(35%);
+    -o-transform: translateY(35%);
+}
+
+/* .popup.open > .add-container > .add-wrapper,
+.popup.open > .delete-container > .delete-wrapper {
+    padding: 68px 1rem;
+    padding-bottom: 22px;
+} */
+/* Delete style */
+.delete-container {
+    max-width: 600px;
     margin: auto;
+    padding: 1rem;
+}
+
+.delete-wrapper {
+    background: #ffffff;
+    padding: 1rem;
+    padding-top: 4rem;
     margin-top: 7rem;
+    position: relative;
+}
+
+.cancelBtn {
+    top: 0;
+    left: 80%;
+    font-size: 24px;
 }
 
 .wrapper ~ body {
     overflow-y: hidden;
 }
 
+/* Add styles */
+.add-container {
+    max-width: 1079px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.add-wrapper {
+    background: #ffffff;
+    padding: 1rem;
+    padding-top: 2rem;
+    position: relative;
+    padding-bottom: 10px;
+    margin-top: -2rem;
+}
+
+.add-label {
+    font-size: 18px;
+    margin: 0;
+}
+
+.add-input {
+    width: 264px;
+    height: 50px;
+    border-radius: 5px;
+    color: #000;
+    font-size: 14px;
+    background-color: #D8EEFE;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.modal-title {
+    line-height: 1;
+    font-size: 48px;
+}
+
 .main-article {
     position: relative;
 }
 
+/* Edit person */
+.edit-container {
+    max-width: 1079px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.edit-wrapper {
+    background: #ffffff;
+    padding: 4rem 2rem;
+    margin-top: 7rem;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.edit-input {
+    font-size: 1rem;
+    background-color: #D8EEFE;
+    border-radius: 5px;
+    height: 50px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
 .aboutPerson {
-    font-size: 24px;
+    margin-top: 1rem;
+    font-size: 22px;
+}
+
+.aboutPerson > div > b {
+    font-size: 26px;
     line-height: 28px;
 }
 
 .fs-1 {
-    font-size: 36px;
-    line-height: 43px;
-}
-
-.cancelBtn {
-    top: 0;
-    left: 92%;
-    font-size: 2rem;
+    font-size: 64px;
+    line-height: 74px;
 }
 
 .container {
@@ -91,15 +192,110 @@ body {
     margin-top: 2rem;
 }
 
-@media(min-width: 900px) {
-    .wrapper {
-    background: #ffffff;
-    padding: 6rem 200px;
-    width: 50%;
-    margin: auto;
-    margin-top: 4rem;
-    padding-bottom: 1rem;
+@media (min-width: 460px) {
+    .add-wrapper {
+        margin-top: -1rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    
 }
+
+@media (min-width: 512px) {
+    .person {
+        display: grid;
+        grid-template-columns: 18% 1fr 27%;
+        align-items: center;
+        gap: 5%;
+        padding: 0 1rem;
+        justify-items: center;
+    } 
+
+    .cancelBtn {
+        left: 90%;
+    }
+    
+    .edit-wrapper {
+        margin-top: 8rem;
+        padding-top: 100px;
+    }
+}
+
+@media (min-width: 652px) {
+    .formSearch {
+        display: grid;
+        grid-template-columns: 1fr 1fr 25%;
+        gap: 5%;
+    }
+    
+    .formSearch > button {
+        margin-top: 22px;
+    }
+
+    .edit-wrapper {
+        padding-left: 3rem;
+        padding-right: 3rem;
+        display: grid;
+        justify-content: center;
+    }
+
+    .edit-wrapper {
+        margin-top: 9rem;
+        padding-top: 92px;
+        padding-bottom: 40px;
+    }
+
+    .add-wrapper {
+        margin-top: -1rem;
+        padding-bottom: 58px;
+        padding-top: 86px;
+        display: grid;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 900px) {
+    .person {
+        display: grid;
+        grid-template-columns: 18% 1fr 27%;
+        align-items: center;
+        gap: 5%;
+        padding: 0 1rem;
+    }
+
+    .delete-container {
+        padding: 2rem;
+    }
+
+    .wrapper {
+        background: #ffffff;
+        padding: 6rem 200px;
+        width: 50%;
+        margin: auto;
+        margin-top: 4rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        padding-bottom: 1rem;
+    }
+
+    .cancelBtn {
+        left: 90%;
+    }
+    
+    .formSearch {
+        display: grid;
+        grid-template-columns: 1fr 1fr 25%;
+        gap: 5%;
+    }
+
+    .formSearch > button {
+        margin-top: 22px;
+    }
+
+    .edit-input, .add-input {
+        max-width: 264px;
+    }
+    
 }
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */

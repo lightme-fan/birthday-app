@@ -150,7 +150,7 @@ exports.fetchPeople = fetchPeople;
 
 var _localStorage = require("./localStorage.js");
 
-const API_URL = 'https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json'; // Fetch people
+const API_URL = 'https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/93debb7463fbaaec29622221b8f9e719bd5b119f/birthdayPeople.json'; // Fetch people
 
 async function fetchPeople() {
   const res = await fetch(API_URL);
@@ -18395,7 +18395,8 @@ const displayData = (event, filterName, filterMonth) => {
   let sortedPeople = _localStorage.data.sort((a, b) => {
     let first = (0, _dateFns.differenceInCalendarDays)(a.birthday, new Date());
     let last = (0, _dateFns.differenceInCalendarDays)(b.birthday, new Date());
-    const rank = last - first;
+    const rank = last - last;
+    console.log(_localStorage.data);
     return rank;
   }); // Filter by name
 
@@ -18448,23 +18449,23 @@ const displayData = (event, filterName, filterMonth) => {
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
     return `
-        <div class="person d-flex justify-content-between bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
+        <div class="person bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
           <div>
-            <img class="profile" width="70px" src="${person.picture}" alt="Person's profile">
+            <img class="profile" width="92px" src="${person.picture}" alt="Person's profile">
           </div>
         
           <div class="aboutPerson">
-            <p class="name">
-              <b class="fs-1">${person.lastName} ${person.firstName}</b><br>
-            Turns to 
-            <b class="age text-danger">${birthdate}</b> 
-            years old on <b class="birthday">${nextBirthday.toLocaleDateString()}</b>
-            </p>
+            <div class="name">
+              <b class="fs-3">${person.lastName} ${person.firstName}</b>
+              Turns to 
+              <b class="age text-danger">${birthdate}</b> 
+              years old on ${nextBirthday.toLocaleDateString()}
+            </div>
           </div>       
           
-          <div>
+          <div style="justify-self: end; font-size: 22px;">
             <div>
-              <b class="day">In ${diffDays}</b> days
+              In ${diffDays} days
             </div>
             <div>
               <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
@@ -18549,14 +18550,16 @@ const deletePopup = id => {
   deleteForm.classList.add('popup'); // Delete html
 
   const popupHTML = `
-    <div class="wrapper shadow-sm position-relative">
-      <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+    <div class="delete-container">
+      <div class="delete-wrapper shadow-sm position-relative">
+        <button type="button" class="btn btn-primary position-absolute top-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
 
-      <div tabindex="-1" role="dialog">
-        <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary ok">OK</button>
-          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
+        <div tabindex="-1" role="dialog">
+          <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary ok">OK</button>
+            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
+          </div>
         </div>
       </div>
     </div>
@@ -18627,33 +18630,35 @@ const editPopup = (id, e) => {
     formPopup.classList.add('popup'); // Popup HTML
 
     const popupHtml = `
-        <div class="wrapper shadow-sm position-relative">
-          <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-          <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="lastname">Last name</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="lastname" id="lastname" value="${people.lastName}">
-          </fieldset>
-          
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="firstname">First name</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2"  name="firstname" id="firstname" value="${people.firstName}">
-          </fieldset>
-          
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="picture">Picture</label>
-            <input type="url" class="w-100 border border-white bg-info text-white p-2" name="picture" id="picture" value="${people.picture}">
-          </fieldset>
+        <div class="edit-container">
+          <div class="edit-wrapper shadow-sm position-relative">
+            <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+            <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="lastname">Last name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people.lastName}">
+            </fieldset>
+            
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="firstname">First name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people.firstName}">
+            </fieldset>
+            
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="picture">Picture</label>
+              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people.picture}">
+            </fieldset>
 
-          <fieldset class="form-group d-flex flex-column">
-            <label class="h5" for="birthday">Birthday</label>
-            <input type="text" class="w-100 border border-white bg-info text-white p-2" name="birthday" id="birthday" value="${birthday}" disabled>
-          </fieldset>
-    
-          <div>
-            <button type="submit" class="btn btn-danger submit" value="${people.id}">Save changes</button>
-            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
-          </div>      
+            <fieldset class="form-group d-flex flex-column">
+              <label style="margin: 0" for="birthday">Birthday</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value="${birthday}" disabled>
+            </fieldset>
+      
+            <div>
+              <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people.id}">Save changes</button>
+              <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
+            </div>      
+          </div>
         </div>	
         `;
     formPopup.insertAdjacentHTML('afterbegin', popupHtml);
@@ -18750,34 +18755,36 @@ const handleAddBtn = () => {
   addPopup.classList.add('popup'); // Popup HTML
 
   const popupHtml = `
-      <div class="wrapper shadow-sm position-relative">
+    <div class="add-container">
+      <div class="add-wrapper shadow-sm position-relative">
         <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-        <p class="modal-title h3" id="exampleModalLabel">Add a new person's birthday</i><p>
+        <p class="modal-title h3 fs-4" id="exampleModalLabel">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5" for="lastname">Last name</label>
-          <input type="text" name="lastname" id="lastname" class="w-100 border border-white bg-info text-white p-2" required>
+          <label class="h5 add-label m-0" for="lastname">Last name</label>
+          <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5" for="firstname">First name</label>
-          <input type="text" name="firstname" id="firstname" class="w-100 border border-white bg-info text-white p-2" required>
+          <label class="h5 add-label" for="firstname">First name</label>
+          <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5" for="birthday">Birthday</label>
-          <input type="date" name="birthday" id="birthday" class="w-100 border border-white bg-info text-white p-2" required>
+          <label class="h5 add-label" for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5" for="picture">Image URL</label>
-          <input type="url" name="picture" id="picture" class="w-100 border border-white bg-info text-white p-2" required>
+          <label class="h5 add-label" for="picture">Image URL</label>
+          <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
         
-        <div>
-          <button type="submit" class="btn btn-danger submit">Submit</button>
-          <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
+        <div class="d-flex" style="gap: 36px">
+          <button style="width: 158px; height: 50px; text-align: center" type="submit" class="btn p-1 btn-danger submit">Submit</button>
+          <button style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      
       </div>	
+    </div>
       `;
   addPopup.insertAdjacentHTML('afterbegin', popupHtml);
   document.body.appendChild(addPopup);
@@ -18929,7 +18936,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52431" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
