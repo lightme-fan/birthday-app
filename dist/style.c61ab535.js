@@ -184,12 +184,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
+},{"./bundle-url":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/style.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./fonts\\Rubik-Bold.woff2":[["Rubik-Bold.dc898c8b.woff2","fonts/Rubik-Bold.woff2"],"fonts/Rubik-Bold.woff2"],"./fonts\\Rubik-Bold.woff":[["Rubik-Bold.387f1d1b.woff","fonts/Rubik-Bold.woff"],"fonts/Rubik-Bold.woff"],"./fonts\\Rubik-Regular.woff2":[["Rubik-Regular.3e635f3a.woff2","fonts/Rubik-Regular.woff2"],"fonts/Rubik-Regular.woff2"],"C:\\Users\\Fanilo\\code\\birthday-app\\fonts\\Rubik-Regular.woff":[["Rubik-Regular.d8384832.woff","fonts/Rubik-Regular.woff"],"fonts/Rubik-Regular.woff"],"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./..\\fonts\\Rubik-Bold.woff2":[["Rubik-Bold.dc898c8b.woff2","fonts/Rubik-Bold.woff2"],"fonts/Rubik-Bold.woff2"],"./..\\fonts\\Rubik-Bold.woff":[["Rubik-Bold.387f1d1b.woff","fonts/Rubik-Bold.woff"],"fonts/Rubik-Bold.woff"],"./..\\fonts\\Rubik-Regular.woff2":[["Rubik-Regular.3e635f3a.woff2","fonts/Rubik-Regular.woff2"],"fonts/Rubik-Regular.woff2"],"./..\\fonts\\Rubik-Regular.woff":[["Rubik-Regular.d8384832.woff","fonts/Rubik-Regular.woff"],"fonts/Rubik-Regular.woff"],"_css_loader":"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52431" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60310" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -394,4 +394,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/style.e308ff8e.js.map
+//# sourceMappingURL=/style.c61ab535.js.map

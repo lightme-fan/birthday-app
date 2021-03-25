@@ -20,14 +20,22 @@
 body {
     background: #D8EEFE;
     font-family: 'Rubik';
+    color: #094067;
 }
 
-/* 
-    display: grid;
-    grid-template-columns: 18% 1fr 27%;
-    align-items: center;
-    gap: 5%;
-*/
+.person {
+    padding: 1rem;
+}
+
+/* Buttons */
+.btn:active {
+    outline: none;
+    border: none;
+}
+
+.btn:focus {
+    outline: 0;
+}
 
 .heading {
     text-align: center;
@@ -64,33 +72,32 @@ body {
     bottom: 0; 
 }
 
-.popup.open > .add-container,
-.popup.open > .delete-container {
-    transform: translateY(35%);
-    -webkit-transform: translateY(25%);
-    -moz-transform: translateY(35%);
-    -ms-transform: translateY(35%);
-    -o-transform: translateY(35%);
+.popup.open > .add-container {
+    transform: translateY(26%);
+    -webkit-transform: translateY(26%);
+    -moz-transform: translateY(26%);
+    -ms-transform: translateY(26%);
+    -o-transform: translateY(26%);
 }
 
-/* .popup.open > .add-container > .add-wrapper,
-.popup.open > .delete-container > .delete-wrapper {
-    padding: 68px 1rem;
-    padding-bottom: 22px;
-} */
 /* Delete style */
-.delete-container {
-    max-width: 600px;
+.popup.open > .delete-container {
+    max-width: 900px;
     margin: auto;
     padding: 1rem;
+    transform: translateY(132%);
+    -webkit-transform: translateY(132%);
+    -moz-transform: translateY(132%);
+    -ms-transform: translateY(132%);
+    -o-transform: translateY(132%);
 }
 
 .delete-wrapper {
     background: #ffffff;
-    padding: 1rem;
-    padding-top: 4rem;
-    margin-top: 7rem;
+    padding: 1rem 8rem;
+    padding-top: 5rem;
     position: relative;
+    box-shadow: 1px 1px 9px -3px #000000;
 }
 
 .cancelBtn {
@@ -113,10 +120,10 @@ body {
 .add-wrapper {
     background: #ffffff;
     padding: 1rem;
-    padding-top: 2rem;
+    padding-top: 40px;
     position: relative;
     padding-bottom: 10px;
-    margin-top: -2rem;
+    margin-top: -40px;
 }
 
 .add-label {
@@ -140,6 +147,7 @@ body {
 .modal-title {
     line-height: 1;
     font-size: 48px;
+    line-height: 57px;
 }
 
 .main-article {
@@ -155,10 +163,11 @@ body {
 
 .edit-wrapper {
     background: #ffffff;
-    padding: 4rem 2rem;
+    padding: 16px 2rem;
     margin-top: 7rem;
     position: relative;
     padding-bottom: 5px;
+    padding-top: 30px;
 }
 
 .edit-input {
@@ -173,13 +182,14 @@ body {
 }
 
 .aboutPerson {
-    margin-top: 1rem;
-    font-size: 22px;
+    font-size: 24px;
+    line-height: 0px;
 }
 
 .aboutPerson > div > b {
-    font-size: 26px;
-    line-height: 28px;
+    font-size: 36px;
+    line-height: 43px;
+    font-weight: 500;
 }
 
 .fs-1 {
@@ -199,16 +209,20 @@ body {
         padding-bottom: 3rem;
     }
     
+    .edit-wrapper {
+        margin-top: 126px;
+        padding-top: 72px;
+    }
 }
 
 @media (min-width: 512px) {
     .person {
         display: grid;
-        grid-template-columns: 18% 1fr 27%;
+        grid-template-columns: 18% 1fr 18%;
         align-items: center;
         gap: 5%;
+        
         padding: 0 1rem;
-        justify-items: center;
     } 
 
     .cancelBtn {
@@ -222,6 +236,10 @@ body {
 }
 
 @media (min-width: 652px) {
+    .person {
+        height: 139px;
+    }
+    
     .formSearch {
         display: grid;
         grid-template-columns: 1fr 1fr 25%;
@@ -237,17 +255,13 @@ body {
         padding-right: 3rem;
         display: grid;
         justify-content: center;
-    }
-
-    .edit-wrapper {
-        margin-top: 9rem;
         padding-top: 92px;
         padding-bottom: 40px;
     }
 
     .add-wrapper {
         margin-top: -1rem;
-        padding-bottom: 58px;
+        padding-bottom: 44px;
         padding-top: 86px;
         display: grid;
         justify-content: center;
@@ -266,6 +280,14 @@ body {
     .delete-container {
         padding: 2rem;
     }
+
+    .popup.open > .add-container {
+        transform: translateY(24.5%);
+        -webkit-transform: translateY(24.5%);
+        -moz-transform: translateY(24.5%);
+        -ms-transform: translateY(24.5%);
+        -o-transform: translateY(24.5%);
+}
 
     .wrapper {
         background: #ffffff;
@@ -298,4 +320,4 @@ body {
     
 }
 
-/*# sourceMappingURL=/style.e308ff8e.css.map */
+/*# sourceMappingURL=/style.c61ab535.css.map */

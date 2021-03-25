@@ -4,15 +4,9 @@ import { editPopup } from "./editPopup.js";
 // Import handleClick function
 import { deletePopup } from "./localStorage.js";
 
-import { root, addButton } from "./usefulvariables.js";
-
 // Handling buttons 
 export const handleClickButtons = (e) => {
 
-  const listPerso = document.querySelector('.person');
-  const searchForm = document.querySelector('.formSearch');
-  const container = document.querySelector('.container');
-  
   // Handling Edit button
   if (e.target.closest('button.edit')) {
       const closestEl = e.target.closest('.person');

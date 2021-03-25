@@ -1,6 +1,6 @@
 export let data = []
 
-import { root, formSearch, addButton } from "./usefulvariables.js";
+import { root } from "./usefulvariables.js";
 
 import { fetchPeople } from "./fetchData.js";
 import { displayData } from './displayData.js'
@@ -14,9 +14,6 @@ export const initialLocalStorage = async () => {
   } else {
     data = await fetchPeople();
   }
-  
-  // displayData(data)
-  // console.log(await fetchPeople());
   root.dispatchEvent(new CustomEvent('updatedBirthday'));
 }
 
@@ -42,7 +39,7 @@ export const deletePopup = (id) => {
         <button type="button" class="btn btn-primary position-absolute top-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
 
         <div tabindex="-1" role="dialog">
-          <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
+          <p class="h4">Are sure you want to remove <b>${person?.lastName} ${person?.firstName}</b>?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary ok">OK</button>
             <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
@@ -60,7 +57,7 @@ export const deletePopup = (id) => {
   const confirmBtn = (e) => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      data = data.filter(perso => perso.id !== person.id);
+      data = data.filter(perso => perso.id !== person?.id);
 
       displayData();
       destroyPopup(deleteForm);

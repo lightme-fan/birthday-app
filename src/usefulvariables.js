@@ -1,4 +1,3 @@
-
 export const root = document.querySelector('.root');
 export const addButton = document.querySelector('.addPerson');
 export const formSearch = document.querySelector('.formSearch');

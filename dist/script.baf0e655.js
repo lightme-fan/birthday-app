@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"usefulvariables.js":[function(require,module,exports) {
+})({"src/usefulvariables.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -140,24 +140,7 @@ const resetBtn = document.querySelector('.resetBtn');
 exports.resetBtn = resetBtn;
 const mainArticle = document.querySelector('.main-article');
 exports.mainArticle = mainArticle;
-},{}],"fetchData.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchPeople = fetchPeople;
-
-var _localStorage = require("./localStorage.js");
-
-const API_URL = 'https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/93debb7463fbaaec29622221b8f9e719bd5b119f/birthdayPeople.json'; // Fetch people
-
-async function fetchPeople() {
-  const res = await fetch(API_URL);
-  const dataPerson = await res.json();
-  return dataPerson;
-}
-},{"./localStorage.js":"localStorage.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18330,7 +18313,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = "/edit.77a00f45.svg";
 },{}],"icons/delete.svg":[function(require,module,exports) {
 module.exports = "/delete.491a0fad.svg";
-},{}],"getAge.js":[function(require,module,exports) {
+},{}],"src/getAge.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18348,19 +18331,20 @@ const getAge = (date1, date2) => {
 };
 
 exports.getAge = getAge;
-},{}],"displayData.js":[function(require,module,exports) {
+},{}],"src/displayData.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getNextBirthday = getNextBirthday;
 exports.displayData = void 0;
 
 var _dateFns = require("date-fns");
 
-var _edit = _interopRequireDefault(require("./icons/edit.svg"));
+var _edit = _interopRequireDefault(require("../icons/edit.svg"));
 
-var _delete = _interopRequireDefault(require("./icons/delete.svg"));
+var _delete = _interopRequireDefault(require("../icons/delete.svg"));
 
 var _localStorage = require("./localStorage.js");
 
@@ -18370,66 +18354,49 @@ var _getAge = require("./getAge.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Importing the empty array
-// import Variables
-// Importing the calculation of age
-// Filter function
-const filterList = e => {
-  displayData(e, _usefulvariables.searchByName.value, _usefulvariables.searchByMonth.value);
-}; // Reset filter
+// Get next birthday
+function getNextBirthday(birthday) {
+  const birthdayDate = new Date(birthday);
+  const today = new Date();
+  let nextBirthDay = (0, _dateFns.setYear)(birthdayDate, today.getFullYear());
 
+  if ((0, _dateFns.isToday)(nextBirthDay)) {
+    return nextBirthDay;
+  }
 
-const resetFilters = e => {
-  const reseting = e.target;
+  if ((0, _dateFns.isPast)(nextBirthDay)) {
+    nextBirthDay = (0, _dateFns.addYears)(nextBirthDay, 1);
+  }
 
-  _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
-}; // Event listener for the filters
+  return nextBirthDay;
+}
 
+// Displaying the data form the local storage
+const displayData = () => {
+  let sortedPeople = _localStorage.data; // Fiter by name
 
-_usefulvariables.searchByName.addEventListener('keyup', filterList);
+  const filterByName = sortedPeople.filter(person => {
+    const fullNameLowercase = person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase();
+    return fullNameLowercase.includes(_usefulvariables.searchByName.value.toLowerCase());
+  }); // Filter by name and month
 
-_usefulvariables.searchByMonth.addEventListener('change', filterList); // Displaying the data form the local storage
+  const filteredByMonthAndName = filterByName.filter(person => {
+    let birthday = (0, _dateFns.format)(new Date(person.birthday), 'MMMM');
 
+    if (_usefulvariables.searchByMonth.value === "null") {
+      return true;
+    }
 
-const displayData = (event, filterName, filterMonth) => {
-  let sortedPeople = _localStorage.data.sort((a, b) => {
-    let first = (0, _dateFns.differenceInCalendarDays)(a.birthday, new Date());
-    let last = (0, _dateFns.differenceInCalendarDays)(b.birthday, new Date());
-    const rank = last - last;
-    console.log(_localStorage.data);
-    return rank;
-  }); // Filter by name
+    return birthday.toLocaleLowerCase() === _usefulvariables.searchByMonth.value;
+  });
+  sortedPeople = filterByName;
+  sortedPeople = filteredByMonthAndName; // Sort persons
 
-
-  if (filterName) {
-    sortedPeople = _localStorage.data.filter(person => {
-      let lowerCaseName = person.lastName.toLowerCase();
-      let lowerCaseFilterName = filterName.toLowerCase();
-
-      if (lowerCaseName.includes(lowerCaseFilterName.toLowerCase())) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  } // Filter by Month
-  else if (filterMonth) {
-      sortedPeople = _localStorage.data.filter(person => {
-        let date = new Date(person.birthday);
-        let month = date.toLocaleString('en-us', {
-          month: 'long'
-        });
-        let lowerCaseMonth = month.toLowerCase();
-        let lowerCaseFilterMonth = filterMonth.toLowerCase();
-
-        if (lowerCaseMonth.includes(lowerCaseFilterMonth.toLowerCase())) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    } // Mapping the data,   
-
+  sortedPeople.sort((a, b) => {
+    let first = (0, _dateFns.differenceInCalendarDays)(getNextBirthday(a.birthday), new Date());
+    let last = (0, _dateFns.differenceInCalendarDays)(getNextBirthday(b.birthday), new Date());
+    return (0, _dateFns.compareAsc)(first, last);
+  }); // Mapping the data,   
 
   const persons = sortedPeople.map(person => {
     // Age
@@ -18449,41 +18416,43 @@ const displayData = (event, filterName, filterMonth) => {
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
     return `
-        <div class="person bg-white mt-4 p-4 rounded shadow-lg" data-id="${person.id}" value= "${person.id}">
-          <div>
-            <img class="profile" width="92px" src="${person.picture}" alt="Person's profile">
-          </div>
-        
-          <div class="aboutPerson">
-            <div class="name">
-              <b class="fs-3">${person.lastName} ${person.firstName}</b>
-              Turns to 
-              <b class="age text-danger">${birthdate}</b> 
-              years old on ${nextBirthday.toLocaleDateString()}
+          <div class="person bg-white mt-4 rounded" data-id="${person.id}" value= "${person.id}">
+            <div>
+              <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
             </div>
-          </div>       
           
-          <div style="justify-self: end; font-size: 22px;">
-            <div>
-              In ${diffDays} days
+            <div class="aboutPerson">
+              <div class="name" style="font-weight: bold">
+                <b class="fs-3" style="font-weight: bold">${person.lastName} ${person.firstName}</b><br>
+                <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
+                <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
+                <span style="color: #5F6C7B; opacity: 0.7;">
+                  on ${(0, _dateFns.format)(new Date(nextBirthday), 'MMMM')} ${(0, _dateFns.format)(new Date(nextBirthday), 'io')}
+                </span>
+              </div>
+            </div>       
+            
+            <div style="justify-self: end; font-size: 22px;">
+              <div style="font-weight: 500">
+                In ${diffDays} days
+              </div>
+              <div>
+                <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+                  <img class="edit icon" width="30px" height="30px;" src=${_edit.default} alt="Edit">
+                </button>
+                <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+                  <img class="delete icon" width="30px" height="30px;" src=${_delete.default} alt="Delete">
+                </button>
+              </div>
             </div>
-            <div>
-              <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-                <img class="edit icon" width="15px" src=${_edit.default} alt="Edit">
-              </button>
-              <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-                <img class="delete icon" width="15px" src=${_delete.default} alt="Delete">
-              </button>
-            </div>
-          </div>
-      </div>
+        </div>
     `;
   });
-  _usefulvariables.root.innerHTML = persons.join(''); // root.dispatchEvent(new CustomEvent('updatedBirthday'))
+  _usefulvariables.root.innerHTML = persons.join('');
 };
 
 exports.displayData = displayData;
-},{"date-fns":"node_modules/date-fns/esm/index.js","./icons/edit.svg":"icons/edit.svg","./icons/delete.svg":"icons/delete.svg","./localStorage.js":"localStorage.js","./usefulvariables.js":"usefulvariables.js","./getAge.js":"getAge.js"}],"destroyPopup.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","../icons/edit.svg":"icons/edit.svg","../icons/delete.svg":"icons/delete.svg","./localStorage.js":"src/localStorage.js","./usefulvariables.js":"src/usefulvariables.js","./getAge.js":"src/getAge.js"}],"src/destroyPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18498,7 +18467,7 @@ function destroyPopup(formPopup) {
   formPopup.remove();
   formPopup = null;
 }
-},{}],"localStorage.js":[function(require,module,exports) {
+},{}],"src/localStorage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18525,9 +18494,7 @@ const initialLocalStorage = async () => {
     exports.data = data = storedPersons;
   } else {
     exports.data = data = await (0, _fetchData.fetchPeople)();
-  } // displayData(data)
-  // console.log(await fetchPeople());
-
+  }
 
   _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
 }; // Update local storage
@@ -18555,7 +18522,7 @@ const deletePopup = id => {
         <button type="button" class="btn btn-primary position-absolute top-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
 
         <div tabindex="-1" role="dialog">
-          <p class="h4">Are sure you want to remove ${person.lastName} ${person.firstName}?</p>
+          <p class="h4">Are sure you want to remove <b>${person?.lastName} ${person?.firstName}</b>?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary ok">OK</button>
             <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
@@ -18571,7 +18538,7 @@ const deletePopup = id => {
   const confirmBtn = e => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      exports.data = data = data.filter(perso => perso.id !== person.id);
+      exports.data = data = data.filter(perso => perso.id !== person?.id);
       (0, _displayData.displayData)();
       (0, _destroyPopup.destroyPopup)(deleteForm);
 
@@ -18593,7 +18560,24 @@ const deletePopup = id => {
 };
 
 exports.deletePopup = deletePopup;
-},{"./usefulvariables.js":"usefulvariables.js","./fetchData.js":"fetchData.js","./displayData.js":"displayData.js","./destroyPopup.js":"destroyPopup.js"}],"editPopup.js":[function(require,module,exports) {
+},{"./usefulvariables.js":"src/usefulvariables.js","./fetchData.js":"src/fetchData.js","./displayData.js":"src/displayData.js","./destroyPopup.js":"src/destroyPopup.js"}],"src/fetchData.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchPeople = fetchPeople;
+
+var _localStorage = require("./localStorage.js");
+
+const API_URL = 'https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json'; // Fetch people
+
+async function fetchPeople() {
+  const res = await fetch(API_URL);
+  const dataPerson = await res.json();
+  return dataPerson;
+}
+},{"./localStorage.js":"src/localStorage.js"}],"src/editPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18609,6 +18593,10 @@ var _destroyPopup = require("./destroyPopup.js");
 
 var _displayData = require("./displayData.js");
 
+var _format = _interopRequireDefault(require("date-fns/format"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // Importing the empty array
 // import Variables
 // Import destroy popup
@@ -18622,8 +18610,9 @@ const editPopup = (id, e) => {
 
   const people = _localStorage.data.find(person => person.id.toString() === id);
 
-  console.log(people);
-  const birthday = new Date(people.birthday).toLocaleDateString();
+  const birthdayDate = new Date(people?.birthday).toISOString().slice(0, 10);
+  const maxDate = new Date().toISOString().slice(0, 10);
+  const birthday = `${(0, _format.default)(new Date(people.birthday), 'dd')}/${(0, _format.default)(new Date(people.birthday), 'II')}/${(0, _format.default)(new Date(people.birthday), 'yy')}`;
   return new Promise(async function (resolve) {
     // Creating form popup
     const formPopup = document.createElement('form');
@@ -18633,29 +18622,31 @@ const editPopup = (id, e) => {
         <div class="edit-container">
           <div class="edit-wrapper shadow-sm position-relative">
             <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-            <p class="modal-title h3" id="exampleModalLabel">Edit ${people.lastName} ${people.firstName}<p>
+            <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="lastname">Last name</label>
-              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people.lastName}">
+              <label style="margin: 0" for="lastname">First name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="firstname">First name</label>
-              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people.firstName}">
+              <label style="margin: 0" for="firstname">Last name</label>
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people?.lastName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0" for="picture">Picture</label>
-              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people.picture}">
+              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people?.picture}">
             </fieldset>
 
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0" for="birthday">Birthday</label>
-              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value="${birthday}" disabled>
+              <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value=${birthdayDate} max=${maxDate}>
             </fieldset>
       
-            <div>
-              <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people.id}">Save changes</button>
+            <div 
+              style="display: flex; gap: 20px;"
+              >
+              <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people?.id}">Save changes</button>
               <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
             </div>      
           </div>
@@ -18672,6 +18663,13 @@ const editPopup = (id, e) => {
       people.lastName = formPopup.lastname.value;
       people.firstName = formPopup.firstname.value;
       people.picture = formPopup.picture.value;
+
+      const toTimestamp = strDate => {
+        let datum = Date.parse(strDate);
+        return datum;
+      };
+
+      people.birthday = toTimestamp(formPopup.birthday.value);
       (0, _displayData.displayData)(_localStorage.data);
       (0, _destroyPopup.destroyPopup)(formPopup);
 
@@ -18691,7 +18689,7 @@ const editPopup = (id, e) => {
 };
 
 exports.editPopup = editPopup;
-},{"./localStorage.js":"localStorage.js","./usefulvariables.js":"usefulvariables.js","./destroyPopup.js":"destroyPopup.js","./displayData.js":"displayData.js"}],"handleclick.js":[function(require,module,exports) {
+},{"./localStorage.js":"src/localStorage.js","./usefulvariables.js":"src/usefulvariables.js","./destroyPopup.js":"src/destroyPopup.js","./displayData.js":"src/displayData.js","date-fns/format":"node_modules/date-fns/esm/format/index.js"}],"src/handleclick.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18703,16 +18701,11 @@ var _editPopup = require("./editPopup.js");
 
 var _localStorage = require("./localStorage.js");
 
-var _usefulvariables = require("./usefulvariables.js");
-
 // Import handleClick function
 // Import handleClick function
 // Handling buttons 
 const handleClickButtons = e => {
-  const listPerso = document.querySelector('.person');
-  const searchForm = document.querySelector('.formSearch');
-  const container = document.querySelector('.container'); // Handling Edit button
-
+  // Handling Edit button
   if (e.target.closest('button.edit')) {
     const closestEl = e.target.closest('.person');
     const id = closestEl.dataset.id;
@@ -18728,7 +18721,7 @@ const handleClickButtons = e => {
 };
 
 exports.handleClickButtons = handleClickButtons;
-},{"./editPopup.js":"editPopup.js","./localStorage.js":"localStorage.js","./usefulvariables.js":"usefulvariables.js"}],"addBtn.js":[function(require,module,exports) {
+},{"./editPopup.js":"src/editPopup.js","./localStorage.js":"src/localStorage.js"}],"src/addBtn.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18758,25 +18751,25 @@ const handleAddBtn = () => {
     <div class="add-container">
       <div class="add-wrapper shadow-sm position-relative">
         <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-        <p class="modal-title h3 fs-4" id="exampleModalLabel">Add a new person's birthday</i><p>
+        <p class="modal-title h3 fs-4" id="exampleModalLabel" style="font-weight: bold">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label m-0" for="lastname">Last name</label>
+          <label class="h5 add-label m-0" for="lastname" style="font-weight: bold">Last name</label>
           <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="firstname">First name</label>
+          <label class="h5 add-label" for="firstname" style="font-weight: bold">First name</label>
           <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="birthday">Birthday</label>
-          <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-white p-2" required>
+          <label class="h5 add-label" for="birthday" style="font-weight: bold">Birthday</label>
+          <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="picture">Image URL</label>
-          <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-white p-2" required>
+          <label class="h5 add-label" for="picture" style="font-weight: bold">Image URL</label>
+          <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <div class="d-flex" style="gap: 36px">
@@ -18809,7 +18802,11 @@ const handleAddBtn = () => {
     (0, _destroyPopup.destroyPopup)(addPopup);
 
     _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
-  }); // Close button
+  }); // Restricting add birthday
+
+  const birthdayEl = document.querySelector('input[type="date"]');
+  const newBirthday = new Date().toISOString().slice(0, 10);
+  birthdayEl.max = newBirthday; // Close button
 
   window.addEventListener('click', e => {
     if (e.target.closest('.cancel')) {
@@ -18821,79 +18818,27 @@ const handleAddBtn = () => {
 };
 
 exports.handleAddBtn = handleAddBtn;
-},{"./usefulvariables.js":"usefulvariables.js","./localStorage.js":"localStorage.js","./displayData.js":"displayData.js","./destroyPopup.js":"destroyPopup.js"}],"searchByName.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.searchByNameFunction = void 0;
-
-var _usefulvariables = require("./usefulvariables.js");
-
-var _localStorage = require("./localStorage.js");
-
-// Import searchByName variable
-// Import data variable
-// Import local storage
-// Import searchBtn variable
-const searchByNameFunction = () => {
-  const html = `
-        
-    `;
-  _usefulvariables.searchBtn.innerHTML = html;
-  const inputSearch = document.querySelector('.search');
-
-  const filterByName = (e, filterName, filterStyle) => {
-    let sortedData = _localStorage.data.sort((a, b) => b.birthday - a.birthday);
-
-    if (filterName) {
-      sortedData = _localStorage.data.filter(person => {
-        let lowerCaseName = person.lastName.toLowerCase();
-        let lowerCaseFilterName = filterName.toLowerCase();
-
-        if (lowerCaseName.includes(lowerCaseFilterName)) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    }
-  };
-
-  inputSearch.addEventListener('input', filterByName);
-};
-
-exports.searchByNameFunction = searchByNameFunction;
-},{"./usefulvariables.js":"usefulvariables.js","./localStorage.js":"localStorage.js"}],"script.js":[function(require,module,exports) {
+},{"./usefulvariables.js":"src/usefulvariables.js","./localStorage.js":"src/localStorage.js","./displayData.js":"src/displayData.js","./destroyPopup.js":"src/destroyPopup.js"}],"src/script.js":[function(require,module,exports) {
 "use strict";
 
 var _usefulvariables = require("./usefulvariables.js");
-
-var _localStorage = require("./localStorage.js");
 
 var _fetchData = require("./fetchData.js");
 
-var _displayData = require("./displayData.js");
+var _localStorage = require("./localStorage.js");
 
-var _destroyPopup = require("./destroyPopup.js");
+var _displayData = require("./displayData.js");
 
 var _handleclick = require("./handleclick.js");
 
 var _addBtn = require("./addBtn.js");
 
-var _searchByName = require("./searchByName.js");
-
 // import Variables
-// Importing the empty array
 // Import fetch people function
 // Importing local storage
 // Import display data function
-// Import destroy popup
 // Import handleClick function
 // Import handleAdd button
-// Import searchByName variable
-// Import searchByName Function
 window.addEventListener('click', _handleclick.handleClickButtons); // Event listner for localStorage
 
 _usefulvariables.root.addEventListener('updatedBirthday', _localStorage.updatedLocalStorage);
@@ -18903,12 +18848,16 @@ _usefulvariables.root.addEventListener('updatedBirthday', _displayData.displayDa
 
 (0, _localStorage.initialLocalStorage)(); // event listner for handle Add button
 
-_usefulvariables.addButton.addEventListener('click', _addBtn.handleAddBtn); // searchByName.addEventListener('click', searchByNameFunction);
+_usefulvariables.addButton.addEventListener('click', _addBtn.handleAddBtn);
 
+(0, _fetchData.fetchPeople)(); // searchByName.addEventListener('click', searchByNameFunction);
+
+_usefulvariables.searchByName.addEventListener('input', () => (0, _displayData.displayData)());
+
+_usefulvariables.searchByMonth.addEventListener('change', () => (0, _displayData.displayData)());
 
 (0, _displayData.displayData)();
-(0, _fetchData.fetchPeople)();
-},{"./usefulvariables.js":"usefulvariables.js","./localStorage.js":"localStorage.js","./fetchData.js":"fetchData.js","./displayData.js":"displayData.js","./destroyPopup.js":"destroyPopup.js","./handleclick.js":"handleclick.js","./addBtn.js":"addBtn.js","./searchByName.js":"searchByName.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./usefulvariables.js":"src/usefulvariables.js","./fetchData.js":"src/fetchData.js","./localStorage.js":"src/localStorage.js","./displayData.js":"src/displayData.js","./handleclick.js":"src/handleclick.js","./addBtn.js":"src/addBtn.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -18936,7 +18885,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52431" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60310" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -19112,5 +19061,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
-//# sourceMappingURL=/script.75da7f30.js.map
+},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/script.js"], null)
+//# sourceMappingURL=/script.baf0e655.js.map

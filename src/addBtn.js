@@ -21,25 +21,25 @@ export const handleAddBtn = () => {
     <div class="add-container">
       <div class="add-wrapper shadow-sm position-relative">
         <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-        <p class="modal-title h3 fs-4" id="exampleModalLabel">Add a new person's birthday</i><p>
+        <p class="modal-title h3 fs-4" id="exampleModalLabel" style="font-weight: bold">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label m-0" for="lastname">Last name</label>
+          <label class="h5 add-label m-0" for="lastname" style="font-weight: bold">Last name</label>
           <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="firstname">First name</label>
+          <label class="h5 add-label" for="firstname" style="font-weight: bold">First name</label>
           <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-white p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="birthday">Birthday</label>
-          <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-white p-2" required>
+          <label class="h5 add-label" for="birthday" style="font-weight: bold">Birthday</label>
+          <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="picture">Image URL</label>
-          <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-white p-2" required>
+          <label class="h5 add-label" for="picture" style="font-weight: bold">Image URL</label>
+          <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <div class="d-flex" style="gap: 36px">
@@ -75,6 +75,11 @@ export const handleAddBtn = () => {
       root.dispatchEvent(new CustomEvent('updatedBirthday'));
     })
   
+    // Restricting add birthday
+    const birthdayEl = document.querySelector('input[type="date"]')
+    const newBirthday = new Date().toISOString().slice(0, 10)
+    birthdayEl.max = newBirthday
+
     // Close button
     window.addEventListener('click', (e) => {
       if (e.target.closest('.cancel')) {
