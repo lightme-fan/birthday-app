@@ -62,6 +62,9 @@ You can see my demo by clicking this [link](https://fanilo-birthday-app.netlify.
 
 -   [Vanilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+### Figma design
+[https://www.figma.com/file/LEUZKSMUfcf8twluAqmiqC/Birthday-App-Copy](https://www.figma.com/file/LEUZKSMUfcf8twluAqmiqC/Birthday-App-Copy)
+
 ## Features
 
 - I have a component folder. In this folder, I have two folders which are Custom-hooks and Pages as well as App.js file
