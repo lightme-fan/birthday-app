@@ -23,8 +23,13 @@ body {
     color: #094067;
 }
 
+.container {
+    padding: 1rem;
+}
+
 .person {
     padding: 1rem;
+    text-align: center;
 }
 
 /* Buttons */
@@ -47,7 +52,7 @@ body {
 }
 
 .formSearch {
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: 34px;
 }
@@ -182,6 +187,7 @@ body {
 }
 
 .aboutPerson {
+    padding-left: 0;
     font-size: 24px;
     line-height: 0px;
 }
@@ -213,6 +219,9 @@ body {
         margin-top: 126px;
         padding-top: 72px;
     }
+    .person {
+        text-align: start;
+    }
 }
 
 @media (min-width: 512px) {
@@ -220,9 +229,8 @@ body {
         display: grid;
         grid-template-columns: 18% 1fr 18%;
         align-items: center;
-        gap: 5%;
-        
-        padding: 0 1rem;
+        padding: 22px 23px 23px 43px;
+        text-align: start;
     } 
 
     .cancelBtn {
@@ -233,17 +241,21 @@ body {
         margin-top: 8rem;
         padding-top: 100px;
     }
+
+    .aboutPerson {
+        padding-left: 39px;
+    }
 }
 
 @media (min-width: 652px) {
     .person {
         height: 139px;
+        padding: 22px 23px 23px 43px;
     }
     
     .formSearch {
         display: grid;
         grid-template-columns: 1fr 1fr 25%;
-        gap: 5%;
     }
     
     .formSearch > button {
@@ -269,12 +281,15 @@ body {
 }
 
 @media (min-width: 900px) {
+    .container {
+        padding: 0;
+    }
+
     .person {
         display: grid;
-        grid-template-columns: 18% 1fr 27%;
+        grid-template-columns: 92px 1fr 114px;
         align-items: center;
-        gap: 5%;
-        padding: 0 1rem;
+        padding: 22px 23px 23px 43px;
     }
 
     .delete-container {
@@ -307,7 +322,7 @@ body {
     .formSearch {
         display: grid;
         grid-template-columns: 1fr 1fr 25%;
-        gap: 5%;
+        gap: 36px;
     }
 
     .formSearch > button {

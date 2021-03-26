@@ -18423,7 +18423,7 @@ const displayData = () => {
           
             <div class="aboutPerson">
               <div class="name" style="font-weight: bold">
-                <b class="fs-3" style="font-weight: bold">${person.lastName} ${person.firstName}</b><br>
+                <b class="fs-3" style="font-weight: bold; color: #000000">${person.lastName} ${person.firstName}</b><br>
                 <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
                 <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
                 <span style="color: #5F6C7B; opacity: 0.7;">
@@ -18436,11 +18436,11 @@ const displayData = () => {
               <div style="font-weight: 500">
                 In ${diffDays} days
               </div>
-              <div>
+              <div >
                 <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
                   <img class="edit icon" width="30px" height="30px;" src=${_edit.default} alt="Edit">
                 </button>
-                <button type="button" class="btn delete" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+                <button type="button" class="btn delete pr-0" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
                   <img class="delete icon" width="30px" height="30px;" src=${_delete.default} alt="Delete">
                 </button>
               </div>
@@ -18885,7 +18885,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60310" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61653" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
