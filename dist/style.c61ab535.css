@@ -90,16 +90,16 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 1rem;
-    transform: translateY(132%);
-    -webkit-transform: translateY(132%);
-    -moz-transform: translateY(132%);
-    -ms-transform: translateY(132%);
-    -o-transform: translateY(132%);
+    transform: translateY(105%);
+    -webkit-transform: translateY(105%);
+    -moz-transform: translateY(105%);
+    -ms-transform: translateY(105%);
+    -o-transform: translateY(105%);
 }
 
 .delete-wrapper {
     background: #ffffff;
-    padding: 1rem 8rem;
+    padding: 1rem;
     padding-top: 5rem;
     position: relative;
     box-shadow: 1px 1px 9px -3px #000000;
@@ -125,10 +125,10 @@ body {
 .add-wrapper {
     background: #ffffff;
     padding: 1rem;
-    padding-top: 40px;
+    padding-top: 54px;
     position: relative;
     padding-bottom: 10px;
-    margin-top: -40px;
+    margin-top: -33px;
 }
 
 .add-label {
@@ -169,10 +169,10 @@ body {
 .edit-wrapper {
     background: #ffffff;
     padding: 16px 2rem;
-    margin-top: 7rem;
+    margin-top: 8rem;
     position: relative;
     padding-bottom: 5px;
-    padding-top: 30px;
+    padding-top: 75px;
 }
 
 .edit-input {

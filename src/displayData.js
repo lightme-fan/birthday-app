@@ -89,7 +89,7 @@ export const displayData = () => {
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
     return  `
-          <div class="person bg-white mt-4 rounded" data-id="${person.id}" value= "${person.id}">
+          <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
             <div>
               <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
             </div>
