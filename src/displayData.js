@@ -77,6 +77,9 @@ export const displayData = () => {
     const today = new Date();
 
     let nextBirthday = setYear(birthday, today.getFullYear())
+    // console.log(new Date(person.birthday));
+    console.log(new Date(Date.now()) === nextBirthday && 'Happy birthday!');
+    
     
     if (isToday(nextBirthday)) {
       return nextBirthday;
@@ -87,10 +90,9 @@ export const displayData = () => {
     }
 
     const diffDays = differenceInCalendarDays(nextBirthday, today)
-    console.log(diffDays);
+    
     return (  
-      `
-        <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+      ` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
           <div>
             <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>

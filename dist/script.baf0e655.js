@@ -18403,7 +18403,9 @@ const displayData = () => {
     const birthdate = (0, _getAge.getAge)(new Date(person.birthday));
     const birthday = new Date(person.birthday);
     const today = new Date();
-    let nextBirthday = (0, _dateFns.setYear)(birthday, today.getFullYear());
+    let nextBirthday = (0, _dateFns.setYear)(birthday, today.getFullYear()); // console.log(new Date(person.birthday));
+
+    console.log(new Date(Date.now()) === nextBirthday && 'Happy birthday!');
 
     if ((0, _dateFns.isToday)(nextBirthday)) {
       return nextBirthday;
@@ -18415,9 +18417,7 @@ const displayData = () => {
     }
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
-    console.log(diffDays);
-    return `
-        <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+    return ` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
           <div>
             <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>
@@ -18886,7 +18886,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52494" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50093" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -75,14 +75,19 @@ body {
     left: 0;
     right: 0;
     bottom: 0; 
+    overflow: auto;
+}
+
+.popup.open ~ body {
+    overflow: hidden;
 }
 
 .popup.open > .add-container {
-    transform: translateY(26%);
-    -webkit-transform: translateY(26%);
-    -moz-transform: translateY(26%);
-    -ms-transform: translateY(26%);
-    -o-transform: translateY(26%);
+    transform: translateY(23%);
+    -webkit-transform: translateY(23%);
+    -moz-transform: translateY(23%);
+    -ms-transform: translateY(23%);
+    -o-transform: translateY(23%);
 }
 
 /* Delete style */
@@ -108,7 +113,8 @@ body {
 .cancelBtn {
     top: 0;
     left: 80%;
-    font-size: 24px;
+    font-size: 45px;
+    font-weight: 400;
 }
 
 .wrapper ~ body {
