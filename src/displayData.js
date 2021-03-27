@@ -87,39 +87,40 @@ export const displayData = () => {
     }
 
     const diffDays = differenceInCalendarDays(nextBirthday, today)
-    
-    return  `
-          <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
-            <div>
-              <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
+    console.log(diffDays);
+    return (  
+      `
+        <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+          <div>
+            <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
+          </div>
+        
+          <div class="aboutPerson">
+            <div class="name" style="font-weight: bold">
+              <b class="fs-3" style="font-weight: bold; color: #000000">${person.lastName} ${person.firstName}</b><br>
+              <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
+              <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
+              <span style="color: #5F6C7B; opacity: 0.7;">
+                on ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
+              </span>
             </div>
+          </div>       
           
-            <div class="aboutPerson">
-              <div class="name" style="font-weight: bold">
-                <b class="fs-3" style="font-weight: bold; color: #000000">${person.lastName} ${person.firstName}</b><br>
-                <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
-                <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
-                <span style="color: #5F6C7B; opacity: 0.7;">
-                  on ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
-                </span>
-              </div>
-            </div>       
-            
-            <div style="justify-self: end; font-size: 22px;">
-              <div style="font-weight: 500">
-                In ${diffDays} days
-              </div>
-              <div >
-                <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-                  <img class="edit icon" width="30px" height="30px;" src=${editIcon} alt="Edit">
-                </button>
-                <button type="button" class="btn delete pr-0" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
-                  <img class="delete icon" width="30px" height="30px;" src=${trashIcon} alt="Delete">
-                </button>
-              </div>
+          <div style="justify-self: end; font-size: 22px;">
+            <div style="font-weight: 500">
+              In ${diffDays !== 0 && diffDays} days
             </div>
+            <div >
+              <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+                <img class="edit icon" width="30px" height="30px;" src=${editIcon} alt="Edit">
+              </button>
+              <button type="button" class="btn delete pr-0" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
+                <img class="delete icon" width="30px" height="30px;" src=${trashIcon} alt="Delete">
+              </button>
+            </div>
+          </div>
         </div>
-    `});
+    `)});
 
   root.innerHTML = persons.join('');
 }  
