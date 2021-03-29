@@ -42,7 +42,7 @@ export const handleAddBtn = () => {
           <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
-        <div class="d-flex" style="gap: 36px">
+        <div class="d-flex" style="gap: 36px; margin-top: 49px;">
           <button style="width: 158px; height: 50px; text-align: center" type="submit" class="btn p-1 btn-danger submit">Submit</button>
           <button style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      

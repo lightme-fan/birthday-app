@@ -83,11 +83,11 @@ body {
 }
 
 .popup.open > .add-container {
-    transform: translateY(23%);
-    -webkit-transform: translateY(23%);
-    -moz-transform: translateY(23%);
-    -ms-transform: translateY(23%);
-    -o-transform: translateY(23%);
+    transform: translateY(161px);
+    -webkit-transform: translateY(161px);
+    -moz-transform: translateY(161px);
+    -ms-transform: translateY(161px);
+    -o-transform: translateY(161px);
 }
 
 /* Delete style */
@@ -133,8 +133,8 @@ body {
     padding: 1rem;
     padding-top: 54px;
     position: relative;
-    padding-bottom: 10px;
-    margin-top: -33px;
+    padding-top: 121px;
+    padding-bottom: 186px;
 }
 
 .add-label {
@@ -175,10 +175,10 @@ body {
 .edit-wrapper {
     background: #ffffff;
     padding: 16px 2rem;
-    margin-top: 8rem;
+    margin-top: 161px;
     position: relative;
-    padding-bottom: 5px;
-    padding-top: 75px;
+    padding-top: 121px;
+    padding-bottom: 186px;
 }
 
 .edit-input {
@@ -215,16 +215,14 @@ body {
 }
 
 @media (min-width: 460px) {
-    .add-wrapper {
-        margin-top: -1rem;
+    /* .add-wrapper {
         padding-top: 3rem;
         padding-bottom: 3rem;
-    }
+    } */
     
-    .edit-wrapper {
+    /* .edit-wrapper {
         margin-top: 126px;
-        padding-top: 72px;
-    }
+    } */
     .person {
         text-align: start;
     }
@@ -243,10 +241,9 @@ body {
         left: 90%;
     }
     
-    .edit-wrapper {
+    /* .edit-wrapper {
         margin-top: 8rem;
-        padding-top: 100px;
-    }
+    } */
 
     .aboutPerson {
         padding-left: 39px;
@@ -273,14 +270,9 @@ body {
         padding-right: 3rem;
         display: grid;
         justify-content: center;
-        padding-top: 92px;
-        padding-bottom: 40px;
     }
 
     .add-wrapper {
-        margin-top: -1rem;
-        padding-bottom: 44px;
-        padding-top: 86px;
         display: grid;
         justify-content: center;
     }
@@ -301,14 +293,6 @@ body {
     .delete-container {
         padding: 2rem;
     }
-
-    .popup.open > .add-container {
-        transform: translateY(24.5%);
-        -webkit-transform: translateY(24.5%);
-        -moz-transform: translateY(24.5%);
-        -ms-transform: translateY(24.5%);
-        -o-transform: translateY(24.5%);
-}
 
     .wrapper {
         background: #ffffff;

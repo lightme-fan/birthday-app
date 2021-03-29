@@ -39,22 +39,22 @@ export const editPopup = (id, e) => {
             <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
             <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="lastname">First name</label>
+              <label style="margin: 0; font-weight: 500" for="lastname">First name</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="firstname">Last name</label>
+              <label style="margin: 0; font-weight: 500" for="firstname">Last name</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people?.lastName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="picture">Picture</label>
+              <label style="margin: 0; font-weight: 500" for="picture">Picture</label>
               <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people?.picture}">
             </fieldset>
 
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0" for="birthday">Birthday</label>
+              <label style="margin: 0; font-weight: 500" for="birthday">Birthday</label>
               <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" 
                 value=${new Date(people?.birthday).toISOString().substring(0, 10)} 
                 max=${maxDate}
@@ -62,7 +62,7 @@ export const editPopup = (id, e) => {
             </fieldset>
       
             <div 
-              style="display: flex; gap: 20px;"
+              style="display: flex; gap: 20px; margin-top: 49px"
               >
               <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people?.id}">Save changes</button>
               <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
