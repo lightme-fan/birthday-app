@@ -55,7 +55,10 @@ export const editPopup = (id, e) => {
 
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0" for="birthday">Birthday</label>
-              <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value=${birthdayDate} max=${maxDate}>
+              <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" 
+                value=${new Date(people?.birthday).toISOString().substring(0, 10)} 
+                max=${maxDate}
+              >
             </fieldset>
       
             <div 

@@ -18403,17 +18403,25 @@ const displayData = () => {
     const birthdate = (0, _getAge.getAge)(new Date(person.birthday));
     const birthday = new Date(person.birthday);
     const today = new Date();
-    let nextBirthday = (0, _dateFns.setYear)(birthday, today.getFullYear()); // console.log(new Date(person.birthday));
+    let nextBirthday = (0, _dateFns.setYear)(birthday, today.getFullYear()); // ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
 
-    console.log(new Date(Date.now()) === nextBirthday && 'Happy birthday!');
+    const onesBirthday = new Date(person.birthday).toISOString().substring(0, 10);
+    const birthdayMonth = (0, _dateFns.format)(new Date(onesBirthday), 'MMMM');
+    const dayOfBirthday = new Date(nextBirthday).getDate();
+    let birthdayDate;
 
-    if ((0, _dateFns.isToday)(nextBirthday)) {
-      return nextBirthday;
-    } // if the date is already behind us, we add + 1 to the year
+    if (dayOfBirthday === 1) {
+      birthdayDate = dayOfBirthday + 'st';
+    }
 
+    if (dayOfBirthday === 2) {
+      birthdayDate = dayOfBirthday + 'nd';
+    }
 
-    if ((0, _dateFns.isPast)(nextBirthday)) {
-      nextBirthday = (0, _dateFns.addYears)(nextBirthday, 1);
+    if (dayOfBirthday === 3) {
+      birthdayDate = dayOfBirthday + 'rd';
+    } else {
+      birthdayDate = dayOfBirthday + 'th';
     }
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
@@ -18428,7 +18436,7 @@ const displayData = () => {
               <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
               <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
               <span style="color: #5F6C7B; opacity: 0.7;">
-                on ${(0, _dateFns.format)(new Date(nextBirthday), 'MMMM')} ${(0, _dateFns.format)(new Date(nextBirthday), 'io')}
+                on ${birthdayMonth} ${birthdayDate}
               </span>
             </div>
           </div>       
@@ -18641,7 +18649,10 @@ const editPopup = (id, e) => {
 
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0" for="birthday">Birthday</label>
-              <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" value=${birthdayDate} max=${maxDate}>
+              <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" 
+                value=${new Date(people?.birthday).toISOString().substring(0, 10)} 
+                max=${maxDate}
+              >
             </fieldset>
       
             <div 
@@ -18886,7 +18897,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50093" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51538" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

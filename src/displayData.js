@@ -77,22 +77,28 @@ export const displayData = () => {
     const today = new Date();
 
     let nextBirthday = setYear(birthday, today.getFullYear())
-    // console.log(new Date(person.birthday));
-    console.log(new Date(Date.now()) === nextBirthday && 'Happy birthday!');
     
-    
-    if (isToday(nextBirthday)) {
-      return nextBirthday;
+    // ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
+    const onesBirthday = new Date(person.birthday).toISOString().substring(0, 10);
+    const birthdayMonth= format(new Date(onesBirthday), 'MMMM');
+    const dayOfBirthday = new Date(nextBirthday).getDate();
+    let birthdayDate;
+    if (dayOfBirthday === 1) {
+      birthdayDate = dayOfBirthday + 'st'
     }
-    // if the date is already behind us, we add + 1 to the year
-    if (isPast(nextBirthday)) {
-      nextBirthday = addYears(nextBirthday, 1);
+    if (dayOfBirthday === 2) {
+      birthdayDate = dayOfBirthday + 'nd'
+    }
+    if (dayOfBirthday === 3) {
+      birthdayDate = dayOfBirthday + 'rd'
+    }
+    else {
+      birthdayDate = dayOfBirthday + 'th'
     }
 
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
-    return (  
-      ` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+    return` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
           <div>
             <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>
@@ -103,7 +109,7 @@ export const displayData = () => {
               <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
               <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
               <span style="color: #5F6C7B; opacity: 0.7;">
-                on ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
+                on ${birthdayMonth} ${birthdayDate}
               </span>
             </div>
           </div>       
@@ -122,7 +128,7 @@ export const displayData = () => {
             </div>
           </div>
         </div>
-    `)});
+    `});
 
   root.innerHTML = persons.join('');
 }  
