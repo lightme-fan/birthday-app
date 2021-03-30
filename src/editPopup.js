@@ -68,7 +68,7 @@ export const editPopup = (id, e) => {
               style="display: flex; gap: 20px; margin-top: 49px"
               >
               <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people?.id}">Save changes</button>
-              <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
+              <button id='cancel-button' style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
             </div>      
           </div>
         </div>	
@@ -98,9 +98,14 @@ export const editPopup = (id, e) => {
         root.dispatchEvent(new CustomEvent('updatedBirthday'));
       }, { once: true });
   
+      // document.querySelector('')
       // Close popup
       window.addEventListener('click', (e) => {
         if (e.target.closest('svg[data-dismiss="modal"]')) {
+          destroyPopup(formPopup);
+          root.dispatchEvent(new CustomEvent('updatedBirthday'));
+        }
+        if (e.target.closest('button[data-dismiss="modal"]')) {
           destroyPopup(formPopup);
           root.dispatchEvent(new CustomEvent('updatedBirthday'));
         }

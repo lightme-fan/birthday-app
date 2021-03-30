@@ -48,7 +48,7 @@ export const handleAddBtn = () => {
         
         <div class="d-flex" style="gap: 36px; margin-top: 49px;">
           <button style="width: 158px; height: 50px; text-align: center" type="submit" class="btn p-1 btn-danger submit">Submit</button>
-          <button style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
+          <button id='cancel-button' style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      
       </div>	
     </div>
@@ -87,6 +87,10 @@ export const handleAddBtn = () => {
     // Close button
     window.addEventListener('click', (e) => {
       if (e.target.closest('.cancel')) {
+        destroyPopup(addPopup);
+        root.dispatchEvent(new CustomEvent('updatedBirthday'));
+      }
+      if (e.target.closest("button[id='cancel-button']")) {
         destroyPopup(addPopup);
         root.dispatchEvent(new CustomEvent('updatedBirthday'));
       }

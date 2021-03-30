@@ -41,7 +41,7 @@ export const deletePopup = (id) => {
           <p class="h4">Are sure you want to remove <b>${person?.lastName} ${person?.firstName}</b>?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary ok">OK</button>
-            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
+            <button id='cancel-button' type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
           </div>
         </div>
       </div>
@@ -73,7 +73,10 @@ export const deletePopup = (id) => {
       destroyPopup(deleteForm);
       root.dispatchEvent(new CustomEvent('updatedBirthday'));
     }
-
+    if (e.target.closest("button[id='cancel-button']")) {
+      destroyPopup(addPopup);
+      root.dispatchEvent(new CustomEvent('updatedBirthday'));
+    }
     root.dispatchEvent(new CustomEvent('updatedBirthday'));
   };
 

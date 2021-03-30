@@ -18534,7 +18534,7 @@ const deletePopup = id => {
           <p class="h4">Are sure you want to remove <b>${person?.lastName} ${person?.firstName}</b>?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary ok">OK</button>
-            <button type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
+            <button id='cancel-button' type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
           </div>
         </div>
       </div>
@@ -18563,6 +18563,12 @@ const deletePopup = id => {
 
     if (e.target.matches('svg[data-dismiss="modal"]')) {
       (0, _destroyPopup.destroyPopup)(deleteForm);
+
+      _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
+    }
+
+    if (e.target.closest("button[id='cancel-button']")) {
+      (0, _destroyPopup.destroyPopup)(addPopup);
 
       _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
     }
@@ -18668,7 +18674,7 @@ const editPopup = (id, e) => {
               style="display: flex; gap: 20px; margin-top: 49px"
               >
               <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people?.id}">Save changes</button>
-              <button style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
+              <button id='cancel-button' style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
             </div>      
           </div>
         </div>	
@@ -18697,10 +18703,17 @@ const editPopup = (id, e) => {
       _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
     }, {
       once: true
-    }); // Close popup
+    }); // document.querySelector('')
+    // Close popup
 
     window.addEventListener('click', e => {
       if (e.target.closest('svg[data-dismiss="modal"]')) {
+        (0, _destroyPopup.destroyPopup)(formPopup);
+
+        _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
+      }
+
+      if (e.target.closest('button[data-dismiss="modal"]')) {
         (0, _destroyPopup.destroyPopup)(formPopup);
 
         _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
@@ -18799,7 +18812,7 @@ const handleAddBtn = () => {
         
         <div class="d-flex" style="gap: 36px; margin-top: 49px;">
           <button style="width: 158px; height: 50px; text-align: center" type="submit" class="btn p-1 btn-danger submit">Submit</button>
-          <button style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
+          <button id='cancel-button' style="width: 158px; height: 50px; text-align: center" type="button" class="btn p-1 btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>
         </div>      
       </div>	
     </div>
@@ -18835,6 +18848,12 @@ const handleAddBtn = () => {
 
   window.addEventListener('click', e => {
     if (e.target.closest('.cancel')) {
+      (0, _destroyPopup.destroyPopup)(addPopup);
+
+      _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
+    }
+
+    if (e.target.closest("button[id='cancel-button']")) {
       (0, _destroyPopup.destroyPopup)(addPopup);
 
       _usefulvariables.root.dispatchEvent(new CustomEvent('updatedBirthday'));
@@ -18910,7 +18929,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55483" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57647" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
