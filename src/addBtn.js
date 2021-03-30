@@ -20,16 +20,20 @@ export const handleAddBtn = () => {
     const popupHtml = `
     <div class="add-container">
       <div class="add-wrapper shadow-sm position-relative">
-        <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
+        <svg class="position-absolute cancel border-0 cancelBtn" data-dismiss="modal" width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M43.5 14.5L14.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14.5 14.5L43.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
         <p class="modal-title h3 fs-4" id="exampleModalLabel" style="font-weight: bold">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
           <label class="h5 add-label m-0" for="lastname" style="font-weight: bold">Last name</label>
-          <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-white p-2" required>
+          <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
           <label class="h5 add-label" for="firstname" style="font-weight: bold">First name</label>
-          <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-white p-2" required>
+          <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">

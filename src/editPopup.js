@@ -36,8 +36,11 @@ export const editPopup = (id, e) => {
       const popupHtml = `
         <div class="edit-container">
           <div class="edit-wrapper shadow-sm position-relative">
-            <button type="button" class="btn btn-primary position-absolute top-0 end-0 bg-transparent border-white text-dark cancel cancelBtn border" data-dismiss="modal">X</button>
-            <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
+          <svg class="position-absolute cancel border-0 cancelBtn" data-dismiss="modal" width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M43.5 14.5L14.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14.5 14.5L43.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg> 
+          <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0; font-weight: 500" for="lastname">First name</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
@@ -97,7 +100,7 @@ export const editPopup = (id, e) => {
   
       // Close popup
       window.addEventListener('click', (e) => {
-        if (e.target.closest('button[data-dismiss="modal"]')) {
+        if (e.target.closest('svg[data-dismiss="modal"]')) {
           destroyPopup(formPopup);
           root.dispatchEvent(new CustomEvent('updatedBirthday'));
         }
