@@ -18,7 +18,7 @@ You can see my demo by clicking this [link](https://fanilo-birthday-app.netlify.
 
 ### Built With
 
--   [Vanilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+-   [Vanilla js](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ### Figma design
 [https://www.figma.com/file/LEUZKSMUfcf8twluAqmiqC/Birthday-App-Copy](https://www.figma.com/file/LEUZKSMUfcf8twluAqmiqC/Birthday-App-Copy)
@@ -26,7 +26,7 @@ You can see my demo by clicking this [link](https://fanilo-birthday-app.netlify.
 ## Features
 
 - Using Custom-hooks
-- Searching a person by their name or month of their birthday.
+- Searching a person by either their name or month of their birthday.
 - Adding a new person to the list
 - Removing a person
 - Editing a preson
