@@ -42,12 +42,12 @@ export const editPopup = (id, e) => {
           </svg> 
           <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0; font-weight: 500" for="lastname">First name</label>
+              <label style="margin: 0; font-weight: 500" for="lastname">Firstname</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0; font-weight: 500" for="firstname">Last name</label>
+              <label style="margin: 0; font-weight: 500" for="firstname">Lastname</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people?.lastName}">
             </fieldset>
             

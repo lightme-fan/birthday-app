@@ -88,11 +88,11 @@ input::-webkit-input-placeholder { /* Edge */
 }
 
 .popup.open > .add-container {
-    transform: translateY(-37px);
-    -webkit-transform: translateY(-37px);
-    -moz-transform: translateY(-37px);
-    -ms-transform: translateY(-37px);
-    -o-transform: translateY(-37px);
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
 }
 
 .cancelBtn {
@@ -135,10 +135,9 @@ input::-webkit-input-placeholder { /* Edge */
 .add-wrapper {
     background: #ffffff;
     padding: 1rem;
-    padding-top: 54px;
     position: relative;
-    padding-top: 121px;
-    padding-bottom: 186px;
+    padding-top: 99px;
+    padding-bottom: 10px;
 }
 
 .add-label {
@@ -179,10 +178,10 @@ input::-webkit-input-placeholder { /* Edge */
 .edit-wrapper {
     background: #ffffff;
     padding: 16px 2rem;
-    margin-top: -37px;
+    margin-top: -6px;
     position: relative;
-    padding-top: 121px;
-    padding-bottom: 186px;
+    padding-top: 88px;
+    padding-bottom: 10px;
 }
 
 .edit-input {
@@ -218,6 +217,20 @@ input::-webkit-input-placeholder { /* Edge */
     margin-top: 2rem;
 }
 
+select#months {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #5F6C7B;
+    background-image: url(../icons/down-arrow.svg);
+    background-repeat: no-repeat;
+    background-position: 88% center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-size: 18px;
+}
+
 @media (min-width: 460px) {
     .person {
         text-align: start;
@@ -243,9 +256,6 @@ input::-webkit-input-placeholder { /* Edge */
 }
 
 @media (min-width: 652px) {
-    .popup.open {
-        overflow-y: hidden;
-    }
     
     .person {
         height: 139px;
@@ -324,3 +334,9 @@ input::-webkit-input-placeholder { /* Edge */
     }
     
 }
+
+/* 
+    remove the default styling of the select element and insert a background image with the arrow (ask somebody who did this already to collaborate to get this done quickly,)
+    When these points are adressed, your done :)
+
+*/

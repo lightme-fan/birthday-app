@@ -18403,8 +18403,7 @@ const displayData = () => {
     const birthdate = (0, _getAge.getAge)(new Date(person.birthday));
     const birthday = new Date(person.birthday);
     const today = new Date();
-    let nextBirthday = (0, _dateFns.setYear)(birthday, today.getFullYear()); // ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
-
+    let nextBirthday = getNextBirthday(birthday);
     const onesBirthday = new Date(person.birthday).toISOString().substring(0, 10);
     const birthdayMonth = (0, _dateFns.format)(new Date(onesBirthday), 'MMMM');
     const dayOfBirthday = new Date(nextBirthday).getDate();
@@ -18643,12 +18642,12 @@ const editPopup = (id, e) => {
           </svg> 
           <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0; font-weight: 500" for="lastname">First name</label>
+              <label style="margin: 0; font-weight: 500" for="lastname">Firstname</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
-              <label style="margin: 0; font-weight: 500" for="firstname">Last name</label>
+              <label style="margin: 0; font-weight: 500" for="firstname">Lastname</label>
               <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people?.lastName}">
             </fieldset>
             
@@ -18779,22 +18778,22 @@ const handleAddBtn = () => {
 
         <p class="modal-title h3 fs-4" id="exampleModalLabel" style="font-weight: bold">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label m-0" for="lastname" style="font-weight: bold">Last name</label>
+          <label class="h5 add-label m-0" for="lastname" style="font-weight: 500">Lastname</label>
           <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="firstname" style="font-weight: bold">First name</label>
+          <label class="h5 add-label" for="firstname" style="font-weight: 500">Firstname</label>
           <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="birthday" style="font-weight: bold">Birthday</label>
+          <label class="h5 add-label" for="birthday" style="font-weight: 500">Birthday</label>
           <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="picture" style="font-weight: bold">Image URL</label>
+          <label class="h5 add-label" for="picture" style="font-weight: 500">Image URL</label>
           <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
@@ -18911,7 +18910,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50313" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54484" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

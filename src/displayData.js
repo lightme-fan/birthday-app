@@ -76,9 +76,8 @@ export const displayData = () => {
     
     const today = new Date();
 
-    let nextBirthday = setYear(birthday, today.getFullYear())
+    let nextBirthday = getNextBirthday(birthday)
     
-    // ${format(new Date(nextBirthday), 'MMMM')} ${format(new Date(nextBirthday), 'io')}
     const onesBirthday = new Date(person.birthday).toISOString().substring(0, 10);
     const birthdayMonth= format(new Date(onesBirthday), 'MMMM');
     const dayOfBirthday = new Date(nextBirthday).getDate();

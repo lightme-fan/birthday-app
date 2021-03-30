@@ -27,22 +27,22 @@ export const handleAddBtn = () => {
 
         <p class="modal-title h3 fs-4" id="exampleModalLabel" style="font-weight: bold">Add a new person's birthday</i><p>
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label m-0" for="lastname" style="font-weight: bold">Last name</label>
+          <label class="h5 add-label m-0" for="lastname" style="font-weight: 500">Lastname</label>
           <input type="text" name="lastname" placeholder="Add your first name" id="lastname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="firstname" style="font-weight: bold">First name</label>
+          <label class="h5 add-label" for="firstname" style="font-weight: 500">Firstname</label>
           <input type="text" name="firstname" placeholder="Add your last name" id="firstname" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
 
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="birthday" style="font-weight: bold">Birthday</label>
+          <label class="h5 add-label" for="birthday" style="font-weight: 500">Birthday</label>
           <input type="date" name="birthday" id="birthday" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
         <fieldset class="form-group d-flex flex-column">
-          <label class="h5 add-label" for="picture" style="font-weight: bold">Image URL</label>
+          <label class="h5 add-label" for="picture" style="font-weight: 500">Image URL</label>
           <input type="url" name="picture" placeholder="Image url" id="picture" class="add-input w-100 border border-white text-dark p-2" required>
         </fieldset>
         
