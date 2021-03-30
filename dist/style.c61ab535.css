@@ -28,6 +28,10 @@ input::-webkit-input-placeholder { /* Edge */
     font-weight: 500;
 }
 
+img {
+    vertical-align: unset;
+}
+
 .container {
     padding: 1rem;
 }

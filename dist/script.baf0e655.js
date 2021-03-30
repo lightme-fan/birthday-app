@@ -18425,7 +18425,7 @@ const displayData = () => {
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
     return ` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
-          <div>
+          <div class="align-self-start">
             <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>
         
@@ -18910,7 +18910,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54484" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55483" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
