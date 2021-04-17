@@ -95,9 +95,7 @@ export const displayData = () => {
     else {
       birthdayDate = dayOfBirthday + 'th'
     }
-
-    // console.log(birthday);
-    // console.log(new Date());
+    
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
 

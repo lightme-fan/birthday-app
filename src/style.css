@@ -107,7 +107,7 @@ img {
 
 /* Delete style */
 .popup.open > .delete-container {
-    max-width: 900px;
+    max-width: 577px;
     margin: auto;
     padding: 1rem;
     transform: translateY(50%);
