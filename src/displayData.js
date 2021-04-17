@@ -26,6 +26,7 @@ export function getNextBirthday(birthday) {
 
 import editIcon from '../icons/edit.svg';
 import trashIcon from '../icons/delete.svg';
+import happyBirthday from '../icons/happy-birthday.jpg';
 
 // Importing the empty array
 import { data } from "./localStorage.js";
@@ -95,27 +96,32 @@ export const displayData = () => {
       birthdayDate = dayOfBirthday + 'th'
     }
 
+    // console.log(birthday);
+    // console.log(new Date());
     const diffDays = differenceInCalendarDays(nextBirthday, today)
     
-    return` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+
+    return (
+        `<div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
           <div class="align-self-start">
-            <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
+            <img class="profile" id=${diffDays === 0 && 'present-birthday-img'} width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>
-        
-          <div class="aboutPerson">
-            <div class="name" style="font-weight: bold">
+          
+          <div class="aboutPerson" id=${diffDays === 0 && 'present-birthday'}>
+            ${diffDays === 0 ? `<div><img src=${happyBirthday} style="height: 71px; width: 141px;" alt="Happy Birthday"/></div>`: ''}
+            <div class="name" style="font-weight: bold" id=${diffDays === 0 && 'present-birthday-aboutPerson'}>
               <b class="fs-3" style="font-weight: bold; color: #000000">${person.lastName} ${person.firstName}</b><br>
               <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
               <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
               <span style="color: #5F6C7B; opacity: 0.7;">
-                on ${birthdayMonth} ${birthdayDate}
+                ${diffDays === 0 ? 'today' : `on ${birthdayMonth} ${birthdayDate}`}
               </span>
             </div>
           </div>       
           
           <div style="justify-self: end; font-size: 22px;">
-            <div style="font-weight: 500">
-              In ${diffDays !== 0 && diffDays} days
+            <div style="font-weight: 500" id=${diffDays !== 0 ? '' : 'your-birthday'}>
+              ${diffDays !== 0 ? 'In' : "Today is your birthday."} ${diffDays !== 0 ? diffDays : ''} ${diffDays !== 0 ? 'days' : ''}
             </div>
             <div >
               <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
@@ -127,7 +133,8 @@ export const displayData = () => {
             </div>
           </div>
         </div>
-    `});
+    `
+  )});
 
   root.innerHTML = persons.join('');
 }  

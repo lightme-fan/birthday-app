@@ -339,8 +339,22 @@ select#months {
     
 }
 
-/* 
-    remove the default styling of the select element and insert a background image with the arrow (ask somebody who did this already to collaborate to get this done quickly,)
-    When these points are adressed, your done :)
+#present-birthday {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    margin-top: -20px;
+}
 
-*/
+#present-birthday-aboutPerson, #present-birthday-aboutPerson > b, #present-birthday-aboutPerson > span {
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    gap: 4px;
+}
+
+#your-birthday {
+    line-height: 1;
+    font-size: 18px;
+}

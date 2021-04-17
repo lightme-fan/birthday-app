@@ -18313,6 +18313,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = "/edit.77a00f45.svg";
 },{}],"icons/delete.svg":[function(require,module,exports) {
 module.exports = "/delete.491a0fad.svg";
+},{}],"icons/happy-birthday.jpg":[function(require,module,exports) {
+module.exports = "/happy-birthday.9c745e15.jpg";
 },{}],"src/getAge.js":[function(require,module,exports) {
 "use strict";
 
@@ -18345,6 +18347,8 @@ var _dateFns = require("date-fns");
 var _edit = _interopRequireDefault(require("../icons/edit.svg"));
 
 var _delete = _interopRequireDefault(require("../icons/delete.svg"));
+
+var _happyBirthday = _interopRequireDefault(require("../icons/happy-birthday.jpg"));
 
 var _localStorage = require("./localStorage.js");
 
@@ -18421,28 +18425,31 @@ const displayData = () => {
       birthdayDate = dayOfBirthday + 'rd';
     } else {
       birthdayDate = dayOfBirthday + 'th';
-    }
+    } // console.log(birthday);
+    // console.log(new Date());
+
 
     const diffDays = (0, _dateFns.differenceInCalendarDays)(nextBirthday, today);
-    return ` <div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
+    return `<div class="person bg-white rounded" style="margin-bottom: 31px" data-id="${person.id}" value= "${person.id}">
           <div class="align-self-start">
-            <img class="profile" width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
+            <img class="profile" id=${diffDays === 0 && 'present-birthday-img'} width="92px" height="94px" style="border-radius: 5px;" src="${person.picture}" alt="Person's profile">
           </div>
-        
-          <div class="aboutPerson">
-            <div class="name" style="font-weight: bold">
+          
+          <div class="aboutPerson" id=${diffDays === 0 && 'present-birthday'}>
+            ${diffDays === 0 ? `<div><img src=${_happyBirthday.default} style="height: 71px; width: 141px;" alt="Happy Birthday"/></div>` : ''}
+            <div class="name" style="font-weight: bold" id=${diffDays === 0 && 'present-birthday-aboutPerson'}>
               <b class="fs-3" style="font-weight: bold; color: #000000">${person.lastName} ${person.firstName}</b><br>
               <span style="color: #5F6C7B; opacity: 0.7">Turns</span> 
               <b class="age text-danger" style="font-size: 24px; opacity: 0.7; color: #5F6C7B; font-weight: bold">${birthdate}</b>  
               <span style="color: #5F6C7B; opacity: 0.7;">
-                on ${birthdayMonth} ${birthdayDate}
+                ${diffDays === 0 ? 'today' : `on ${birthdayMonth} ${birthdayDate}`}
               </span>
             </div>
           </div>       
           
           <div style="justify-self: end; font-size: 22px;">
-            <div style="font-weight: 500">
-              In ${diffDays !== 0 && diffDays} days
+            <div style="font-weight: 500" id=${diffDays !== 0 ? '' : 'your-birthday'}>
+              ${diffDays !== 0 ? 'In' : "Today is your birthday."} ${diffDays !== 0 ? diffDays : ''} ${diffDays !== 0 ? 'days' : ''}
             </div>
             <div >
               <button type="button" class="btn edit" data-toggle="modal" data-target="#exampleModal" value="${person.id}">
@@ -18460,7 +18467,7 @@ const displayData = () => {
 };
 
 exports.displayData = displayData;
-},{"date-fns":"node_modules/date-fns/esm/index.js","../icons/edit.svg":"icons/edit.svg","../icons/delete.svg":"icons/delete.svg","./localStorage.js":"src/localStorage.js","./usefulvariables.js":"src/usefulvariables.js","./getAge.js":"src/getAge.js"}],"src/destroyPopup.js":[function(require,module,exports) {
+},{"date-fns":"node_modules/date-fns/esm/index.js","../icons/edit.svg":"icons/edit.svg","../icons/delete.svg":"icons/delete.svg","../icons/happy-birthday.jpg":"icons/happy-birthday.jpg","./localStorage.js":"src/localStorage.js","./usefulvariables.js":"src/usefulvariables.js","./getAge.js":"src/getAge.js"}],"src/destroyPopup.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18823,15 +18830,22 @@ const handleAddBtn = () => {
 
   addPopup.addEventListener('submit', e => {
     e.preventDefault();
-    const addForm = e.currentTarget; // Declare a new object
+    const addForm = e.currentTarget;
+
+    const toTimestamp = strDate => {
+      let datum = Date.parse(strDate);
+      return datum;
+    }; // Declare a new object
+
 
     const newPerson = {
-      birthday: addForm.birthday.value,
+      birthday: toTimestamp(addForm.birthday.value) === Date.now ? toTimestamp(Date.now()) : toTimestamp(addForm.birthday.value),
       id: Date.now(),
       lastName: addForm.lastname.value,
       firstName: addForm.firstname.value,
       picture: addForm.picture.value
-    }; // Push the new object
+    };
+    console.log(newPerson); // Push the new object
 
     _localStorage.data.unshift(newPerson);
 
@@ -18929,7 +18943,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57647" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50940" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

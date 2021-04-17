@@ -62,14 +62,21 @@ export const handleAddBtn = () => {
       e.preventDefault();
       const addForm = e.currentTarget;
       
+      const toTimestamp=(strDate)=>{
+        let datum = Date.parse(strDate);
+        return datum;
+      } 
+      
       // Declare a new object
       const newPerson = {
-        birthday: addForm.birthday.value,
+        birthday: toTimestamp(addForm.birthday.value) === Date.now ? toTimestamp(Date.now()) : toTimestamp(addForm.birthday.value),
         id: Date.now(),
         lastName: addForm.lastname.value,
         firstName: addForm.firstname.value,
         picture: addForm.picture.value
       }
+
+      console.log(newPerson);
       
       // Push the new object
       data.unshift(newPerson);
