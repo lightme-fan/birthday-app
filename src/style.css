@@ -285,13 +285,13 @@ select#months:focus {
     padding-right: 3rem;
     display: grid;
     justify-content: center;
-    padding-bottom: 82px;
+    padding-bottom: 78px;
   }
 
   .add-wrapper {
     display: grid;
     justify-content: center;
-    padding-bottom: 82px;
+    padding-bottom: 78px;
   }
 }
 
@@ -359,8 +359,6 @@ select#months:focus {
 #present-birthday-aboutPerson > span {
   font-size: 18px;
   line-height: 24px;
-  display: flex;
-  gap: 4px;
 }
 
 #your-birthday {
