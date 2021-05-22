@@ -18300,6 +18300,7 @@ var _index197 = require("./constants/index.js");
 Object.keys(_index197).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _index197[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -18536,7 +18537,7 @@ const deletePopup = id => {
           <path d="M14.5 14.5L43.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div tabindex="-1" role="dialog">
-          <p class="h4">Are sure you want to remove <b>${person?.lastName} ${person?.firstName}</b>?</p>
+          <p class="h4">Are sure you want to remove <b>${person === null || person === void 0 ? void 0 : person.lastName} ${person === null || person === void 0 ? void 0 : person.firstName}</b>?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary ok">OK</button>
             <button id='cancel-button' type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>                      
@@ -18552,7 +18553,7 @@ const deletePopup = id => {
   const confirmBtn = e => {
     // Confirm deletion
     if (e.target.matches('button.ok')) {
-      exports.data = data = data.filter(perso => perso.id !== person?.id);
+      exports.data = data = data.filter(perso => perso.id !== (person === null || person === void 0 ? void 0 : person.id));
       (0, _displayData.displayData)();
       (0, _destroyPopup.destroyPopup)(deleteForm);
 
@@ -18636,7 +18637,7 @@ const editPopup = (id, e) => {
 
   const people = _localStorage.data.find(person => person.id.toString() === id);
 
-  const birthdayDate = new Date(people?.birthday).toISOString().slice(0, 10);
+  const birthdayDate = new Date(people === null || people === void 0 ? void 0 : people.birthday).toISOString().slice(0, 10);
   const maxDate = new Date().toISOString().slice(0, 10);
   const birthday = `${(0, _format.default)(new Date(people.birthday), 'dd')}/${(0, _format.default)(new Date(people.birthday), 'II')}/${(0, _format.default)(new Date(people.birthday), 'yy')}`;
   return new Promise(async function (resolve) {
@@ -18651,26 +18652,26 @@ const editPopup = (id, e) => {
             <path d="M43.5 14.5L14.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M14.5 14.5L43.5 43.5" stroke="#094067" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg> 
-          <p class="modal-title h3" id="exampleModalLabel">Edit ${people?.lastName} ${people?.firstName}<p>
+          <p class="modal-title h3" id="exampleModalLabel">Edit ${people === null || people === void 0 ? void 0 : people.lastName} ${people === null || people === void 0 ? void 0 : people.firstName}<p>
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0; font-weight: 500" for="lastname">Firstname</label>
-              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people?.firstName}">
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1" name="lastname" id="lastname" value="${people === null || people === void 0 ? void 0 : people.firstName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0; font-weight: 500" for="firstname">Lastname</label>
-              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people?.lastName}">
+              <input type="text" class="edit-input w-100 border border-white text-dark p-1"  name="firstname" id="firstname" value="${people === null || people === void 0 ? void 0 : people.lastName}">
             </fieldset>
             
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0; font-weight: 500" for="picture">Picture</label>
-              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people?.picture}">
+              <input type="url" class="edit-input w-100 border border-white text-dark p-1" name="picture" id="picture" value="${people === null || people === void 0 ? void 0 : people.picture}">
             </fieldset>
 
             <fieldset class="form-group d-flex flex-column">
               <label style="margin: 0; font-weight: 500" for="birthday">Birthday</label>
               <input type="date" class="edit-input w-100 border border-white text-dark p-1" name="birthday" id="birthday" 
-                value=${new Date(people?.birthday).toISOString().substring(0, 10)} 
+                value=${new Date(people === null || people === void 0 ? void 0 : people.birthday).toISOString().substring(0, 10)} 
                 max=${maxDate}
               >
             </fieldset>
@@ -18678,7 +18679,7 @@ const editPopup = (id, e) => {
             <div 
               style="display: flex; gap: 20px; margin-top: 49px"
               >
-              <button style="width: 158px; height: 50px" type="submit" class="btn btn-danger submit mb-1" value="${people?.id}">Save changes</button>
+              <button style="width: 158px; height: 50px; line-height: 1;" type="submit;" class="btn btn-danger submit mb-1" value="${people === null || people === void 0 ? void 0 : people.id}">Save changes</button>
               <button id='cancel-button' style="width: 158px; height: 50px" type="button" class="btn btn-primary bg-transparent text-dark cancel border" data-dismiss="modal">Cancel</button>            
             </div>      
           </div>
@@ -18913,7 +18914,7 @@ _usefulvariables.searchByName.addEventListener('input', () => (0, _displayData.d
 _usefulvariables.searchByMonth.addEventListener('change', () => (0, _displayData.displayData)());
 
 (0, _displayData.displayData)();
-},{"./usefulvariables.js":"src/usefulvariables.js","./fetchData.js":"src/fetchData.js","./localStorage.js":"src/localStorage.js","./displayData.js":"src/displayData.js","./handleclick.js":"src/handleclick.js","./addBtn.js":"src/addBtn.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./usefulvariables.js":"src/usefulvariables.js","./fetchData.js":"src/fetchData.js","./localStorage.js":"src/localStorage.js","./displayData.js":"src/displayData.js","./handleclick.js":"src/handleclick.js","./addBtn.js":"src/addBtn.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -18941,7 +18942,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44607" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -19117,5 +19118,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/script.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/script.js"], null)
 //# sourceMappingURL=/script.baf0e655.js.map
